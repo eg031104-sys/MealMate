@@ -1176,7 +1176,7 @@ export function App() {
                   Prep {detail.recipe.prep} min · Cook {detail.recipe.cook} min
                   ·{" "}
                   {detail.meal
-                    ? `${detail.meal.people} people · ${detail.meal.appetite}× appetite`
+                    ? `${detailPeople} people · ${detailAppetite}× appetite`
                     : `${detail.recipe.servings} standard serves`}
                 </p>
                 <div className="tags">

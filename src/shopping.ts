@@ -1,5 +1,9 @@
 import { estimateIngredient } from "./product-estimates";
-import { planningSettings, planningAllergies } from "./planning-model";
+import {
+  planningSettings,
+  planningAllergies,
+  generationPortions,
+} from "./planning-model";
 import { discoverable } from "./catalogue";
 import {
   selectedStore,
@@ -500,7 +504,13 @@ export function replaceMeal(
     ...state,
     plan: state.plan.map((m) =>
       m.day === meal.day && m.category === meal.category
-        ? { ...m, recipeId: recipe.id, substitutions: undefined, cooked: false }
+        ? {
+            ...m,
+            ...generationPortions(state, m),
+            recipeId: recipe.id,
+            substitutions: undefined,
+            cooked: false,
+          }
         : m,
     ),
   };
@@ -602,8 +612,8 @@ export function sendToOtherShop(
 export function mealCost(
   state: State,
   r: Recipe,
-  people = state.settings.people,
-  appetite = state.settings.appetite,
+  people = planningSettings(state).people,
+  appetite = planningSettings(state).appetite,
 ) {
   let cost = 0,
     missing = 0;
@@ -634,9 +644,10 @@ export function rankedRecipes(state: State, meal: Meal, cheap = false) {
         ),
       ),
   );
+  const portions = generationPortions(state, meal);
   return options.sort((a, b) => {
-    const ac = mealCost(state, a, meal.people, meal.appetite),
-      bc = mealCost(state, b, meal.people, meal.appetite);
+    const ac = mealCost(state, a, portions.people, portions.appetite),
+      bc = mealCost(state, b, portions.people, portions.appetite);
     const ap = ac.missing * 1000 + ac.cost,
       bp = bc.missing * 1000 + bc.cost;
     const used = (r: Recipe) =>
@@ -660,13 +671,9 @@ export function smartGenerate(state: State): State {
         (m) => m.day === day && m.category === category,
       );
       if (old?.locked || old?.cooked) continue;
-      const meal = old ?? {
-        day,
-        category,
-        recipeId: null,
-        people: state.settings.people,
-        appetite: state.settings.appetite,
-        locked: false,
+      const meal = {
+        ...(old ?? { day, category, recipeId: null, locked: false }),
+        ...generationPortions(state, old),
       };
       const options = rankedRecipes(next, meal);
       const pool = options.filter((r) => !used.has(r.id) || r.favourite);
@@ -780,13 +787,9 @@ export function generateStorePlan(state: State): State {
         (m) => m.day === day && m.category === category,
       );
       if (old?.locked || old?.cooked) continue;
-      const meal = old ?? {
-        day,
-        category,
-        recipeId: null,
-        people: state.settings.people,
-        appetite: state.settings.appetite,
-        locked: false,
+      const meal = {
+        ...(old ?? { day, category, recipeId: null, locked: false }),
+        ...generationPortions(state, old),
       };
       const candidates = rankedRecipes(state, meal, true)
         .filter((r) => !used.has(r.id) || r.favourite)

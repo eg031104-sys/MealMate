@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { State } from "./v2-state";
-import type { Settings } from "./domain";
+import type { Settings, Meal } from "./domain";
 const date = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/)
@@ -87,4 +87,22 @@ export function planningAllergies(s: State) {
   ]
     .map((a) => a.trim().toLowerCase())
     .filter(Boolean);
+}
+
+// Reuse saved portions only with evidence of a deliberate override. Merely
+// differing from today's defaults can mean a stale, automatically planned meal.
+// Loading saved data never calls this: portions change only on explicit planning actions.
+export function generationPortions(s: State, meal?: Meal) {
+  const settings = planningSettings(s);
+  const preserve =
+    meal &&
+    (meal.portionOverride === true ||
+      meal.locked ||
+      meal.cooked ||
+      (!s.planning?.weeks[s.week] && meal.portionOverride === undefined));
+  return {
+    people: preserve ? meal.people : settings.people,
+    appetite: preserve ? meal.appetite : settings.appetite,
+    portionOverride: meal?.portionOverride === true,
+  };
 }

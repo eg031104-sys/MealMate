@@ -43,6 +43,7 @@ export function PlanningPreferences({
     [conflicts, setConflicts] = useState<ScheduleConflict[]>([]),
     [busy, setBusy] = useState(false);
   const [finderOpen, setFinderOpen] = useState(false);
+  const [resetPortions, setResetPortions] = useState(false);
   const section = (title: string, body: ReactNode) => (
     <details className="planning-section">
       <summary>
@@ -83,6 +84,7 @@ export function PlanningPreferences({
     try {
       const result = generateWeeklyPlan(state, parsed.data, {
         confirmReplace: replace,
+        resetPortions: replace && resetPortions,
       });
       if (result.conflicts.length) {
         setConflicts(result.conflicts);
@@ -333,9 +335,21 @@ export function PlanningPreferences({
               state.plan.filter((m) => m.recipeId && !m.locked && !m.cooked)
                 .length
             }{" "}
-            unlocked planned meals? Locked and cooked meals, individual
-            portions, purchases and daily switches are kept.
+            unlocked planned meals? These use the new weekly portions unless
+            individually customised. Locked and cooked meals, explicit
+            individual portion overrides, purchases and daily switches are kept.
+            Older meals without an override marker use the new weekly
+            preferences.
           </p>
+          <label className="check-row">
+            <input
+              type="checkbox"
+              checked={resetPortions}
+              onChange={(e) => setResetPortions(e.target.checked)}
+            />
+            Use weekly portions for all unlocked, uncooked meals (reset
+            individual portion overrides)
+          </label>
           <button
             className="primary"
             disabled={busy}

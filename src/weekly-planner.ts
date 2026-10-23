@@ -3,6 +3,7 @@ import { discoverable } from "./catalogue";
 import { dateForDay, enabledCategories, type State } from "./v2-state";
 import {
   preferencesSchema,
+  generationPortions,
   planningData,
   planningSettings,
   planningAllergies,
@@ -113,7 +114,11 @@ export type ScheduleConflict = { message: string; recipeIds: string[] };
 export function generateWeeklyPlan(
   state: State,
   prefs: PlanningPreferences,
-  options: { confirmReplace?: boolean; random?: () => number } = {},
+  options: {
+    confirmReplace?: boolean;
+    resetPortions?: boolean;
+    random?: () => number;
+  } = {},
 ) {
   if (
     state.plan.some((m) => m.recipeId && !m.locked && !m.cooked) &&
@@ -127,8 +132,7 @@ export function generateWeeklyPlan(
       "Choose a Monday as the planning week start. Your existing saved plan is kept.",
     );
   let next = savePlanningPreferences(state, prefs);
-  const random = options.random ?? Math.random,
-    settings = planningSettings(next);
+  const random = options.random ?? Math.random;
   const warnings = new Set<string>(),
     conflicts: ScheduleConflict[] = [];
   // Retain disabled categories, daily overrides, completed meals, locks and their portions.
@@ -155,25 +159,7 @@ export function generateWeeklyPlan(
         day,
         category,
         recipeId: null,
-        people:
-          old &&
-          (old.portionOverride ??
-            (old.people !== planningSettings(state).people ||
-              old.appetite !== planningSettings(state).appetite))
-            ? old.people
-            : settings.people,
-        appetite:
-          old &&
-          (old.portionOverride ??
-            (old.people !== planningSettings(state).people ||
-              old.appetite !== planningSettings(state).appetite))
-            ? old.appetite
-            : settings.appetite,
-        portionOverride: old
-          ? (old.portionOverride ??
-            (old.people !== planningSettings(state).people ||
-              old.appetite !== planningSettings(state).appetite))
-          : false,
+        ...generationPortions(next, options.resetPortions ? undefined : old),
         locked: false,
       });
     }
