@@ -23,7 +23,7 @@ describe("IndexedDB migration and persistence", () => {
     const { loadState, saveState, restoreState } = await import("./storage");
     const migrated = await loadState();
     expect(migrated?.checked).toEqual(["old-check"]);
-    const read = await openDB("mealmate", 2);
+    const read = await openDB("mealmate", 3);
     expect(await read.get("household", "pre-v2-backup")).toEqual(legacy);
     migrated!.v2.budgets["2026-10-19"] = 200;
     await saveState(migrated!);

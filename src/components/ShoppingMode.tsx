@@ -1,10 +1,21 @@
+import { ProductSuggestion } from "./ProductSuggestion";
 import { useState } from "react";
+import { NumericInput } from "./NumericInput";
+import { StoreSelector, StoreComparisons } from "./Supermarkets";
+import {
+  selectedStore,
+  assignedStore,
+  saveStoreProduct,
+  selectProduct,
+  supermarketData,
+} from "../supermarkets";
 import { Check, ChevronDown, ChevronUp, AlertTriangle } from "lucide-react";
 import type { Ingredient, Meal, ShoppingItem } from "../domain";
 import { quantity } from "../domain";
 import type { State, Product } from "../v2-state";
 import { decisionKey, mealLabel } from "../v2-state";
 import {
+  unquantifiedIngredients,
   acknowledgeChanges,
   affectedMeals,
   aud,
@@ -52,6 +63,7 @@ export function BudgetCard({ state, onChange }: Props) {
         </span>
         <p>Week beginning {state.week}</p>
         <h2>
+          {b.estimated > 0 ? "~" : ""}
           {aud(b.total)}
           <small>
             {b.limit != null ? ` / ${aud(b.limit)}` : " · no budget set"}
@@ -67,27 +79,34 @@ export function BudgetCard({ state, onChange }: Props) {
       </div>
       <label>
         Weekly budget
-        <input
+        <NumericInput
           aria-label="Weekly budget AUD"
-          type="number"
-          min="0"
-          step="1"
-          placeholder="e.g. 200"
-          value={b.limit ?? ""}
-          onChange={(e) =>
+          value={b.limit}
+          min={0}
+          onCommit={(value) =>
             onChange({
               ...state,
               v2: {
                 ...state.v2,
-                budgets: {
-                  ...state.v2.budgets,
-                  [state.week]:
-                    e.target.value === "" ? null : Math.max(0, +e.target.value),
-                },
+                budgets: { ...state.v2.budgets, [state.week]: value },
               },
             })
           }
         />
+        <button
+          className="text-button"
+          onClick={() =>
+            onChange({
+              ...state,
+              v2: {
+                ...state.v2,
+                budgets: { ...state.v2.budgets, [state.week]: null },
+              },
+            })
+          }
+        >
+          Clear budget
+        </button>
       </label>
       {Math.abs(difference) > 0.005 && (
         <p className="budget-note">
@@ -97,11 +116,13 @@ export function BudgetCard({ state, onChange }: Props) {
         </p>
       )}
       <p className="budget-note">
-        Includes recorded purchases for this week plus outstanding package
-        purchases.{" "}
+        A planning target, not a guaranteed checkout price. Includes recorded
+        purchases for this week plus outstanding package purchases.{" "}
         {b.demoUsed
           ? "Demonstration prices and example pack sizes — not current supermarket prices. "
-          : "User-entered or unpriced products. "}
+          : b.estimated > 0
+            ? `${b.estimated} entries use approximate Australian retail allowances, not observed supermarket prices. `
+            : "User-entered or unpriced products. "}
         {b.missing > 0 &&
           `${b.missing} prices or planned recipe details are missing. `}
         {b.uncertain > 0 &&
@@ -117,7 +138,9 @@ function ProductEditor({
 }: { item: ShoppingItem } & Props) {
   const existing = productFor(state, item);
   const [size, setSize] = useState(String(existing?.size ?? ""));
-  const [price, setPrice] = useState(existing?.price?.toString() ?? "");
+  const [price, setPrice] = useState(
+    existing?.source === "estimate" ? "" : (existing?.price?.toString() ?? ""),
+  );
   const [shop, setShop] = useState(
     existing?.source === "user" ? (existing.shop ?? "") : "",
   );
@@ -127,9 +150,11 @@ function ProductEditor({
     <details className="product-editor">
       <summary>Package size & price</summary>
       <p className="subtle">
-        {existing?.source === "demo"
-          ? "Current values are demonstration data. Save to use your own package and price."
-          : "User-entered package information. Not live supermarket data."}
+        {existing?.source === "estimate"
+          ? "Generic estimate, not catalogue data. Enter the package you intend to buy."
+          : existing?.source === "demo"
+            ? "Current values are demonstration data. Save to use your own package and price."
+            : "User-entered package information. Not live supermarket data."}
       </p>
       <div className="form-grid">
         <label>
@@ -174,18 +199,44 @@ function ProductEditor({
           }
           const product: Product = {
             size: +size,
-            price: price === "" ? undefined : +price,
+            price: price.trim() === "" ? undefined : +price,
             shop,
             name,
             source: "user",
           };
-          onChange({
-            ...state,
-            v2: {
-              ...state.v2,
-              products: { ...state.v2.products, [item.key]: product },
-            },
-          });
+          if (state.v3) {
+            const store = assignedStore(state, item.key);
+            if (!store) {
+              setError("Choose a specific store before saving its product.");
+              return;
+            }
+            const id = existing?.productId ?? crypto.randomUUID();
+            onChange(
+              selectProduct(
+                saveStoreProduct(state, {
+                  id,
+                  storeId: store.id,
+                  ingredientKey: item.key,
+                  name: name || item.name,
+                  unit: item.unit,
+                  size: +size,
+                  price: price.trim() === "" ? undefined : +price,
+                  source: "user",
+                  observedAt: new Date().toISOString(),
+                  availability: "unknown",
+                }),
+                item.key,
+                id,
+              ),
+            );
+          } else
+            onChange({
+              ...state,
+              v2: {
+                ...state.v2,
+                products: { ...state.v2.products, [item.key]: product },
+              },
+            });
           setError("Package saved.");
         }}
       >
@@ -205,7 +256,7 @@ function PurchaseForm({
   const [unit, setUnit] = useState<string>(item.unit);
   const [price, setPrice] = useState("");
   const [expiry, setExpiry] = useState("");
-  const [prepared, setPrepared] = useState(false);
+  const [prepared, setPrepared] = useState(!!item.prepared);
   const [message, setMessage] = useState("");
   return (
     <div className="purchase-form">
@@ -307,51 +358,38 @@ function PurchaseForm({
           </p>
           <label>
             Correct this purchase quantity ({p.unit})
-            <input
-              type="number"
+            <NumericInput
+              value={p.quantity}
               min={Math.max(0.001, p.consumed)}
-              step="any"
-              defaultValue={p.quantity}
-              onBlur={(e) => {
-                const q = +e.target.value;
-                if (Number.isFinite(q) && q > 0 && q >= p.consumed)
-                  onChange({
-                    ...state,
-                    v2: {
-                      ...state.v2,
-                      purchases: state.v2.purchases.map((x) =>
-                        x.id === p.id ? { ...x, quantity: q } : x,
-                      ),
-                    },
-                  });
-                else e.target.value = String(p.quantity);
-              }}
+              onCommit={(value) =>
+                onChange({
+                  ...state,
+                  v2: {
+                    ...state.v2,
+                    purchases: state.v2.purchases.map((x) =>
+                      x.id === p.id ? { ...x, quantity: value } : x,
+                    ),
+                  },
+                })
+              }
             />
           </label>
           <label>
             Correct total price (AUD)
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              defaultValue={p.price ?? ""}
-              onBlur={(e) => {
-                const value =
-                  e.target.value === "" ? undefined : +e.target.value;
-                if (
-                  value === undefined ||
-                  (Number.isFinite(value) && value >= 0)
-                )
-                  onChange({
-                    ...state,
-                    v2: {
-                      ...state.v2,
-                      purchases: state.v2.purchases.map((x) =>
-                        x.id === p.id ? { ...x, price: value } : x,
-                      ),
-                    },
-                  });
-              }}
+            <NumericInput
+              value={p.price}
+              min={0}
+              onCommit={(value) =>
+                onChange({
+                  ...state,
+                  v2: {
+                    ...state.v2,
+                    purchases: state.v2.purchases.map((x) =>
+                      x.id === p.id ? { ...x, price: value } : x,
+                    ),
+                  },
+                })
+              }
             />
           </label>
         </div>
@@ -439,6 +477,7 @@ function Resolution({
   const [meal, setMeal] = useState<Meal | null>(null);
   const [locked, setLocked] = useState(false);
   const [shop, setShop] = useState("");
+  const [storeId, setStoreId] = useState("");
   const [error, setError] = useState("");
   const affected = affectedMeals(state, item.key);
   return (
@@ -555,6 +594,29 @@ function Resolution({
           ))}
         {step === "shop" && (
           <>
+            {state.v3 && (
+              <label className="field">
+                Choose a saved store
+                <select
+                  aria-label="Other saved store"
+                  value={storeId}
+                  onChange={(e) => {
+                    setStoreId(e.target.value);
+                    const store = supermarketData(state).stores.find(
+                      (s) => s.id === e.target.value,
+                    );
+                    if (store) setShop(store.chain + " · " + store.name);
+                  }}
+                >
+                  <option value="">Free-text shop note</option>
+                  {supermarketData(state).stores.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.chain} · {s.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
             <label className="field">
               Another supermarket or shop
               <input
@@ -567,7 +629,21 @@ function Resolution({
               className="primary"
               onClick={() => {
                 try {
-                  onChange(sendToOtherShop(state, item.key, shop));
+                  let next = sendToOtherShop(state, item.key, shop);
+                  if (storeId) {
+                    const data = supermarketData(next);
+                    next = {
+                      ...next,
+                      v3: {
+                        ...data,
+                        itemStores: {
+                          ...data.itemStores,
+                          [`${state.week}/${item.key}`]: storeId,
+                        },
+                      },
+                    };
+                  }
+                  onChange(next);
                   onClose();
                 } catch (error) {
                   setError((error as Error).message);
@@ -621,7 +697,22 @@ export function ShoppingMode({ state, onChange }: Props) {
     });
   return (
     <div className="shopping-mode">
+      {state.v3 && <StoreSelector state={state} onChange={onChange} compact />}
       <BudgetCard state={state} onChange={onChange} />
+      {!!unquantifiedIngredients(state).length && (
+        <section className="notice-block">
+          <strong>Outside exact quantity totals</strong>
+          <p>
+            Check your pantry:{" "}
+            {unquantifiedIngredients(state)
+              .map((i) => i.name)
+              .join(", ")}
+            . Source quantities are unmeasured or to taste. Shopping quantities
+            and budget exclude these amounts unless you configure an estimate.
+          </p>
+        </section>
+      )}
+      {state.v3 && <StoreComparisons state={state} />}
       {b.remaining !== null && b.remaining < 0 && (
         <details className="settings-card">
           <summary>Find cheaper meal alternatives</summary>
@@ -690,7 +781,10 @@ export function ShoppingMode({ state, onChange }: Props) {
               return (
                 <div className="pantry-check-row" key={i.key}>
                   <strong>{i.name}</strong>
-                  <span>{amount(i.quantity, i.unit)} needed in total</span>
+                  <span>
+                    {i.approximate ? "≈ " : ""}
+                    {amount(i.quantity, i.unit)} needed in total
+                  </span>
                   <small>
                     {stock?.quantity === null ||
                     (!stock && available(state, i.key) === 0)
@@ -719,19 +813,14 @@ export function ShoppingMode({ state, onChange }: Props) {
                   </div>
                   <label className="stock-inline">
                     Opening stock estimate ({i.unit}, excludes purchases)
-                    <input
-                      type="number"
-                      min="0"
-                      step="any"
-                      placeholder="Unknown"
-                      defaultValue={stock?.quantity ?? ""}
-                      onBlur={(e) => {
-                        if (
-                          e.target.value !== "" &&
-                          (!Number.isFinite(+e.target.value) ||
-                            +e.target.value < 0)
-                        )
-                          return;
+                    <NumericInput
+                      value={
+                        stock?.quantity == null
+                          ? null
+                          : stock.quantity - stock.consumed
+                      }
+                      min={0}
+                      onCommit={(value) =>
                         onChange({
                           ...state,
                           v2: {
@@ -742,18 +831,15 @@ export function ShoppingMode({ state, onChange }: Props) {
                                 name: i.name,
                                 unit: i.unit,
                                 department: i.department,
-                                quantity:
-                                  e.target.value === ""
-                                    ? null
-                                    : +e.target.value + (stock?.consumed ?? 0),
+                                quantity: value + (stock?.consumed ?? 0),
                                 consumed: stock?.consumed ?? 0,
                                 prepared: stock?.prepared ?? false,
                                 expiry: stock?.expiry,
                               },
                             },
                           },
-                        });
-                      }}
+                        })
+                      }
                     />
                   </label>
                 </div>
@@ -820,6 +906,10 @@ export function ShoppingMode({ state, onChange }: Props) {
                           </span>
                         ) : (
                           <>
+                            <small>
+                              {i.approximate ? "≈ " : ""}
+                              {amount(i.quantity, i.unit)} required
+                            </small>
                             <span>
                               Buy {amount(rec.buy, i.unit)}
                               {rec.product
@@ -827,7 +917,17 @@ export function ShoppingMode({ state, onChange }: Props) {
                                 : " · package size unknown"}
                             </span>
                             <small>
-                              {amount(i.quantity, i.unit)} needed
+                              {rec.product?.source === "estimate" ? "~" : ""}
+                              {rec.cost === undefined
+                                ? "Price unknown"
+                                : aud(rec.cost)}{" "}
+                              ·{" "}
+                              {rec.product?.priceLabel ??
+                                (rec.product?.source === "demo"
+                                  ? "Demonstration price"
+                                  : rec.product
+                                    ? "User price"
+                                    : "Price unknown")}
                               {inv.shortage > 0 && recorded.length > 0
                                 ? ` · Short ${amount(inv.shortage, i.unit)}`
                                 : ""}
@@ -865,14 +965,51 @@ export function ShoppingMode({ state, onChange }: Props) {
                   {expanded === i.key && (
                     <div className="expanded-item">
                       <p>
-                        <strong>{amount(i.quantity, i.unit)} required</strong> ·
-                        Recommended purchase {amount(rec.buy, i.unit)}
+                        <strong>
+                          {i.approximate ? "≈ " : ""}
+                          {amount(i.quantity, i.unit)} required
+                        </strong>{" "}
+                        · Recommended purchase {amount(rec.buy, i.unit)}
                       </p>
-                      <p className="subtle">
-                        {rec.product
-                          ? `${rec.product.source === "demo" ? "Example pack (demonstration only)" : "Your package"}: ${amount(rec.product.size, i.unit)} · ${rec.product.price === undefined ? "No price" : aud(rec.product.price)} · ${rec.product.shop ?? "Shop not specified"} ${rec.product.name ?? ""}`
-                          : "No product information. Set your own package size and price."}
-                      </p>
+                      {state.v3 && (
+                        <ProductSuggestion
+                          key={`${i.key}/${assignedStore(state, i.key)?.id}`}
+                          state={state}
+                          item={i}
+                          onChange={onChange}
+                        />
+                      )}
+                      {state.v3 && (
+                        <label className="field">
+                          Buy this item at
+                          <select
+                            value={
+                              supermarketData(state).itemStores[
+                                `${state.week}/${i.key}`
+                              ] ?? ""
+                            }
+                            onChange={(e) => {
+                              const data = supermarketData(state),
+                                itemStores = { ...data.itemStores };
+                              if (e.target.value)
+                                itemStores[`${state.week}/${i.key}`] =
+                                  e.target.value;
+                              else delete itemStores[`${state.week}/${i.key}`];
+                              onChange({
+                                ...state,
+                                v3: { ...data, itemStores },
+                              });
+                            }}
+                          >
+                            <option value="">Use planning store</option>
+                            {supermarketData(state).stores.map((store) => (
+                              <option key={store.id} value={store.id}>
+                                {store.chain} · {store.name}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      )}
                       <div className="inventory-strip">
                         <span>
                           Purchased
@@ -901,7 +1038,7 @@ export function ShoppingMode({ state, onChange }: Props) {
                         </p>
                       )}
                       <ProductEditor
-                        key={`product-${i.key}`}
+                        key={`product-${i.key}/${rec.product?.productId ?? "generic"}/${assignedStore(state, i.key)?.id}`}
                         state={state}
                         onChange={onChange}
                         item={i}

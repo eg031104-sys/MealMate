@@ -1,0 +1,551 @@
+{
+  "baked-pasta-with-broccoli": {
+    "parsing": {},
+    "extra": [],
+    "instructionReplacements": {
+      "Boil water and add salt (a handful for every liter), put pasta inside.": "Boil water, salt to taste and add the pasta."
+    },
+    "notes": "Source pasta-water salt instruction moderated to taste; use a ready-made béchamel sauce."
+  },
+  "cheesy-pasta-bake": {
+    "parsing": {
+      "300-400g Pasta (Fusilli recommended but not essential)": "300-400g pasta",
+      "6 Rashers of bacon (optional)": "6 slices bacon"
+    },
+    "extra": [],
+    "instructionReplacements": {
+      "Start [cooking the pasta](/pasta).": "Cook pasta in a large saucepan of boiling water using the packet cooking time, then drain.",
+      "Bake at gas mark 6 for about 30 minutes.": "Bake at 200°C (gas mark 6) for about 30 minutes."
+    }
+  },
+  "cheesy-potatoe-bake": {
+    "parsing": {
+      "As much bacon as you want to garnish": "bacon garnish (optional)"
+    },
+    "extra": []
+  },
+  "chicken-paprikash": {
+    "parsing": {
+      "2 cups chicken or beef broth": "2 cups chicken stock",
+      "1/4 cup Hungarian paprika or regular paprika": "1/4 cup paprika"
+    },
+    "extra": [],
+    "notes": "Uses the source's first stock and paprika choices."
+  },
+  "chicken-satay": {
+    "parsing": {
+      "2 lbs boneless chicken breast or thigh": "2 lbs chicken breast",
+      "1 tbsp ground tumeric": "1 tbsp turmeric",
+      "water to thin peanut sauce": "water (optional; add as needed to thin)"
+    },
+    "extra": [],
+    "wait": 60,
+    "appliances": ["BBQ", "Hob"],
+    "notes": "Source grill method; includes its one-hour marinade. Water for sauce consistency is unquantified."
+  },
+  "chipolata-in-balsamic-vinegar": {
+    "parsing": {
+      "Black balsamic vinegar": "3 tablespoons balsamic vinegar"
+    },
+    "extra": ["3 tablespoons vegetable oil"],
+    "notes": "Vinegar and cooking-oil quantities recovered from source steps 6 and 11."
+  },
+  "easy-chicken-and-rice-casserole": {
+    "parsing": {
+      "2 cups Chicken, cooked and chopped": "2 cups cooked chicken",
+      "1 cup Frozen Peas and Carrots": "1 cup frozen peas and carrots",
+      "1 tsp Dried Thyme and Rosemary": "1 tsp mixed thyme and rosemary"
+    },
+    "extra": [],
+    "preparedIngredients": ["cooked chicken"]
+  },
+  "honey-sriracha-chicken-thighs": {
+    "parsing": {
+      "5-6 bone-in, skin-on chicken thighs": "5-6 chicken thighs"
+    },
+    "extra": [],
+    "notes": "Uses the upper stated chicken quantity; marked approximate."
+  },
+  "lemon-and-oregano-chicken-traybake": {
+    "parsing": {
+      "5 oregano sprigs / heavy sprinkle of oregano leaves": "5 sprigs oregano"
+    },
+    "extra": []
+  },
+  "fall-vegetable-and-chickpea-curry": {
+    "parsing": {},
+    "extra": ["1/2 cup water"],
+    "notes": "Water is specified in source step 2. Check curry-paste ingredients for seafood allergens; no vegetarian claim is made."
+  },
+  "pasta-alla-norma": {
+    "parsing": {
+      "3 aubergines (900g)": "900g eggplant",
+      "1 chilli (or 1 tsp of dried chilli flakes)": "1 chilli"
+    },
+    "extra": [],
+    "instructionReplacements": {
+      "[Cook the pasta](/pasta) according to packet instructions, once al dente, drain and retain some of the pasta water.": "Cook pasta in a large saucepan of boiling water using the packet cooking time, then drain."
+    },
+    "appliances": ["Fan-forced oven", "Hob"]
+  },
+  "schnitzel": {
+    "parsing": {
+      "4 veal cutlets (1 ~ 150g)": "600g veal cutlets"
+    },
+    "extra": [],
+    "instructionReplacements": {
+      "Wash the veal and gently dry it with kitchen roll.": "Pat the veal dry with kitchen paper. Do not wash raw meat."
+    },
+    "notes": "Four cutlets at approximately 150 g each = approximately 600 g; source meat-washing instruction replaced with safe handling.",
+    "approximateNames": ["veal cutlets"]
+  },
+  "shepherds-pie": {
+    "parsing": {
+      "800 g of minced lamb": "800g lamb mince"
+    },
+    "extra": []
+  },
+  "spicy-sausage-pasta": {
+    "parsing": {
+      "Olive oil": "1 splash olive oil"
+    },
+    "extra": [],
+    "notes": "Source step 1 calls for a splash of oil; ingredient-specific configurable estimate retained.",
+    "review": [
+      "Contributor identifies a newspaper source; reuse rights require confirmation."
+    ]
+  },
+  "spicy-kung-pao-style-chicken": {
+    "parsing": {
+      "Oil": "2 tablespoons vegetable oil"
+    },
+    "extra": ["1 7/12 cups water"],
+    "approximateNames": ["vegetable oil"],
+    "notes": "Oil estimate includes the stated 1 tablespoon across steps 1 and 3, plus an estimated tablespoon for frying chicken. Water sums source steps 1 and 2; oil is approximate."
+  },
+  "tofu-and-cashew-chow-mein": {
+    "parsing": {
+      "2 Tbsp Peanut Oil or other suitable frying oil": "2 tbsp peanut oil"
+    },
+    "extra": [],
+    "notes": "Uses the source's first frying-oil choice. Contains oyster sauce; not vegetarian."
+  },
+  "zaatar-chicken-bulgur-bowls": {
+    "parsing": {
+      "oil": "1.5 teaspoons vegetable oil"
+    },
+    "extra": ["1.5 cups water"],
+    "notes": "Oil sums source steps 3 and 4 (half a teaspoon + one teaspoon); water from step 1."
+  },
+  "red-lentil-dahl": {
+    "parsing": {
+      "Dried Red Chili's or cayenne pepper, to taste": "cayenne pepper to taste"
+    },
+    "extra": []
+  },
+  "marinated-pork-steaks": {
+    "parsing": {
+      "4 ¼ inch thick boneless pork shoulder steaks": "4 pork shoulder steaks"
+    },
+    "extra": [],
+    "instructionReplacements": {
+      "Add the pork steaks to the marinade and leave in room temperature for 30 minutes or a bit longer.": "Add pork steaks to the marinade, cover and refrigerate for at least 30 minutes.",
+      "Preheat your grill/frying pan. Add marinated steaks, grill for 2 minutes, flip, repeat until you've grilled them for 10 minutes total. Towards the last minutes pour the remaining marinade over the steaks.": "Preheat a frying pan. Cook the marinated steaks for around 10 minutes, turning regularly, until safely cooked through. Discard used raw-meat marinade rather than pouring it over cooked meat."
+    },
+    "wait": 10,
+    "notes": "Four steaks, each quarter-inch thick. Marinate refrigerated and discard raw-meat marinade; source handling instructions updated for safety."
+  },
+  "mapo-tofu": {
+    "parsing": {
+      "2-3 chopped scallions white and green separated)": "2-3 spring onions",
+      "2 inch minced ginger (similar amount as garlic)": "5.08 cm ginger",
+      "340 g (1 package) soft tofu cut into 1.5cm (1/2 inch cubes)": "340g soft tofu",
+      "400 ml chicken broth or water": "400ml chicken stock",
+      "Cooking oil for the marinade (source splash)": "1 splash vegetable oil",
+      "Cooking oil for frying (unquantified)": "1 tablespoon vegetable oil",
+      "Soy sauce added to the braise (source splash)": "1 splash soy sauce"
+    },
+    "extra": [
+      "Cooking oil for the marinade (source splash)",
+      "Cooking oil for frying (unquantified)",
+      "Soy sauce added to the braise (source splash)"
+    ],
+    "notes": "Uses first broth option. Source splashes are configurable estimates; unmeasured frying oil uses a labelled tablespoon estimate. Ginger length is converted to 5.08 cm; mass is estimated."
+  },
+  "mexican-meat-loaf": {
+    "parsing": {
+      "Cooking Spray": "cooking spray for greasing"
+    },
+    "extra": [],
+    "wait": 15,
+    "review": ["The source gives no oven temperature; confirm before planning."]
+  },
+  "one-pot-chicken-tetrazzini": {
+    "parsing": {
+      "3 cup Deli Chicken, cooked and cut into bite-size pieces": "3 cups cooked chicken",
+      "Parmesan, grated": "parmesan garnish (optional)"
+    },
+    "extra": [],
+    "preparedIngredients": ["cooked chicken"],
+    "notes": "Source finishing sprinkle of Parmesan is unquantified and excluded from exact totals.",
+    "instructionReplacements": {
+      "Stir in chunks of Boursin, then chicken, peas, and parsley, stirring until chicken is hot and Boursin is melted. Serve sprinkled with basil and Parmesan.": "Stir in Boursin, cooked chicken, peas and parsley. Heat until the chicken is steaming hot throughout and the cheese is melted. Serve sprinkled with optional basil and Parmesan."
+    }
+  },
+  "pork-carnitas": {
+    "parsing": {
+      "¾ cup low sodium chicken broth": "3/4 cup chicken stock"
+    },
+    "extra": []
+  },
+  "smoked-salmon-pasta-primavera": {
+    "parsing": {
+      "1/2 cup Frozen Edamame or Peas": "1/2 cup edamame"
+    },
+    "extra": [],
+    "notes": "Uses the first source option, edamame."
+  },
+  "spaghetti-and-meatballs": {
+    "parsing": {
+      "2 cans (28 oz.) Italian plum tomatoes": "56 oz tinned tomatoes"
+    },
+    "extra": [],
+    "notes": "Two 28 oz tins total 56 oz."
+  },
+  "shrimp-fettuccine-alfredo": {
+    "parsing": {
+      "1 8oz cream cheese": "8 oz cream cheese",
+      "Pasta noodles of choice (e.g. approximately 9oz of fettuccine noodles)": "9 oz pasta"
+    },
+    "extra": [],
+    "approximateNames": ["pasta"],
+    "notes": "Uses the source's approximately 9 oz pasta quantity."
+  },
+  "shrimp-and-grits": {
+    "parsing": {
+      "1 cup Un-Cooked Grits": "1 cup grits"
+    },
+    "extra": []
+  },
+  "baked-rice": {
+    "parsing": {
+      "A few saffron threads": "saffron to taste"
+    },
+    "extra": [],
+    "notes": "Source few saffron threads are unquantified seasoning; excluded from exact totals."
+  },
+  "lamb-biriyani": {
+    "parsing": {
+      "4-5 pods of Cardamom": "4-5 cardamom pods",
+      "8 Cloves": "8 whole cloves",
+      "5cm piece of Ginger": "5 cm ginger",
+      "Juice of 1/2 Lemon or 1 tsp of Vinegar": "0.5 lemon juice",
+      "Dash of Tumeric Powder": "turmeric to taste",
+      "Dash of Curry Powder": "curry powder to taste",
+      "1 Sprig of Mint / Coriander (Garnish)": "1 sprig mint",
+      "600gm Mutton / Lamb (Boneless)": "600g lamb pieces",
+      "1 Tbsp of Chilli Powder or Hungarian Smoked Paprika": "1 tbsp chilli powder",
+      "3-4 Cinnamon Sticks": "3-4 cinnamon sticks"
+    },
+    "extra": ["30ml vegetable oil", "1.3 litres water"],
+    "instructionReplacements": {
+      "Add the mutton/ lamb and 2 cups (500ml) of water. Add one Tbsp of salt.": "Add lamb and 500 mL water. Season with salt to taste.",
+      "Turn the heat up to high and add the green chilli, turmeric powder, chilli powder and 2 Tbsp of salt and let the mutton cook for about 40 -50 min.": "Turn the heat up, add green chilli, turmeric and chilli powder; simmer lamb for 40–50 minutes. Adjust salt to taste."
+    },
+    "notes": "Oil and cooking water recovered from source steps 4, 7 and 10 (top up water as needed). Excessive source salt instruction moderated to taste; no fixed salt quantity used."
+  },
+  "autumn-soup": {
+    "parsing": {
+      "1 Medium Squash": "1 squash"
+    },
+    "extra": [],
+    "appliances": ["Oven", "Hand mixer"]
+  },
+  "croque-monsieur": {
+    "parsing": {
+      "12 very thin slices of ham with Italian herbs": "12 slices ham",
+      "80g grated cheese (Emmental, Comté Gruyère Mimolette": "80g grated cheese"
+    },
+    "extra": []
+  },
+  "finnish-salmon-soup": {
+    "parsing": {
+      "2 pcs salmon fillet": "2 salmon fillets",
+      "4 cups water or stock": "4 cups water"
+    },
+    "extra": [],
+    "notes": "Uses the source's first liquid option (water). Fish is specified as two whole fillets, not an invented weight."
+  },
+  "perfect-potato-salad": {
+    "parsing": {
+      "5 Potatoes, peeled and cut into bite-size chunks (about 2 lbs)": "2 lbs potato"
+    },
+    "extra": [],
+    "approximateNames": ["potato"],
+    "notes": "Uses the source's approximate 2 lb total potato weight.",
+    "wait": 60
+  },
+  "newfoundland-cod-chowder": {
+    "parsing": {
+      "1 can Evaporated Milk": "1 can evaporated milk",
+      "2 Tbsp Fresh Parsley or Chives, chopped": "2 tbsp parsley"
+    },
+    "extra": ["water (optional; add as needed for soup consistency)"]
+  },
+  "banana-pancakes": {
+    "parsing": {
+      "1 cup flour (2.5 dl)": "1 cup flour",
+      "1 cup milk (2.5 dl)": "250ml milk"
+    },
+    "extra": ["1 knob butter"],
+    "appliances": ["Hob"],
+    "notes": "Frying butter is an ingredient-specific estimate. The oven is optional for keeping pancakes warm."
+  },
+  "basic-waffles": {
+    "parsing": {
+      "2 pcks vanilla sugar (16g) *or* other vanilla flavouring": "16g vanilla sugar"
+    },
+    "extra": []
+  },
+  "breakfast-wrap": {
+    "parsing": {
+      "milk": "1 dash milk",
+      "2 bacon rashers": "2 slices bacon"
+    },
+    "extra": [],
+    "notes": "Source step 3 calls for a dash of milk; configurable ingredient-specific estimate used.",
+    "appliances": ["Hob", "Microwave"]
+  },
+  "eggs-benedict": {
+    "parsing": {
+      "4 slices of Canadian bacon or ham": "4 slices bacon",
+      "2 english muffins or toast, split": "2 english muffins"
+    },
+    "extra": [],
+    "notes": "Uses the source's first bacon option. People at increased food-safety risk should avoid runny eggs.",
+    "appliances": ["Hob", "Blender", "Toaster"]
+  },
+  "frittata": {
+    "parsing": {
+      "Thinly sliced meat (prosciutto, shaved chicken, sandwich steak, etc.) (Optional)": "prepared sliced meat (optional)",
+      "Shredded cheese of choice (Optional)": "grated cheese (optional)"
+    },
+    "extra": [],
+    "notes": "Optional additions are unquantified and excluded; cook raw meat thoroughly before adding."
+  },
+  "granola": {
+    "parsing": {
+      "1 cup chopped nuts (almonds, pumpkin seeds, etc)": "1 cup mixed nuts",
+      "1 cup dried fruit (apricots, unsweetened cranberries, dates, etc)": "1 cup dried fruit"
+    },
+    "extra": ["milk for serving (optional)", "yoghurt for serving (optional)"],
+    "notes": "Optional serving accompaniments are unquantified; add to shopping separately if wanted."
+  },
+  "pancake": {
+    "parsing": {
+      "200g wheat flour or 100g glutenfree flour": "200g flour",
+      "a little bit of salt": "salt to taste"
+    },
+    "extra": ["1 knob butter"],
+    "notes": "Uses the source wheat-flour option. Cooking butter is an ingredient-specific estimate for the source's bit of butter; not gluten-free.",
+    "appliances": ["Hob"]
+  },
+  "risengroed": {
+    "parsing": {
+      "Salt *2 pinches*": "2 pinch salt"
+    },
+    "extra": []
+  },
+  "cinnamon-biscuits": {
+    "parsing": {
+      "½ cup + 2 tablespoons (150ml) cold whole milk": "150ml milk"
+    },
+    "extra": [],
+    "wait": 45,
+    "notes": "Source metric milk total used; includes up to 45 minutes for chilling browned butter."
+  },
+  "tarta-de-santiago": {
+    "parsing": {
+      "Zest of 1 lemon": "1 lemon zest",
+      "Zest of 1 clementine": "1 clementine zest"
+    },
+    "extra": ["butter for greasing", "flour for dusting"],
+    "appliances": ["Oven"]
+  },
+  "ham-and-lentil-soup": {
+    "parsing": {},
+    "extra": ["2 quart water"],
+    "notes": "Cooking water recovered from source step 1; US liquid-quart estimate is labelled approximate.",
+    "cook": 600,
+    "appliances": ["Slow cooker"]
+  },
+  "potato-leek-soup": {
+    "parsing": {
+      "1 quart chicken or veggie stock": "1 quart chicken stock"
+    },
+    "notes": "Uses first source stock choice; source quart normalised as an approximate US liquid quart.",
+    "appliances": ["Hob", "Stick blender"]
+  },
+  "erwtensoep": {
+    "appliances": ["Hob"],
+    "notes": "Stick blending is optional; use the source chunky soup method.",
+    "parsing": {}
+  },
+  "turkish-red-lentil-soup": {
+    "appliances": ["Hob", "Blender"],
+    "parsing": {}
+  },
+  "tabouleh": {
+    "appliances": ["Hob"],
+    "notes": "Heat water for the bulgur; source soaking time retained.",
+    "parsing": {}
+  },
+  "oaty-pancakes": {
+    "appliances": ["Hob"],
+    "notes": "The source permits a fork instead of a food processor.",
+    "parsing": {}
+  },
+  "pavlova": {
+    "appliances": ["Oven", "Hand mixer"],
+    "notes": "Oven cooling is additional to the stated cooking time.",
+    "parsing": {}
+  },
+  "spiced-apple-pancakes": {
+    "extra": ["1 tablespoon butter"],
+    "notes": "Cooking butter recovered from source step 7.",
+    "parsing": {}
+  },
+  "zurich-sytle-meat-saute": {
+    "extra": ["1 knob butter"],
+    "notes": "Frying butter is unquantified in the source; configurable knob estimate used.",
+    "parsing": {}
+  },
+  "lenten-lentil-curry": {
+    "extra": ["water (optional; use as needed for boiling)"],
+    "parsing": {}
+  },
+  "pesto-chicken-quinoa-bowls": {
+    "extra": [
+      "Water for boiling quinoa (unquantified)",
+      "Oil for searing (unquantified)"
+    ],
+    "parsing": {
+      "Water for boiling quinoa (unquantified)": "water (optional; use as needed for boiling)",
+      "Oil for searing (unquantified)": "1 splash olive oil"
+    },
+    "appliances": ["Hob"],
+    "notes": "Uses source stovetop method. Extra searing oil is a configurable splash estimate. Cooking water is unquantified.",
+    "preparedIngredients": []
+  },
+  "turkish-style-spiced-chicken": {
+    "extra": ["1 tablespoon vegetable oil"],
+    "notes": "Oil recovered from source cooking steps.",
+    "parsing": {},
+    "review": ["Source does not state oven temperature."]
+  },
+  "limoncini": {
+    "parsing": {
+      "650 g 00 or 0 flour": "650g flour",
+      "3 lemon untreated. Make sure the skin is edible!": "3 lemons"
+    },
+    "wait": 120,
+    "notes": "Source 20 servings / 40 pieces retained; includes two stated one-hour rises."
+  },
+  "grands-peres": {
+    "parsing": {
+      "2 TB butter, cut into pieces": "2 tablespoons butter"
+    }
+  },
+  "butter-cake": {
+    "parsing": {
+      "4 egg yolks": "4 eggs"
+    },
+    "omit": ["Egg whites separated from the yolks above"],
+    "notes": "Separate four whole eggs; their yolks and whites are counted once for shopping.",
+    "cook": 60,
+    "appliances": ["Conventional oven", "Hand mixer"]
+  },
+  "cuca-italiana": {
+    "parsing": {
+      "3/4 of a cup of warm water": "3/4 cup water",
+      "2 tablespoons of lard or butter": "2 tablespoons butter",
+      "Optional herbs and spices: Fennel seeds, cinammon, cloves. Don't put too many though.": "herbs (optional)"
+    },
+    "instructionReplacements": {
+      "Have it with [fruit jam](/tags/jam) (grape is my favourite) or [dulce de leche](/dulce-de-leche), and some coffee.": "Optional serving suggestion: jam, dulce de leche and coffee."
+    },
+    "notes": "Uses source butter option. Serving accompaniments are not included in shopping."
+  },
+  "hakka-style-meatballs": {
+    "parsing": {
+      "Oil": "1 tablespoon vegetable oil"
+    },
+    "extra": ["1.5 cups water"],
+    "notes": "Oil and water recovered from source steps 1, 3 and 4."
+  },
+  "hoisin-pork-belly": {
+    "parsing": {
+      "large thumb of ginger": "1 thumb ginger"
+    },
+    "notes": "Ginger thumb is a configurable ingredient-specific estimate."
+  },
+  "ravioli": {
+    "parsing": {
+      "400 g 00 flour": "400g flour"
+    },
+    "appliances": ["Hob"],
+    "wait": 30,
+    "notes": "Use the source hand-kneading and rolling-pin method. Optional seafood and serving sauces are outside exact totals."
+  },
+  "colcannon-bake": {
+    "notes": "Contains chicken stock cubes; not vegetarian.",
+    "parsing": {}
+  },
+  "irish-potato-casserole": {
+    "extra": ["butter for greasing"],
+    "parsing": {}
+  },
+  "coconut-flour-bread": {
+    "parsing": {
+      "6 Medium Eggs (or 5 Extra Large)": "6 eggs",
+      "½ tsp or less of Xanthan Gum (optional, to have a more stick bread)": "1/2 tsp xanthan gum"
+    },
+    "notes": "Uses six medium eggs and a parchment-lined tin as allowed by the source."
+  },
+  "damper": {
+    "extra": [
+      "1/2 cup water",
+      "1 teaspoon salt",
+      "butter for greasing",
+      "flour for dusting"
+    ],
+    "notes": "Water and salt from source step 2. Greasing and dusting are configurable estimates.",
+    "parsing": {}
+  },
+  "winter-risotto": {
+    "review": ["Source omits onion quantity and oven temperature."]
+  },
+  "desert-roses": {
+    "wait": 30,
+    "notes": "Includes the source optional chilling allowance if dough is sticky."
+  },
+  "guobaorou": {
+    "parsing": {
+      "400g pork tenderloin or loin": "400g pork tenderloin",
+      "250g potato starch or cornstarch": "250g potato starch"
+    },
+    "notes": "Uses the source's first pork and starch options."
+  },
+  "egyptian-lentils": {
+    "parsing": {
+      "2 Fresh Chili or Bell Peppers": "2 capsicum"
+    },
+    "notes": "Uses the source bell-pepper option; cooking water is added as directed."
+  },
+  "fennel-beans-and-kale-soup": {
+    "parsing": {
+      "4 teaspoons minced fresh rosemary or thyme": "4 teaspoons rosemary"
+    },
+    "notes": "Uses the source rosemary choice."
+  }
+}

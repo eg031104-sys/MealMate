@@ -395,7 +395,7 @@ describe("migration and backup validation", () => {
     old.recipes = [...old.recipes, { ...old.recipes[0], id: "user-recipe" }];
     const next = migrateState(old);
     expect(next.plan).toEqual(old.plan);
-    expect(next.recipes).toEqual(old.recipes);
+    expect(next.recipes).toMatchObject(JSON.parse(JSON.stringify(old.recipes)));
     expect(next.checked).toEqual(old.checked);
     expect(next.pantry).toEqual(old.pantry);
     expect(next.settings.appliances).toEqual(old.settings.appliances);
@@ -406,7 +406,9 @@ describe("migration and backup validation", () => {
     s = setDayCategories(s, 2, ["Lunch", "Dinner"]);
     s.v2.budgets[s.week] = 200;
     s = acknowledgeChanges(s);
-    expect(parseBackup(exportBackup(s))).toEqual(s);
+    expect(parseBackup(exportBackup(s))).toMatchObject(
+      JSON.parse(JSON.stringify(s)),
+    );
   });
   it("rejects malformed backups and broken meal references", () => {
     expect(() => parseBackup("{}")).toThrow();

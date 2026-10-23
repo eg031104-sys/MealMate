@@ -1,0 +1,1614 @@
+[
+  {
+    "slug": "aelplermagronen",
+    "issues": [
+      "Quantity requires review: a jar of apple sauce",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "aglio-e-olio",
+    "issues": [
+      "Verify preparation/cooking timing.",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "air-fryer-zucchini",
+    "issues": [
+      "Quantity requires review: Pinch of season salt",
+      "Quantity requires review: Olive oil"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "apple-chicken",
+    "issues": [
+      "Quantity requires review: Chicken breast or similar.",
+      "Quantity requires review: Onions.",
+      "Quantity requires review: Nuez moscada.",
+      "Quantity requires review: Apples.",
+      "Quantity requires review: Potatoes.",
+      "Quantity requires review: Cream or creme fraiche."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "apple-pie",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "apple-strudel",
+    "issues": [
+      "Quantity requires review: Puff pastry",
+      "Quantity requires review: Breadcrumbs / crushed cookies"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ardei-umpluti",
+    "issues": [
+      "Quantity requires review: 1 or 2 onions",
+      "Quantity requires review: Condiments of your choice: Parsley, origan or cumin",
+      "Quantity requires review: Olive oil",
+      "Quantity requires review: Tomato sauce"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "arroz-chaufa",
+    "issues": [
+      "Quantity requires review: Rice",
+      "Quantity requires review: Bell pepper",
+      "Quantity requires review: Chicken",
+      "Quantity requires review: Eggs",
+      "Quantity requires review: Soy sauce",
+      "Quantity requires review: Welsh onion"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "assam-tea",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "autumn-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "baked-mostaccioli",
+    "issues": [
+      "Quantity requires review: 24 oz or 1 jar of Fradiavolo Sauce",
+      "Quantity requires review: 1 box mostaccioli rigati or penne rigate",
+      "Quantity requires review: I've found that pre-shredded cheese doesn't taste as good as shredding it right before cooking.",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "baked-pasta-with-broccoli",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "baked-rice",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "banana-oatmeal-cookies",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "banana-pancakes",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "basic-meatballs",
+    "issues": [
+      "Quantity requires review: 1/4-1/2 cup chopped parsley",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "basic-waffles",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "bean-salad",
+    "issues": [
+      "Quantity requires review: 1/3 cup Salad Oil (olive oil, canola, or sunflower)",
+      "Quantity requires review: 1/2 cup Cider Vinegar",
+      "Quantity requires review: 1 can Cut Green Beans",
+      "Quantity requires review: 1 can Cut Waxed Beans",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "bebek-mropol",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "beef-and-broccoli",
+    "issues": [
+      "Quantity requires review: Snow Peas",
+      "Quantity requires review: Bean Sprouts"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "beef-kidney",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "beef-liver-and-onions",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "beef-wellington",
+    "issues": ["Quantity requires review: Extra Virgin Olive Oil"],
+    "selected": false
+  },
+  {
+    "slug": "bloody-mary-mix",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "blueberry-muffins",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "bolo-do-caco",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "breakfast-wrap",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "brown-sauce",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "butter-cake",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "butter-chicken-masala",
+    "issues": ["Quantity requires review: Garlic cloves 3, minced/crushed"],
+    "selected": false
+  },
+  {
+    "slug": "cannellini-bean-salad",
+    "issues": [
+      "Quantity requires review: 1 15 oz can diced tomatoes",
+      "Quantity requires review: Prosciutto",
+      "Quantity requires review: Arugula"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "carbonade",
+    "issues": [
+      "Quantity requires review: beef (chuck, brisket, oxtail...): 1kg | 2 1/4lb",
+      "Quantity requires review: gingerbread: 5 slices",
+      "Quantity requires review: brown beer (try to get a strong, tasty one): 1L | 4 cups",
+      "Quantity requires review: onions: 400g | 1lb",
+      "Quantity requires review: diced smoked bacon: 250g | 1/2lb (optional)",
+      "Quantity requires review: mustard",
+      "Quantity requires review: butter",
+      "Quantity requires review: olive oil",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "carbonara",
+    "issues": [
+      "Quantity requires review: Spaghetti: 320 g | 11 oz",
+      "Quantity requires review: Guanciale or Smoked Pancetta (cleaned and cubed): 150 g | 5 oz",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "casio-in-pastelletto",
+    "issues": [
+      "Quantity requires review: 2 slice cheese. Use a cheese that is mid-aged, not too savoury and not too delicate.",
+      "Quantity requires review: sugar",
+      "Quantity requires review: butter or lard"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "castagnole",
+    "issues": [
+      "Quantity requires review: flour",
+      "Quantity requires review: instant yeast",
+      "Quantity requires review: oil or lard"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "challah-bread",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "cheddar-crusted-chicken",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "cheesy-pasta-bake",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "cheesy-potatoe-bake",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "chicken-in-red-wine-vinegar-sauce",
+    "issues": [
+      "Quantity requires review: 1 whole chicken, cut into 10 pieces (alternatively, use breasts or legs)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "chicken-paprikash",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "chicken-pasta-casserole",
+    "issues": [
+      "Quantity requires review: Some oil and butter",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "chicken-satay",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "chicken-tikka-masala",
+    "issues": ["Quantity requires review: Hot cooked basmati rice"],
+    "selected": false
+  },
+  {
+    "slug": "chicory-and-tomato-pesto",
+    "issues": ["Quantity requires review: coarse-grained salt"],
+    "selected": false
+  },
+  {
+    "slug": "chimichanga",
+    "issues": [
+      "Quantity requires review: [taco-meat](/taco-meat)",
+      "Quantity requires review: Diced Tomatoes",
+      "Quantity requires review: Burrito sized tortilla",
+      "Quantity requires review: Plain Greek Yogurt or Sour Cream",
+      "Quantity requires review: Any other vegetables you want"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "chipolata-in-balsamic-vinegar",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "chocolate-chip-cookies",
+    "issues": [
+      "Quantity requires review: 225 g 50-70% dark chocolate chips or semi-sweet milk chocolate chips"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "cinnamon-biscuits",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "cinque-pi",
+    "issues": [
+      "Quantity requires review: pasta: 800g | 1 1/2 lb",
+      "Quantity requires review: Cream: 4dl | 1 1/2 cups",
+      "Quantity requires review: Parmigiano (grated)",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "coconut-flour-bread",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "coconut-oil-coffee",
+    "issues": [
+      "Quantity requires review: 1 cup hot coffee",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "colcannon-bake",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "coleslaw",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "collard-greens-with-smoked-duck-and-parnips",
+    "issues": [
+      "Quantity requires review: 1 large bunch collard greens chopped into ribbons"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "cooked-chickpeas",
+    "issues": [
+      "Quantity requires review: 1 can chickpeas / garbanzo beans, drained"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "coriander-chicken",
+    "issues": [
+      "Quantity requires review: Mustard oil / Sunflower oil",
+      "Quantity requires review: Sugar",
+      "Quantity requires review: Ginger",
+      "Quantity requires review: Garlic",
+      "Quantity requires review: Green chillies",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "corn-polenta",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "country-crisp-cereals",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "crab-salad",
+    "issues": [
+      "Quantity requires review: Egg (3)",
+      "Quantity requires review: Cucumber (1)",
+      "Quantity requires review: Carrot (1)",
+      "Quantity requires review: Onion (1)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "creme-brulee",
+    "issues": [
+      "Quantity requires review: Lemon peel, rubbed",
+      "Quantity requires review: Sugar for the top crust"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "croque-monsieur",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "crostata",
+    "issues": [
+      "Subrecipe must be resolved: 8 servings [shortcrust pastry](/shortcrust-pastry)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "cuca-italiana",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "curry-sauce",
+    "issues": ["Quantity requires review: Thumb of ginger, sliced"],
+    "selected": false
+  },
+  {
+    "slug": "damper",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "desert-roses",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "diannes-southwest-salad",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "dominican-spaghetti",
+    "issues": [
+      "Quantity requires review: 1 cup Starchy Pasta Water",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "dou-sha-bao",
+    "issues": [
+      "Quantity requires review: 1 sachet (~ 4g / 0.14 oz) baker's yeast",
+      "Quantity requires review: 6 baking paper square 7x7cm (~ 3x3inches)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "easy-chicken-and-rice-casserole",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "easy-pizza-sauce",
+    "issues": ["Quantity requires review: olive oil"],
+    "selected": false
+  },
+  {
+    "slug": "eggroll-in-a-bowl",
+    "issues": [
+      "Quantity requires review: soy sauce",
+      "Quantity requires review: sesame oil"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "eggs-benedict",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "egyptian-lentils",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "erwtensoep",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "exotic-ginger-cumin-chicken",
+    "issues": ["Quantity requires review: 3/4 cup Low Fat Plain Yogurt"],
+    "selected": false
+  },
+  {
+    "slug": "fajitas",
+    "issues": [
+      "Quantity requires review: 1/4 cup + 1/2 tsp Lime Juice, divided"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "fall-vegetable-and-chickpea-curry",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "farci-tomatoes",
+    "issues": [
+      "Quantity requires review: 1 or 2 onions",
+      "Quantity requires review: Condiments of your choice: parsley, origan or cumin",
+      "Quantity requires review: Olive oil",
+      "Quantity requires review: Gruyere cheese"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "fennel-beans-and-kale-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "finnish-salmon-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "fish-curry",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "flammkuchen",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "fondue",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "french-mustard-sauce-porkchops",
+    "issues": [
+      "Quantity requires review: gerkins: a dozen medium sized ones",
+      "Quantity requires review: white wine: 350ml | 1 1/2 cup",
+      "Quantity requires review: brown stock: 100ml | 1/2 cup",
+      "Quantity requires review: butter",
+      "Quantity requires review: olive oil",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "french-onion-soup",
+    "issues": [
+      "Quantity requires review: 1 Can of Chicken Broth",
+      "Quantity requires review: Balsamic vinegar, to taste",
+      "Quantity requires review: Worcestershire Sauce, to taste",
+      "Quantity requires review: Soy Sauce, to taste",
+      "Quantity requires review: Melty cheese, preferably guereye or swiss"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "french-toast",
+    "issues": ["Quantity requires review: Butter"],
+    "selected": false
+  },
+  {
+    "slug": "frijol-con-puerco",
+    "issues": ["Quantity requires review: **Mexican tortillas**"],
+    "selected": false
+  },
+  {
+    "slug": "fritatem-pomeranciis",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "frittata",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "full-english-breakfast",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "fume-sauce",
+    "issues": [
+      "Quantity requires review: olive oil",
+      "Quantity requires review: onion",
+      "Quantity requires review: paprica"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ginataang-kalabasa",
+    "issues": ["Quantity requires review: A few cloves of garlic"],
+    "selected": false
+  },
+  {
+    "slug": "ginger-garlic-broccoli",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "gluehwein",
+    "issues": [
+      "Quantity requires review: 1 bottle 700ml red wine (I prefer Primitivo/Zinfandel), don't buy a cheap cooking wine, you want to drink it :)",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "grands-peres",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "granita",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "granola",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "greek-salad",
+    "issues": [
+      "Quantity requires review: 2 cup assorted Lettuce, chopped or torn",
+      "Quantity requires review: 1/2 cup pitted Black Olives (preferably brine-cured), coarsely chopped",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "grilled-mackerel-with-miso-soup-and-squash",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "gumbo-shrimp-and-sausage",
+    "issues": [
+      "Quantity requires review: 2 (32 oz) Chicken Broth",
+      "Quantity requires review: 1 12 oz. bottle of Beer",
+      "Quantity requires review: 1/2 cup Green Onions"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "guobaorou",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "gypsy-soup",
+    "issues": [
+      "Quantity requires review: 1-1/2 cup Cooked Chickpeas",
+      "Quantity requires review: 3 cup Stock or Water",
+      "Quantity requires review: dash Cinnamon",
+      "Quantity requires review: dash Cayenne"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "hakka-style-meatballs",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "ham-and-lentil-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "hamburger-patties-all-beef",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "hamburger-patties",
+    "issues": [
+      "Quantity requires review: dash pepper",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "herbs-pizza",
+    "issues": ["Quantity requires review: extra-virgin olive oil or lard"],
+    "selected": false
+  },
+  {
+    "slug": "hoisin-pork-belly",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "hoisin-tofu-and-broccoli",
+    "issues": ["Quantity requires review: water"],
+    "selected": false
+  },
+  {
+    "slug": "honey-garlic-chicken",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "honey-sriracha-chicken-thighs",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "honey-vanilla-ice-cream",
+    "issues": [
+      "Quantity requires review: 1 pint heavy cream",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "indian-tea",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "instant-tom-yam-kung-noodle-soup",
+    "issues": [
+      "Quantity requires review: 10 small or 5 big mushrooms",
+      "Quantity requires review: A few salad leaves (or practically any veggie you have in the fridge)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "irish-coffee",
+    "issues": [
+      "Quantity requires review: 1 cup hot brewed coffee",
+      "Quantity requires review: 1 dash ground nutmeg"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "irish-potato-casserole",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "italian-mulled-wine",
+    "issues": [
+      "Quantity requires review: 1 pinch rosemary",
+      "Quantity requires review: 1 pinch peppercorn",
+      "Quantity requires review: 1 pinch thyme",
+      "Quantity requires review: 1 pinch red pepper",
+      "Quantity requires review: 1 pinch fennel seeds",
+      "Quantity requires review: 1 pinch cloves"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "japanese-noodle-soup",
+    "issues": [
+      "Quantity requires review: 4 Pork chops OR 4 Chicken Breasts",
+      "Quantity requires review: Set honey",
+      "Quantity requires review: Soy sauce",
+      "Quantity requires review: Worcestershire sauce",
+      "Quantity requires review: Ginger, sliced",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "kalderetang-manok",
+    "issues": [
+      "Quantity requires review: Tomato sauce",
+      "Quantity requires review: Chopped bell pepper",
+      "Quantity requires review: Dried peas",
+      "Quantity requires review: Liver spread",
+      "Quantity requires review: Fish sauce",
+      "Quantity requires review: Grated cheese"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "korv-stroganoff",
+    "issues": ["Quantity requires review: 2 1/2 dl cream"],
+    "selected": false
+  },
+  {
+    "slug": "kropsua",
+    "issues": ["Quantity requires review: Maple syrup"],
+    "selected": false
+  },
+  {
+    "slug": "lamb-biriyani",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "lasagna",
+    "issues": [
+      "Quantity requires review: Parmesan cheese",
+      "Quantity requires review: Dry mozzarella cheese",
+      "Quantity requires review: [Béchamel sauce](/classic-bechamel-sauce) or [ricotta lasagna filling](/ricotta-lasagna-filling)",
+      "Quantity requires review: Lasagna pasta sheets"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "lebanese-lentil-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "lemon-and-oregano-chicken-traybake",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "lentejas",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "lenten-chili",
+    "issues": [
+      "Quantity requires review: 4 15oz cans of kidney beans (or 6 cups cooked beans)",
+      "Quantity requires review: 1 29oz large can tomato sauce (or 4 cups fresh tomato sauce)",
+      "Quantity requires review: 1 15oz can diced tomatoes (or 1 large diced tomato with skin removed)",
+      "Quantity requires review: 1 cup cooked white or brown rice"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "lenten-lentil-curry",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "limoncello",
+    "issues": [
+      "Quantity requires review: 300ml 95% ABV grain alcohol",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "limoncini",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "long-cooked-chuck-steak",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "mapo-tofu",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "marinated-pork-steaks",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "mexican-meat-loaf",
+    "issues": [
+      "The source gives no oven temperature; confirm before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "mushroom-risotto",
+    "issues": [
+      "Quantity requires review: Olive oil",
+      "Quantity requires review: Mushroom or chicken stock",
+      "Quantity requires review: Butter",
+      "Quantity requires review: Grated Pecorino or Parmesan cheese"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "mushroom-sauce",
+    "issues": [
+      "Quantity requires review: Champignons",
+      "Quantity requires review: Onion",
+      "Quantity requires review: A glass of cream or milk",
+      "Quantity requires review: Butter",
+      "Quantity requires review: Wheat flour"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "mushroom-stragonov",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "naan-bread",
+    "issues": [
+      "Quantity requires review: Warm Milk 1 cup",
+      "Quantity requires review: Oil - little to grease"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "nashville-chicken",
+    "issues": [
+      "Quantity requires review: 1/3 Cup Hot sauce",
+      "Quantity requires review: 1 1/2 Cups Cooking oil Used to fry the chicken"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "newfoundland-cod-chowder",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "no-knead-bread",
+    "issues": [
+      "Quantity requires review: 1/4 tsp instant yeast or 1.25/4 tsp active dry yeast",
+      "Quantity requires review: Oven-safe pan"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "oatmeal-cookies",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "oatmeal-pancakes",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "oaty-pancakes",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "okonomiyaki",
+    "issues": [
+      "Quantity requires review: Thinly sliced meat, any kind can do, sliced pork, beef, even bacon",
+      "Quantity requires review: Dashi powder or any desired seasonings",
+      "Quantity requires review: The following options are traditional but can be substituted with any desired toppings",
+      "Quantity requires review: Tonkatsu sauce (sometimes known as Bulldog sauce) in squirt bottle",
+      "Quantity requires review: Mayonnaise in squirt bottle",
+      "Quantity requires review: Sriacha in squirt bottle",
+      "Quantity requires review: Katsuobushi (Dried bonito flakes)",
+      "Quantity requires review: Nori (Dried roasted seaweed)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "omelet",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "one-pot-chicken-tetrazzini",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "onion-raitha",
+    "issues": [
+      "Quantity requires review: Sprigs of Mint",
+      "Quantity requires review: Dash of Honey",
+      "Quantity requires review: Hint of Chilli Powder (Spicy option)/ Hint of sugar (Sweet option)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "orange-glorious",
+    "issues": [
+      "Quantity requires review: 1 (6 ounce) can frozen orange juice concentrate"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "paella",
+    "issues": ["Quantity requires review: A few saffron threads"],
+    "selected": false
+  },
+  {
+    "slug": "panang-style-beef-curry",
+    "issues": ["Quantity requires review: 1/2 Onion (2 oz), chopped"],
+    "selected": false
+  },
+  {
+    "slug": "pancake",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "pasta-alla-norma",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "pastitsio",
+    "issues": [
+      "Quantity requires review: salted water",
+      "Quantity requires review: .5 TB ground allspice",
+      "Quantity requires review: .5 TB ground cinnamon"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "pate-chinois",
+    "issues": [
+      "Quantity requires review: 1½ lb of potatoes or around 6 big one, peeled and diced",
+      "Quantity requires review: (optional) ½ cup of strong cheddar cheese, grated",
+      "Quantity requires review: 1 small can (around 14oz) of whole kernel corn",
+      "Quantity requires review: 1 small can (around 14oz) of cream style corn"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "pavlova",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "peat-carrot-salad",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "pepper-sauce",
+    "issues": ["Quantity requires review: Salt if needed"],
+    "selected": false
+  },
+  {
+    "slug": "perfect-potato-salad",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "pesto-chicken-quinoa-bowls",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "pho-soup",
+    "issues": [
+      "Quantity requires review: Garlic (4-8 large cloves)",
+      "Quantity requires review: Spring Onions",
+      "Quantity requires review: Cardamom Seeds (10 or so)",
+      "Quantity requires review: Star Anise (4-5)",
+      "Quantity requires review: Ginger",
+      "Quantity requires review: Cinnamon Sticks (3-5 sticks)",
+      "Quantity requires review: Beef Bones with marrow (3x)",
+      "Quantity requires review: Beef bouillon cubes (1-3)",
+      "Quantity requires review: Fish/Oyster Sauce",
+      "Quantity requires review: Honey or Brown Sugar",
+      "Quantity requires review: Rice noodles"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "pininyahang-manok",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "pork-carnitas",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "potato-leek-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "potato-pure",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "puff-pastry",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "quesadilla",
+    "issues": [
+      "Quantity requires review: ~4 small pinches of (Mozzarella, Oaxaca, or Montery Jack cheese).",
+      "Quantity requires review: Most cheeses are fine, but the taste of oaxaca cheese is more authentic.",
+      "Quantity requires review: If you don't have pre-grated cheese, you can cut thin slices off of the block of cheese.",
+      "Quantity requires review: Any ingredients you want. ie, veggies, chicken, mushrooms (cooked), or beans",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ragu-napoletano",
+    "issues": [
+      "Quantity requires review: Red pepper",
+      "Quantity requires review: 1 1/2 cups grated Pecorino Romano cheese",
+      "Quantity requires review: Splash of milk",
+      "Quantity requires review: Handfull of fresh parsley chopped",
+      "Quantity requires review: Sprig of fresh basil chopped",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ratatouille",
+    "issues": ["Quantity requires review: Olive Oil"],
+    "selected": false
+  },
+  {
+    "slug": "ravioli",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "red-lentil-dahl",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "red-sauce",
+    "issues": [
+      "Quantity requires review: Crushed hot red pepper",
+      "Quantity requires review: Sweet onion",
+      "Quantity requires review: Large carrot",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ricotta-lasagna-filling",
+    "issues": [
+      "Quantity requires review: Ricotta cheese",
+      "Quantity requires review: Parmesan cheese"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "risengroed",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "roesti",
+    "issues": ["Quantity requires review: butter"],
+    "selected": false
+  },
+  {
+    "slug": "salsa",
+    "issues": [
+      "Quantity requires review: 1 14.5 oz (400 grams) canned tomatoes"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "sardine-cakes",
+    "issues": ["Quantity requires review: 2 tins sardines (~4oz)"],
+    "selected": false
+  },
+  {
+    "slug": "schinkenfleckerl-gratinated",
+    "issues": [
+      "Quantity requires review: Majoran, Muskat, Pepper",
+      "Quantity requires review: parmesan",
+      "Quantity requires review: chili flakes"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "schnitzel",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "scouse",
+    "issues": [
+      "Quantity requires review: beef mince",
+      "Quantity requires review: a white onion",
+      "Quantity requires review: garlic",
+      "Quantity requires review: bayleaf",
+      "Quantity requires review: potatoes",
+      "Quantity requires review: carrots",
+      "Quantity requires review: beef stock ~1 pint",
+      "Quantity requires review: beef gravy granules"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "shakshouka",
+    "issues": ["Quantity requires review: powdered sweet pepper"],
+    "selected": false
+  },
+  {
+    "slug": "shepherds-pie",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "shortcrust-pastry-biscuits",
+    "issues": [
+      "Subrecipe must be resolved: 8 servings [shortcrust pastry](/shortcrust-pastry)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "shortcrust-pastry",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "shrimp-and-grits",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "shrimp-fettuccine-alfredo",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "simple-chicken-curry",
+    "issues": [
+      "Quantity requires review: 2-3 cups Crushed or Pureed Tomatoes",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "simple-pasta-cream-sauce",
+    "issues": [
+      "Quantity requires review: Dairy liquid cream (10%+ fat recommended)",
+      "Quantity requires review: Flour (Wheat flour recommended)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "slowcooked-green-bean-beef-soup-supreme",
+    "issues": [
+      "Quantity requires review: 2 cans french cut green beans (or diced green beans)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "smoked-salmon-pasta-primavera",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "smoked-salmon-quiche",
+    "issues": [
+      "Quantity requires review: 1 cup + 2 1/2 Tbsp Butter, divided",
+      "Quantity requires review: Up to 1/3 cup Water, chilled"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "soleier",
+    "issues": [
+      "Quantity requires review: peels of five onions",
+      "Quantity requires review: 3 cloves"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "spaghetti-all-amatriciana",
+    "issues": [
+      "Quantity requires review: Pecorino romano cheese preferably or Parmesan 1.5oz (40g)",
+      "Quantity requires review: Fresh chili pepper (as many as you'd like)",
+      "Quantity requires review: Extra virgin olive oil 1/4 cup (40g)",
+      "Quantity requires review: Guanciale preferably or Bacon 3.5oz (100g)",
+      "Quantity requires review: White wine 1/4 cup (60g)",
+      "Quantity requires review: Tomato passata 10oz (300g)",
+      "Quantity requires review: Spaghetti or similar long pasta 12oz (350g)",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "spaghetti-alla-puttanesca",
+    "issues": [
+      "Quantity requires review: Pot of water",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "spaghetti-and-meatballs",
+    "issues": [
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "spanish-tortilla",
+    "issues": ["Quantity requires review: Extra virgin olive oil"],
+    "selected": false
+  },
+  {
+    "slug": "spiced-apple-pancakes",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "spiced-cantaloupe",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "spicy-kung-pao-style-chicken",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "spicy-sausage-pasta",
+    "issues": [
+      "Contributor identifies a newspaper source; reuse rights require confirmation."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "spinach-rice-casserole",
+    "issues": [
+      "Quantity requires review: 4 cups Brown Rice, cooked",
+      "Quantity requires review: A few dashes each - Nutmeg; Cayenne; Paprika"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "steak-tartare",
+    "issues": [
+      "Quantity requires review: Ground Beef (Lean as possible)",
+      "Quantity requires review: Eggs",
+      "Quantity requires review: Onion or Shallots",
+      "Quantity requires review: Capers",
+      "Quantity requires review: Gherkin / Cornichons",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "sticky-porkchops",
+    "issues": [
+      "Quantity requires review: 2 heaped tbsp Set honey",
+      "Quantity requires review: Soy sauce",
+      "Quantity requires review: Ginger (thumb sized piece), sliced"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "stoemp",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "stoofvlees",
+    "issues": [
+      "Quantity requires review: 2 33cl bottles of brown beer",
+      "Quantity requires review: 1 clove (spice)",
+      "Quantity requires review: mustard"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "stracciatella-soup",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "stuffed-round-squash",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "stuffed-vegetables",
+    "issues": ["Quantity requires review: extra virgin olive oil"],
+    "selected": false
+  },
+  {
+    "slug": "sugar-free-brown-sugar-peanut-butter-cookies",
+    "issues": [
+      "Quantity requires review: 0.8 cup brown-sugar-style erythritol/stevia blend, lightly packed"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "swedish-pancakes",
+    "issues": ["Quantity requires review: 1 - 2/3 cups Milk"],
+    "selected": false
+  },
+  {
+    "slug": "tabouleh",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "tahini-short-bread",
+    "issues": [
+      "Quantity requires review: from 30g to 70g of sugar",
+      "Directions rely on a linked subrecipe; resolve before planning."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "tajine",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "tanzania-tea-with-milk",
+    "issues": [
+      "Quantity requires review: Black Ceylon Tea (Preferably, you want a dark, herbal flavor from your tea. I have some from Dar es Salaam,",
+      "Quantity requires review: Milk/Sweet Cream"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "tarta-de-santiago",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "tarte-merengada",
+    "issues": [
+      "Quantity requires review: 3 / 4 lemons ( 1 dl of juice + the outer scrapings )"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "teriyaki-beef",
+    "issues": [
+      "Quantity requires review: Sesame oil",
+      "Quantity requires review: Beef slices or strips",
+      "Quantity requires review: Noodles or rice"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "tiramisu",
+    "issues": [
+      "Quantity requires review: coffee at room temperature",
+      "Quantity requires review: cocoa powder",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "tiroler-groestl",
+    "issues": [
+      "Quantity requires review: 1 kg / 2 lbs potatoes",
+      "Quantity requires review: 500 g / 1 lbs porkchops",
+      "Quantity requires review: 400 g / 14 ounce bacon (smoked)",
+      "Quantity requires review: Ample amount of chopped parsley",
+      "Quantity requires review: Marjoram and cumin to taste"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "tofu-and-cashew-chow-mein",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "tomato-and-grilled-paprika-soup",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "tuhu",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "tuna-salad",
+    "issues": [
+      "Quantity requires review: 1 (7 oz) can white tuna, drained",
+      "Quantity requires review: A pinch of garlic powder (optional)",
+      "Quantity requires review: 1 cup shredded cheese (optional)",
+      "Verify preparation/cooking timing."
+    ],
+    "selected": false
+  },
+  {
+    "slug": "turkish-red-lentil-soup",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "turkish-style-spiced-chicken",
+    "issues": ["Source does not state oven temperature."],
+    "selected": false
+  },
+  {
+    "slug": "turkish-yogurt-soup",
+    "issues": [
+      "Quantity requires review: yogurt",
+      "Quantity requires review: butter"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "turmeric-flatbread",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "tuscan-style-pork-roast",
+    "issues": [],
+    "selected": false
+  },
+  {
+    "slug": "tzatziki",
+    "issues": ["Quantity requires review: Lemon/lime or vinegar"],
+    "selected": false
+  },
+  {
+    "slug": "ukrainian-borscht",
+    "issues": [
+      "Quantity requires review: 8 cups chicken broth + 2 cups water",
+      "Quantity requires review: 4 Tbsp ketchup or 3 Tbsp tomato sauce",
+      "Quantity requires review: 1 can white cannelini beans with their juice (optional)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "ukrainian-vareniki",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "venezuelan-arepa",
+    "issues": [
+      "Quantity requires review: 2 cups of precooked corn flour",
+      "Quantity requires review: delicatessen to taste"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "wholemeal-pizza",
+    "issues": [
+      "Subrecipe must be resolved: 1 serving [Wholemeal Wheat Flour Pizza Dough](/wholemeal-wheat-flour-pizza-dough)",
+      "Subrecipe must be resolved: 1 serving [Easy Pizza Sauce](/easy-pizza-sauce)"
+    ],
+    "selected": false
+  },
+  {
+    "slug": "wholemeal-wheat-flour-pizza-dough",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "winter-risotto",
+    "issues": ["Source omits onion quantity and oven temperature."],
+    "selected": false
+  },
+  {
+    "slug": "yogurt-cake",
+    "issues": ["Quantity requires review: Instant yeast"],
+    "selected": false
+  },
+  {
+    "slug": "yolk-milk",
+    "issues": ["Verify preparation/cooking timing."],
+    "selected": false
+  },
+  {
+    "slug": "yorkshire-puddings",
+    "issues": ["Quantity requires review: sunflower oil"],
+    "selected": false
+  },
+  {
+    "slug": "zaatar-chicken-bulgur-bowls",
+    "issues": [],
+    "selected": true
+  },
+  {
+    "slug": "zarangollo",
+    "issues": ["Quantity requires review: Olive oil"],
+    "selected": false
+  },
+  {
+    "slug": "zurich-sytle-meat-saute",
+    "issues": [],
+    "selected": true
+  }
+]

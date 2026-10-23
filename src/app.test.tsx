@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
+import { curatedRecipes } from "./curated-recipes";
 import "fake-indexeddb/auto";
-import { it, expect } from "vitest";
+import { it, expect, afterEach } from "vitest";
 import {
   render,
   screen,
@@ -9,6 +10,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+afterEach(cleanup);
 import { App } from "./main";
 import { saveState, loadState } from "./storage";
 import { defaults } from "./domain";
@@ -72,7 +74,7 @@ it("supports independent daily switches, purchase recording and refresh persiste
   await user.click(screen.getByRole("button", { name: /Shopping List/ }));
   await user.click(screen.getByRole("button", { name: /Chicken breast/ }));
   expect(screen.getByText("✓ Recorded 500 g · $8.00")).toBeTruthy();
-  expect((await loadState())?.recipes.length).toBe(228);
+  expect((await loadState())?.recipes.length).toBe(40 + curatedRecipes.length);
   cleanup();
 }, 20000);
 it("renders appliance search, recipe filters and backup restore validation", async () => {
@@ -95,6 +97,7 @@ it("renders appliance search, recipe filters and backup restore validation", asy
   await screen.findByText(/Backup rejected:/);
   await user.click(screen.getByRole("button", { name: "Recipes" }));
   await screen.findByLabelText("Search recipes");
+  await user.click(screen.getByLabelText(/Show archived recipes/));
   await user.type(
     screen.getByLabelText("Search recipes"),
     "chickpea spinach curry",
@@ -102,6 +105,6 @@ it("renders appliance search, recipe filters and backup restore validation", asy
   expect(
     screen.getByRole("heading", { name: "Chickpea spinach curry" }),
   ).toBeTruthy();
-  expect(screen.getByText("☆ Favourite")).toBeTruthy();
+  expect(screen.getByRole("button", { name: /^Favourite / })).toBeTruthy();
   cleanup();
 }, 20000);

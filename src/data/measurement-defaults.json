@@ -1,0 +1,2110 @@
+{
+  "flour|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "plain flour|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "self-raising flour|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "wholemeal flour|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "sugar|cup": {
+    "quantity": 210,
+    "unit": "g"
+  },
+  "brown sugar|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "icing sugar|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "oats|cup": {
+    "quantity": 90,
+    "unit": "g"
+  },
+  "rice|cup": {
+    "quantity": 195,
+    "unit": "g"
+  },
+  "cooked rice|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "breadcrumbs|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "grated cheese|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "cheddar cheese|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "parmesan|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "almonds|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "cashews|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "peanuts|cup": {
+    "quantity": 145,
+    "unit": "g"
+  },
+  "walnuts|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "spinach|cup": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "parsley|cup": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "coriander|cup": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "broccoli|cup": {
+    "quantity": 90,
+    "unit": "g"
+  },
+  "mushrooms|cup": {
+    "quantity": 70,
+    "unit": "g"
+  },
+  "sweetcorn|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "peas|cup": {
+    "quantity": 145,
+    "unit": "g"
+  },
+  "chickpeas|cup": {
+    "quantity": 165,
+    "unit": "g"
+  },
+  "kidney beans|cup": {
+    "quantity": 175,
+    "unit": "g"
+  },
+  "lentils|cup": {
+    "quantity": 190,
+    "unit": "g"
+  },
+  "red lentils|cup": {
+    "quantity": 190,
+    "unit": "g"
+  },
+  "green lentils|cup": {
+    "quantity": 190,
+    "unit": "g"
+  },
+  "cooked lentils|cup": {
+    "quantity": 200,
+    "unit": "g"
+  },
+  "couscous|cup": {
+    "quantity": 170,
+    "unit": "g"
+  },
+  "quinoa|cup": {
+    "quantity": 170,
+    "unit": "g"
+  },
+  "semolina|cup": {
+    "quantity": 165,
+    "unit": "g"
+  },
+  "pasta|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "macaroni|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "cornflakes|cup": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "desiccated coconut|cup": {
+    "quantity": 85,
+    "unit": "g"
+  },
+  "peanut butter|cup": {
+    "quantity": 260,
+    "unit": "g"
+  },
+  "yoghurt|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "cream cheese|cup": {
+    "quantity": 230,
+    "unit": "g"
+  },
+  "sour cream|cup": {
+    "quantity": 240,
+    "unit": "g"
+  },
+  "tomato paste|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "honey|cup": {
+    "quantity": 340,
+    "unit": "g"
+  },
+  "butter|cup": {
+    "quantity": 225,
+    "unit": "g"
+  },
+  "raisins|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "cream of wheat|cup": {
+    "quantity": 180,
+    "unit": "g"
+  },
+  "polenta|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "almond flour|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "coconut flour|cup": {
+    "quantity": 110,
+    "unit": "g"
+  },
+  "maple syrup|cup": {
+    "quantity": 330,
+    "unit": "g"
+  },
+  "water|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "milk|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "cream|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "olive oil|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "vegetable oil|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "oil|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "chicken stock|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "beef stock|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "vegetable stock|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "soy sauce|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "white wine|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "red wine|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "lemon juice|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "orange juice|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "vinegar|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "coconut milk|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "coconut cream|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "almond milk|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "onion|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "red onion|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "shallot|each": {
+    "quantity": 35,
+    "unit": "g"
+  },
+  "carrot|each": {
+    "quantity": 80,
+    "unit": "g"
+  },
+  "tomato|each": {
+    "quantity": 120,
+    "unit": "g"
+  },
+  "capsicum|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "green capsicum|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "red capsicum|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "yellow capsicum|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "potato|each": {
+    "quantity": 180,
+    "unit": "g"
+  },
+  "sweet potato|each": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "zucchini|each": {
+    "quantity": 200,
+    "unit": "g"
+  },
+  "aubergine|each": {
+    "quantity": 300,
+    "unit": "g"
+  },
+  "eggplant|each": {
+    "quantity": 300,
+    "unit": "g"
+  },
+  "cucumber|each": {
+    "quantity": 300,
+    "unit": "g"
+  },
+  "leek|each": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "broccoli|each": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "cauliflower|each": {
+    "quantity": 600,
+    "unit": "g"
+  },
+  "avocado|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "apple|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "pear|each": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "banana|each": {
+    "quantity": 125,
+    "unit": "g"
+  },
+  "garlic clove|each": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "garlic bulb|each": {
+    "quantity": 60,
+    "unit": "g"
+  },
+  "celery stalk|each": {
+    "quantity": 40,
+    "unit": "g"
+  },
+  "spring onion|each": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "chicken breast|each": {
+    "quantity": 180,
+    "unit": "g"
+  },
+  "chicken thigh|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "chicken drumstick|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "pork chop|each": {
+    "quantity": 200,
+    "unit": "g"
+  },
+  "veal cutlet|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "sausage|each": {
+    "quantity": 75,
+    "unit": "g"
+  },
+  "mushroom|each": {
+    "quantity": 20,
+    "unit": "g"
+  },
+  "lettuce|each": {
+    "quantity": 300,
+    "unit": "g"
+  },
+  "cabbage|each": {
+    "quantity": 900,
+    "unit": "g"
+  },
+  "fennel|each": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "turnip|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "beetroot|each": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "butternut pumpkin|each": {
+    "quantity": 1000,
+    "unit": "g"
+  },
+  "pumpkin|each": {
+    "quantity": 1500,
+    "unit": "g"
+  },
+  "round squash|each": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "small pumpkin|each": {
+    "quantity": 600,
+    "unit": "g"
+  },
+  "tinned tomatoes|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "chickpeas|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "kidney beans|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "white beans|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "black beans|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "sweetcorn|can": {
+    "quantity": 340,
+    "unit": "g"
+  },
+  "tuna|can": {
+    "quantity": 185,
+    "unit": "g"
+  },
+  "condensed milk|can": {
+    "quantity": 395,
+    "unit": "g"
+  },
+  "cream of mushroom soup|can": {
+    "quantity": 420,
+    "unit": "g"
+  },
+  "cream of chicken soup|can": {
+    "quantity": 420,
+    "unit": "g"
+  },
+  "tomato sauce|can": {
+    "quantity": 400,
+    "unit": "g"
+  },
+  "tomato soup|can": {
+    "quantity": 420,
+    "unit": "g"
+  },
+  "coconut milk|can": {
+    "quantity": 400,
+    "unit": "ml"
+  },
+  "coconut cream|can": {
+    "quantity": 400,
+    "unit": "ml"
+  },
+  "pasta|packet": {
+    "quantity": 500,
+    "unit": "g"
+  },
+  "noodles|packet": {
+    "quantity": 200,
+    "unit": "g"
+  },
+  "lasagne sheets|packet": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "beef mince|packet": {
+    "quantity": 500,
+    "unit": "g"
+  },
+  "pork mince|packet": {
+    "quantity": 500,
+    "unit": "g"
+  },
+  "mozzarella|packet": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "frozen vegetables|packet": {
+    "quantity": 500,
+    "unit": "g"
+  },
+  "cream cheese|packet": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "vanilla sugar|packet": {
+    "quantity": 8,
+    "unit": "g"
+  },
+  "chocolate|packet": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "parsley|bunch": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "coriander|bunch": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "basil|bunch": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "mint|bunch": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "dill|bunch": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "spring onion|bunch": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "spinach|bunch": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "kale|bunch": {
+    "quantity": 200,
+    "unit": "g"
+  },
+  "parsley|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "thyme|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "rosemary|sprig": {
+    "quantity": 2,
+    "unit": "g"
+  },
+  "oregano|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "mint|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "basil|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "dill|sprig": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "olive oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "olive oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "vegetable oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "vegetable oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "sesame oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "sesame oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "sunflower oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "sunflower oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "peanut oil|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "peanut oil|frying": {
+    "quantity": 15,
+    "unit": "ml"
+  },
+  "flour|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "plain flour|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "icing sugar|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "sugar|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "parmesan|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "grated cheese|dusting": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "butter|greasing": {
+    "quantity": 5,
+    "unit": "g"
+  },
+  "butter|knob": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "margarine|greasing": {
+    "quantity": 5,
+    "unit": "g"
+  },
+  "margarine|knob": {
+    "quantity": 10,
+    "unit": "g"
+  },
+  "spinach|handful": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "grated cheese|handful": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "almonds|handful": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "parsley|handful": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "coriander|handful": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "basil|handful": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "mint|handful": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "nuts|handful": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "raisins|handful": {
+    "quantity": 30,
+    "unit": "g"
+  },
+  "salt|pinch": {
+    "quantity": 0.3,
+    "unit": "g"
+  },
+  "pepper|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "paprika|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "cinnamon|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "nutmeg|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "cayenne pepper|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "chilli flakes|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "saffron|pinch": {
+    "quantity": 0.2,
+    "unit": "g"
+  },
+  "bacon|slice": {
+    "quantity": 20,
+    "unit": "g"
+  },
+  "ham|slice": {
+    "quantity": 25,
+    "unit": "g"
+  },
+  "bread|slice": {
+    "quantity": 35,
+    "unit": "g"
+  },
+  "cheese|slice": {
+    "quantity": 20,
+    "unit": "g"
+  },
+  "ginger|cm": {
+    "quantity": 5,
+    "unit": "g"
+  },
+  "butter|stick": {
+    "quantity": 113.4,
+    "unit": "g"
+  },
+  "cinnamon|stick": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "ginger|piece": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "saffron|thread": {
+    "quantity": 0.01,
+    "unit": "g"
+  },
+  "lemon|juice": {
+    "quantity": 30,
+    "unit": "ml"
+  },
+  "lime|juice": {
+    "quantity": 20,
+    "unit": "ml"
+  },
+  "orange|juice": {
+    "quantity": 80,
+    "unit": "ml"
+  },
+  "lemon zest|each": {
+    "quantity": 5,
+    "unit": "g"
+  },
+  "orange zest|each": {
+    "quantity": 6,
+    "unit": "g"
+  },
+  "onion|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "carrot|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "red capsicum|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "green capsicum|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "capsicum|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "celery|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "blueberries|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "cabbage|cup": {
+    "quantity": 90,
+    "unit": "g"
+  },
+  "leek|cup": {
+    "quantity": 90,
+    "unit": "g"
+  },
+  "sweet potato|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "tomato|cup": {
+    "quantity": 180,
+    "unit": "g"
+  },
+  "mint|cup": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "dill|cup": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "sugar snap peas|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "edamame|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "black beans|cup": {
+    "quantity": 175,
+    "unit": "g"
+  },
+  "salsa|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "pesto|cup": {
+    "quantity": 240,
+    "unit": "g"
+  },
+  "red curry paste|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "bulgur|cup": {
+    "quantity": 180,
+    "unit": "g"
+  },
+  "arugula|cup": {
+    "quantity": 20,
+    "unit": "g"
+  },
+  "rocket|cup": {
+    "quantity": 20,
+    "unit": "g"
+  },
+  "feta cheese|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "mayonnaise|cup": {
+    "quantity": 230,
+    "unit": "g"
+  },
+  "buttermilk|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "evaporated milk|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "hoisin sauce|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "pineapple chunks|cup": {
+    "quantity": 165,
+    "unit": "g"
+  },
+  "pineapple juice|cup": {
+    "quantity": 250,
+    "unit": "ml"
+  },
+  "tomato sauce|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "swiss chard|cup": {
+    "quantity": 35,
+    "unit": "g"
+  },
+  "celeriac|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "cooked chicken|cup": {
+    "quantity": 140,
+    "unit": "g"
+  },
+  "cornflour|cup": {
+    "quantity": 120,
+    "unit": "g"
+  },
+  "sunflower seeds|cup": {
+    "quantity": 140,
+    "unit": "g"
+  },
+  "cooked brown rice|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "basil|cup": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "cherry tomatoes|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "parmesan-romano cheese|cup": {
+    "quantity": 100,
+    "unit": "g"
+  },
+  "greek yoghurt|cup": {
+    "quantity": 250,
+    "unit": "g"
+  },
+  "porridge rice|cup": {
+    "quantity": 195,
+    "unit": "g"
+  },
+  "flour|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "flour|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "plain flour|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "plain flour|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "self-raising flour|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "self-raising flour|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "wholemeal flour|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "wholemeal flour|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "sugar|tablespoon": {
+    "quantity": 12.6,
+    "unit": "g"
+  },
+  "sugar|teaspoon": {
+    "quantity": 4.2,
+    "unit": "g"
+  },
+  "brown sugar|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "brown sugar|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "icing sugar|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "icing sugar|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "oats|tablespoon": {
+    "quantity": 5.4,
+    "unit": "g"
+  },
+  "oats|teaspoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "rice|tablespoon": {
+    "quantity": 11.7,
+    "unit": "g"
+  },
+  "rice|teaspoon": {
+    "quantity": 3.9,
+    "unit": "g"
+  },
+  "cooked rice|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "cooked rice|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "breadcrumbs|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "breadcrumbs|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "grated cheese|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "grated cheese|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "cheddar cheese|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "cheddar cheese|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "parmesan|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "parmesan|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "almonds|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "almonds|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "cashews|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "cashews|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "peanuts|tablespoon": {
+    "quantity": 8.7,
+    "unit": "g"
+  },
+  "peanuts|teaspoon": {
+    "quantity": 2.9,
+    "unit": "g"
+  },
+  "walnuts|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "walnuts|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "spinach|tablespoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "spinach|teaspoon": {
+    "quantity": 0.6,
+    "unit": "g"
+  },
+  "parsley|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "parsley|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "coriander|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "coriander|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "broccoli|tablespoon": {
+    "quantity": 5.4,
+    "unit": "g"
+  },
+  "broccoli|teaspoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "mushrooms|tablespoon": {
+    "quantity": 4.2,
+    "unit": "g"
+  },
+  "mushrooms|teaspoon": {
+    "quantity": 1.4,
+    "unit": "g"
+  },
+  "sweetcorn|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "sweetcorn|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "peas|tablespoon": {
+    "quantity": 8.7,
+    "unit": "g"
+  },
+  "peas|teaspoon": {
+    "quantity": 2.9,
+    "unit": "g"
+  },
+  "chickpeas|tablespoon": {
+    "quantity": 9.9,
+    "unit": "g"
+  },
+  "chickpeas|teaspoon": {
+    "quantity": 3.3,
+    "unit": "g"
+  },
+  "kidney beans|tablespoon": {
+    "quantity": 10.5,
+    "unit": "g"
+  },
+  "kidney beans|teaspoon": {
+    "quantity": 3.5,
+    "unit": "g"
+  },
+  "lentils|tablespoon": {
+    "quantity": 11.4,
+    "unit": "g"
+  },
+  "lentils|teaspoon": {
+    "quantity": 3.8,
+    "unit": "g"
+  },
+  "red lentils|tablespoon": {
+    "quantity": 11.4,
+    "unit": "g"
+  },
+  "red lentils|teaspoon": {
+    "quantity": 3.8,
+    "unit": "g"
+  },
+  "green lentils|tablespoon": {
+    "quantity": 11.4,
+    "unit": "g"
+  },
+  "green lentils|teaspoon": {
+    "quantity": 3.8,
+    "unit": "g"
+  },
+  "cooked lentils|tablespoon": {
+    "quantity": 12.0,
+    "unit": "g"
+  },
+  "cooked lentils|teaspoon": {
+    "quantity": 4.0,
+    "unit": "g"
+  },
+  "couscous|tablespoon": {
+    "quantity": 10.2,
+    "unit": "g"
+  },
+  "couscous|teaspoon": {
+    "quantity": 3.4,
+    "unit": "g"
+  },
+  "quinoa|tablespoon": {
+    "quantity": 10.2,
+    "unit": "g"
+  },
+  "quinoa|teaspoon": {
+    "quantity": 3.4,
+    "unit": "g"
+  },
+  "semolina|tablespoon": {
+    "quantity": 9.9,
+    "unit": "g"
+  },
+  "semolina|teaspoon": {
+    "quantity": 3.3,
+    "unit": "g"
+  },
+  "pasta|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "pasta|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "macaroni|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "macaroni|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "cornflakes|tablespoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "cornflakes|teaspoon": {
+    "quantity": 0.6,
+    "unit": "g"
+  },
+  "desiccated coconut|tablespoon": {
+    "quantity": 5.1,
+    "unit": "g"
+  },
+  "desiccated coconut|teaspoon": {
+    "quantity": 1.7,
+    "unit": "g"
+  },
+  "peanut butter|tablespoon": {
+    "quantity": 15.6,
+    "unit": "g"
+  },
+  "peanut butter|teaspoon": {
+    "quantity": 5.2,
+    "unit": "g"
+  },
+  "yoghurt|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "yoghurt|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "cream cheese|tablespoon": {
+    "quantity": 13.8,
+    "unit": "g"
+  },
+  "cream cheese|teaspoon": {
+    "quantity": 4.6,
+    "unit": "g"
+  },
+  "sour cream|tablespoon": {
+    "quantity": 14.4,
+    "unit": "g"
+  },
+  "sour cream|teaspoon": {
+    "quantity": 4.8,
+    "unit": "g"
+  },
+  "tomato paste|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "tomato paste|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "honey|tablespoon": {
+    "quantity": 20.4,
+    "unit": "g"
+  },
+  "honey|teaspoon": {
+    "quantity": 6.8,
+    "unit": "g"
+  },
+  "butter|tablespoon": {
+    "quantity": 13.5,
+    "unit": "g"
+  },
+  "butter|teaspoon": {
+    "quantity": 4.5,
+    "unit": "g"
+  },
+  "raisins|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "raisins|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "cream of wheat|tablespoon": {
+    "quantity": 10.8,
+    "unit": "g"
+  },
+  "cream of wheat|teaspoon": {
+    "quantity": 3.6,
+    "unit": "g"
+  },
+  "polenta|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "polenta|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "almond flour|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "almond flour|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "coconut flour|tablespoon": {
+    "quantity": 6.6,
+    "unit": "g"
+  },
+  "coconut flour|teaspoon": {
+    "quantity": 2.2,
+    "unit": "g"
+  },
+  "maple syrup|tablespoon": {
+    "quantity": 19.8,
+    "unit": "g"
+  },
+  "maple syrup|teaspoon": {
+    "quantity": 6.6,
+    "unit": "g"
+  },
+  "water|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "water|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "milk|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "milk|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "cream|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "cream|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "olive oil|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "olive oil|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "vegetable oil|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "vegetable oil|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "oil|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "oil|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "chicken stock|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "chicken stock|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "beef stock|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "beef stock|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "vegetable stock|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "vegetable stock|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "soy sauce|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "soy sauce|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "white wine|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "white wine|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "red wine|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "red wine|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "lemon juice|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "lemon juice|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "orange juice|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "orange juice|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "vinegar|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "vinegar|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "coconut milk|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "coconut milk|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "coconut cream|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "coconut cream|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "almond milk|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "almond milk|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "onion|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "onion|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "carrot|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "carrot|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "red capsicum|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "red capsicum|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "green capsicum|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "green capsicum|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "capsicum|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "capsicum|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "celery|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "celery|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "blueberries|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "blueberries|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "cabbage|tablespoon": {
+    "quantity": 5.4,
+    "unit": "g"
+  },
+  "cabbage|teaspoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "leek|tablespoon": {
+    "quantity": 5.4,
+    "unit": "g"
+  },
+  "leek|teaspoon": {
+    "quantity": 1.8,
+    "unit": "g"
+  },
+  "sweet potato|tablespoon": {
+    "quantity": 7.8,
+    "unit": "g"
+  },
+  "sweet potato|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "tomato|tablespoon": {
+    "quantity": 10.8,
+    "unit": "g"
+  },
+  "tomato|teaspoon": {
+    "quantity": 3.6,
+    "unit": "g"
+  },
+  "mint|tablespoon": {
+    "quantity": 0.9,
+    "unit": "g"
+  },
+  "mint|teaspoon": {
+    "quantity": 0.3,
+    "unit": "g"
+  },
+  "dill|tablespoon": {
+    "quantity": 0.9,
+    "unit": "g"
+  },
+  "dill|teaspoon": {
+    "quantity": 0.3,
+    "unit": "g"
+  },
+  "sugar snap peas|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "sugar snap peas|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "edamame|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "edamame|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "black beans|tablespoon": {
+    "quantity": 10.5,
+    "unit": "g"
+  },
+  "black beans|teaspoon": {
+    "quantity": 3.5,
+    "unit": "g"
+  },
+  "salsa|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "salsa|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "pesto|tablespoon": {
+    "quantity": 14.4,
+    "unit": "g"
+  },
+  "pesto|teaspoon": {
+    "quantity": 4.8,
+    "unit": "g"
+  },
+  "red curry paste|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "red curry paste|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "bulgur|tablespoon": {
+    "quantity": 10.8,
+    "unit": "g"
+  },
+  "bulgur|teaspoon": {
+    "quantity": 3.6,
+    "unit": "g"
+  },
+  "arugula|tablespoon": {
+    "quantity": 1.2,
+    "unit": "g"
+  },
+  "arugula|teaspoon": {
+    "quantity": 0.4,
+    "unit": "g"
+  },
+  "rocket|tablespoon": {
+    "quantity": 1.2,
+    "unit": "g"
+  },
+  "rocket|teaspoon": {
+    "quantity": 0.4,
+    "unit": "g"
+  },
+  "feta cheese|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "feta cheese|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "mayonnaise|tablespoon": {
+    "quantity": 13.8,
+    "unit": "g"
+  },
+  "mayonnaise|teaspoon": {
+    "quantity": 4.6,
+    "unit": "g"
+  },
+  "buttermilk|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "buttermilk|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "evaporated milk|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "evaporated milk|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "hoisin sauce|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "hoisin sauce|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "pineapple chunks|tablespoon": {
+    "quantity": 9.9,
+    "unit": "g"
+  },
+  "pineapple chunks|teaspoon": {
+    "quantity": 3.3,
+    "unit": "g"
+  },
+  "pineapple juice|tablespoon": {
+    "quantity": 15.0,
+    "unit": "ml"
+  },
+  "pineapple juice|teaspoon": {
+    "quantity": 5.0,
+    "unit": "ml"
+  },
+  "tomato sauce|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "tomato sauce|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "swiss chard|tablespoon": {
+    "quantity": 2.1,
+    "unit": "g"
+  },
+  "swiss chard|teaspoon": {
+    "quantity": 0.7,
+    "unit": "g"
+  },
+  "celeriac|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "celeriac|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "cooked chicken|tablespoon": {
+    "quantity": 8.4,
+    "unit": "g"
+  },
+  "cooked chicken|teaspoon": {
+    "quantity": 2.8,
+    "unit": "g"
+  },
+  "cornflour|tablespoon": {
+    "quantity": 8.100000000000001,
+    "unit": "g"
+  },
+  "cornflour|teaspoon": {
+    "quantity": 2.7,
+    "unit": "g"
+  },
+  "sunflower seeds|tablespoon": {
+    "quantity": 8.4,
+    "unit": "g"
+  },
+  "sunflower seeds|teaspoon": {
+    "quantity": 2.8,
+    "unit": "g"
+  },
+  "cooked brown rice|tablespoon": {
+    "quantity": 9.6,
+    "unit": "g"
+  },
+  "cooked brown rice|teaspoon": {
+    "quantity": 3.2,
+    "unit": "g"
+  },
+  "basil|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "basil|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "cherry tomatoes|tablespoon": {
+    "quantity": 9.0,
+    "unit": "g"
+  },
+  "cherry tomatoes|teaspoon": {
+    "quantity": 3.0,
+    "unit": "g"
+  },
+  "parmesan-romano cheese|tablespoon": {
+    "quantity": 6.0,
+    "unit": "g"
+  },
+  "parmesan-romano cheese|teaspoon": {
+    "quantity": 2.0,
+    "unit": "g"
+  },
+  "greek yoghurt|tablespoon": {
+    "quantity": 15.0,
+    "unit": "g"
+  },
+  "greek yoghurt|teaspoon": {
+    "quantity": 5.0,
+    "unit": "g"
+  },
+  "porridge rice|tablespoon": {
+    "quantity": 11.7,
+    "unit": "g"
+  },
+  "porridge rice|teaspoon": {
+    "quantity": 3.9,
+    "unit": "g"
+  },
+  "salt|tablespoon": {
+    "quantity": 18,
+    "unit": "g"
+  },
+  "salt|teaspoon": {
+    "quantity": 6,
+    "unit": "g"
+  },
+  "pepper|tablespoon": {
+    "quantity": 6.8999999999999995,
+    "unit": "g"
+  },
+  "pepper|teaspoon": {
+    "quantity": 2.3,
+    "unit": "g"
+  },
+  "paprika|tablespoon": {
+    "quantity": 6.8999999999999995,
+    "unit": "g"
+  },
+  "paprika|teaspoon": {
+    "quantity": 2.3,
+    "unit": "g"
+  },
+  "smoked paprika|tablespoon": {
+    "quantity": 6.8999999999999995,
+    "unit": "g"
+  },
+  "smoked paprika|teaspoon": {
+    "quantity": 2.3,
+    "unit": "g"
+  },
+  "turmeric|tablespoon": {
+    "quantity": 9,
+    "unit": "g"
+  },
+  "turmeric|teaspoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "cumin|tablespoon": {
+    "quantity": 6.300000000000001,
+    "unit": "g"
+  },
+  "cumin|teaspoon": {
+    "quantity": 2.1,
+    "unit": "g"
+  },
+  "cinnamon|tablespoon": {
+    "quantity": 7.800000000000001,
+    "unit": "g"
+  },
+  "cinnamon|teaspoon": {
+    "quantity": 2.6,
+    "unit": "g"
+  },
+  "garlic powder|tablespoon": {
+    "quantity": 9.3,
+    "unit": "g"
+  },
+  "garlic powder|teaspoon": {
+    "quantity": 3.1,
+    "unit": "g"
+  },
+  "nutmeg|tablespoon": {
+    "quantity": 6.6000000000000005,
+    "unit": "g"
+  },
+  "nutmeg|teaspoon": {
+    "quantity": 2.2,
+    "unit": "g"
+  },
+  "chilli powder|tablespoon": {
+    "quantity": 8.100000000000001,
+    "unit": "g"
+  },
+  "chilli powder|teaspoon": {
+    "quantity": 2.7,
+    "unit": "g"
+  },
+  "baking powder|tablespoon": {
+    "quantity": 12,
+    "unit": "g"
+  },
+  "baking powder|teaspoon": {
+    "quantity": 4,
+    "unit": "g"
+  },
+  "baking soda|tablespoon": {
+    "quantity": 13.799999999999999,
+    "unit": "g"
+  },
+  "baking soda|teaspoon": {
+    "quantity": 4.6,
+    "unit": "g"
+  },
+  "dried yeast|tablespoon": {
+    "quantity": 9,
+    "unit": "g"
+  },
+  "dried yeast|teaspoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "oregano|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "oregano|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "thyme|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "thyme|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "rosemary|tablespoon": {
+    "quantity": 3,
+    "unit": "g"
+  },
+  "rosemary|teaspoon": {
+    "quantity": 1,
+    "unit": "g"
+  },
+  "ground coriander|tablespoon": {
+    "quantity": 6,
+    "unit": "g"
+  },
+  "ground coriander|teaspoon": {
+    "quantity": 2,
+    "unit": "g"
+  },
+  "curry powder|tablespoon": {
+    "quantity": 6,
+    "unit": "g"
+  },
+  "curry powder|teaspoon": {
+    "quantity": 2,
+    "unit": "g"
+  },
+  "garam masala|tablespoon": {
+    "quantity": 6,
+    "unit": "g"
+  },
+  "garam masala|teaspoon": {
+    "quantity": 2,
+    "unit": "g"
+  },
+  "milk|dash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "mixed nuts|cup": {
+    "quantity": 130,
+    "unit": "g"
+  },
+  "dried fruit|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "frozen peas and carrots|cup": {
+    "quantity": 140,
+    "unit": "g"
+  },
+  "evaporated milk|can": {
+    "quantity": 375,
+    "unit": "ml"
+  },
+  "grits|cup": {
+    "quantity": 160,
+    "unit": "g"
+  },
+  "clementine|zest": {
+    "quantity": 2,
+    "unit": "g"
+  },
+  "cooking spray|greasing": {
+    "quantity": 2,
+    "unit": "ml"
+  },
+  "paprika|cup": {
+    "quantity": 115,
+    "unit": "g"
+  },
+  "water|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "water|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "chicken stock|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "chicken stock|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "beef stock|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "beef stock|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "vegetable stock|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "vegetable stock|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "milk|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "milk|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "vinegar|quart": {
+    "quantity": 946.352946,
+    "unit": "ml"
+  },
+  "vinegar|pint": {
+    "quantity": 473.176473,
+    "unit": "ml"
+  },
+  "ginger|thumb": {
+    "quantity": 15,
+    "unit": "g"
+  },
+  "potato|cup": {
+    "quantity": 150,
+    "unit": "g"
+  },
+  "soy sauce|splash": {
+    "quantity": 5,
+    "unit": "ml"
+  },
+  "celery|each": {
+    "quantity": 40,
+    "unit": "g"
+  }
+}

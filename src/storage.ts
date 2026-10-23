@@ -4,7 +4,7 @@ import type { State } from "./v2-state";
 export type { State } from "./v2-state";
 // Keep the original store and record. Store a recovery copy before the first
 // migration, in the same atomic transaction as the migrated snapshot.
-const database = openDB("mealmate", 2, {
+const database = openDB("mealmate", 3, {
   upgrade(db) {
     if (!db.objectStoreNames.contains("household"))
       db.createObjectStore("household");
@@ -22,9 +22,10 @@ export async function loadState(): Promise<State | undefined> {
   const raw = await db.get("household", "state");
   if (!raw) return;
   const migrated = migrateState(raw);
-  if (!raw.v2) {
+  if (!raw.v2 || !raw.v3) {
     const tx = db.transaction("household", "readwrite");
-    await tx.store.put(raw, "pre-v2-backup");
+    if (!raw.v2) await tx.store.put(raw, "pre-v2-backup");
+    await tx.store.put(raw, "pre-v3-backup");
     await tx.store.put(migrated, "state");
     await tx.done;
   }

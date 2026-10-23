@@ -1,3 +1,22 @@
+import { estimateIngredient } from "./product-estimates";
+import {
+  planningSettings,
+  planningAllergies,
+  generationPortions,
+} from "./planning-model";
+import { discoverable } from "./catalogue";
+import {
+  selectedStore,
+  assignedStore,
+  chooseStoreProduct,
+  priceStatus,
+  availabilityLabel,
+  unavailable,
+  genuineSpecial,
+  storeRequired,
+  shoppingPreferences,
+  productSelectionKey,
+} from "./supermarkets";
 import { shoppingList, scaleQuantity, matches, usable } from "./domain";
 import type { Ingredient, Meal, Recipe, ShoppingItem } from "./domain";
 import {
@@ -20,6 +39,18 @@ export function requirements(state: State) {
     "Sides",
   ]);
 }
+export function unquantifiedIngredients(state: State) {
+  const names = new Map<string, Ingredient>();
+  for (const meal of activeMeals(state)) {
+    const recipe = state.recipes.find((r) => r.id === meal.recipeId);
+    if (!recipe || !usable(recipe)) continue;
+    for (const original of recipe.ingredients) {
+      const i = meal.substitutions?.[original.name] ?? original;
+      if (i.excludeFromShopping) names.set(i.name.toLowerCase(), i);
+    }
+  }
+  return [...names.values()];
+}
 export function today() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -30,14 +61,41 @@ export const purchaseIsCurrent = (p: Purchase) =>
   !expired(p.expiry) &&
   (!!p.expiry || Date.now() - Date.parse(p.at) <= 30 * 86400000);
 
-export function available(state: State, key: string) {
-  const base = state.v2.stock[key];
+export function preparedSafe(state: State, id: string, expiry?: string) {
+  if (!state.v3?.safeStorage[id]) return false;
+  const date = state.v3?.storageDates[id];
+  const age = date ? Date.now() - Date.parse(date + "T00:00:00") : NaN;
   return (
-    (base?.quantity !== null && base && !base.prepared && !expired(base.expiry)
+    !!expiry &&
+    !expired(expiry) &&
+    Number.isFinite(age) &&
+    age >= 0 &&
+    age <= 3 * 86400000
+  );
+}
+export function available(state: State, key: string) {
+  const prepared = key.endsWith("|prepared");
+  const baseKey = prepared ? key.slice(0, -9) : key;
+  const openingKey = state.v2.stock[key] ? key : baseKey;
+  const base = state.v2.stock[openingKey];
+  const opening =
+    base?.quantity != null &&
+    base.prepared === prepared &&
+    !expired(base.expiry) &&
+    (!prepared || preparedSafe(state, "stock/" + openingKey, base.expiry))
       ? Math.max(0, base.quantity - base.consumed)
-      : 0) +
+      : 0;
+  return (
+    opening +
     state.v2.purchases
-      .filter((p) => p.key === key && purchaseIsCurrent(p))
+      .filter(
+        (p) =>
+          (p.key === key || p.key === baseKey) &&
+          p.prepared === prepared &&
+          (prepared
+            ? preparedSafe(state, p.id, p.expiry)
+            : purchaseIsCurrent(p)),
+      )
       .reduce((sum, p) => sum + p.quantity - p.consumed, 0)
   );
 }
@@ -46,8 +104,12 @@ export function inventory(
   key: string,
   required = requirements(state).find((i) => i.key === key)?.quantity ?? 0,
 ) {
+  const prepared = key.endsWith("|prepared");
+  const baseKey = prepared ? key.slice(0, -9) : key;
   const purchased = state.v2.purchases
-    .filter((p) => p.key === key)
+    .filter(
+      (p) => (p.key === key || p.key === baseKey) && p.prepared === prepared,
+    )
     .reduce((sum, p) => sum + p.quantity, 0);
   const stock = available(state, key);
   const reserved = Math.min(stock, required);
@@ -59,9 +121,14 @@ export function inventory(
     shortage: Math.max(0, required - stock),
     consumed:
       state.v2.purchases
-        .filter((p) => p.key === key)
+        .filter(
+          (p) =>
+            (p.key === key || p.key === baseKey) && p.prepared === prepared,
+        )
         .reduce((sum, p) => sum + p.consumed, 0) +
-      (state.v2.stock[key]?.consumed ?? 0),
+      ((state.v2.stock[key] ?? state.v2.stock[baseKey])?.prepared === prepared
+        ? ((state.v2.stock[key] ?? state.v2.stock[baseKey])?.consumed ?? 0)
+        : 0),
   };
 }
 const stapleNames = [
@@ -169,6 +236,65 @@ const demo: Record<string, [number, number]> = {
   ginger: [100, 2],
 };
 export function productFor(state: State, i: ShoppingItem): Product | undefined {
+  if (state.v3) {
+    const product = chooseStoreProduct(
+      state,
+      i,
+      Math.max(0, i.quantity - available(state, i.key)),
+    );
+    const fallback = estimateIngredient(i);
+    const overrideKey = `${productSelectionKey(state, i.key)}/${product?.id ?? "generic"}`;
+    const override = shoppingPreferences(state).priceOverrides[overrideKey];
+    if (!product)
+      return override !== undefined
+        ? {
+            ...(fallback ?? {
+              size: i.unit === "each" ? 1 : i.quantity || 1,
+              source: "user" as const,
+            }),
+            price: override,
+            source: "user" as const,
+            priceLabel: "User price",
+          }
+        : fallback;
+    const status = priceStatus(product);
+    const known =
+      !["Unknown price", "Unverified imported price"].includes(status) &&
+      product.price !== undefined;
+    const estimated = estimateIngredient(i, product.size);
+    const unitPrice = override ?? (known ? product.price : estimated?.price);
+    const label =
+      override !== undefined
+        ? "User price"
+        : known
+          ? status === "User-entered price"
+            ? "User price"
+            : status === "Confirmed current price"
+              ? "Catalogue price"
+              : status.includes("retrieved")
+                ? "Previous price"
+                : status === "Demonstration price"
+                  ? "Estimated price"
+                  : status
+          : estimated
+            ? "Estimated price"
+            : "Price unknown";
+    return {
+      size: product.size,
+      price: unitPrice,
+      source: label === "Estimated price" ? "estimate" : "user",
+      shop: assignedStore(state, i.key)?.name,
+      name: product.name,
+      storeId: product.storeId,
+      productId: product.id,
+      priceLabel: label,
+      availabilityLabel: availabilityLabel(product),
+      unavailable: unavailable(product),
+      observedAt: product.observedAt,
+      special: genuineSpecial(product),
+    };
+  }
+
   return (
     state.v2.products[i.key] ??
     (demo[i.name.toLowerCase()]
@@ -195,7 +321,10 @@ export function recommendation(state: State, i: ShoppingItem) {
     shortage,
     packs,
     buy: product ? packs * product.size : shortage,
-    cost: product?.price === undefined ? undefined : packs * product.price,
+    cost:
+      product?.price === undefined || product.unavailable
+        ? undefined
+        : packs * product.price,
   };
 }
 export function budget(state: State, items = requirements(state)) {
@@ -206,7 +335,8 @@ export function budget(state: State, items = requirements(state)) {
         !state.recipes.some((r) => r.id === m.recipeId && usable(r)),
     ).length,
     uncertain = 0,
-    demoUsed = false;
+    demoUsed = false,
+    estimated = 0;
   for (const p of state.v2.purchases.filter((p) => p.week === state.week)) {
     if (p.price !== undefined) {
       total += p.price;
@@ -217,11 +347,14 @@ export function budget(state: State, items = requirements(state)) {
     if (product?.price !== undefined) {
       total += Math.ceil(p.quantity / product.size) * product.price;
       demoUsed ||= product.source === "demo";
+      if (product.source === "estimate") estimated++;
     } else missing++;
   }
   for (const i of items) {
     const status = pantryStatus(state, i);
-    if (status.check && !status.confirmed) {
+    const opening = state.v2.stock[i.key];
+    const quantified = opening?.quantity != null || available(state, i.key) > 0;
+    if (status.check && !status.confirmed && !quantified) {
       uncertain++;
       continue;
     }
@@ -231,6 +364,7 @@ export function budget(state: State, items = requirements(state)) {
       else {
         total += rec.cost;
         demoUsed ||= rec.product?.source === "demo";
+        if (rec.product?.source === "estimate") estimated++;
       }
     }
   }
@@ -239,8 +373,10 @@ export function budget(state: State, items = requirements(state)) {
     total,
     missing,
     uncertain,
-    partial: missing > 0 || uncertain > 0,
+    partial:
+      missing > 0 || uncertain > 0 || unquantifiedIngredients(state).length > 0,
     demoUsed,
+    estimated,
     limit,
     remaining: limit === undefined || limit === null ? null : limit - total,
   };
@@ -251,7 +387,7 @@ export function recordPurchase(
   quantity: number,
   price?: number,
   expiry?: string,
-  prepared = false,
+  prepared = !!i.prepared,
 ): State {
   if (
     !Number.isFinite(quantity) ||
@@ -259,10 +395,12 @@ export function recordPurchase(
     (price !== undefined && (!Number.isFinite(price) || price < 0))
   )
     throw Error("Enter a positive quantity and a valid price.");
+  const purchaseKey =
+    i.key.replace(/\|prepared$/, "") + (prepared ? "|prepared" : "");
   const purchase: Purchase = {
     id: crypto.randomUUID(),
     week: state.week,
-    key: i.key,
+    key: purchaseKey,
     name: i.name,
     department: i.department,
     unit: i.unit,
@@ -271,11 +409,13 @@ export function recordPurchase(
     expiry,
     prepared,
     consumed: 0,
+    storeId: assignedStore(state, i.key)?.id,
+    productId: productFor(state, i)?.productId,
     at: new Date().toISOString(),
   };
   return {
     ...state,
-    checked: [...new Set([...state.checked, i.key])],
+    checked: [...new Set([...state.checked, purchaseKey])],
     v2: {
       ...state.v2,
       purchases: [...state.v2.purchases, purchase],
@@ -332,7 +472,11 @@ export function affectedMeals(state: State, key: string) {
     const r = state.recipes.find((r) => r.id === m.recipeId);
     return r?.ingredients.some(
       (original) =>
-        itemKey(m.substitutions?.[original.name] ?? original) === key,
+        itemKey({
+          ...(m.substitutions?.[original.name] ?? original),
+          prepared:
+            r.preparedIngredients?.includes(original.name) || original.prepared,
+        }) === key,
     );
   });
 }
@@ -347,11 +491,12 @@ export function replaceMeal(
   if (recipe.category !== meal.category)
     throw Error("Replacement must use the same meal category.");
   if (
-    !matches(recipe, state.settings) ||
-    state.v2.allergies.some((a) =>
-      recipe.ingredients.some((i) =>
-        i.name.toLowerCase().includes(a.toLowerCase()),
-      ),
+    !matches(recipe, planningSettings(state)) ||
+    planningAllergies(state).some((a) =>
+      [
+        ...recipe.ingredients.map((i) => i.name),
+        ...(recipe.allergens ?? []),
+      ].some((name) => name.toLowerCase().includes(a.toLowerCase())),
     )
   )
     throw Error("Recipe does not match household preferences.");
@@ -359,7 +504,13 @@ export function replaceMeal(
     ...state,
     plan: state.plan.map((m) =>
       m.day === meal.day && m.category === meal.category
-        ? { ...m, recipeId: recipe.id, substitutions: undefined, cooked: false }
+        ? {
+            ...m,
+            ...generationPortions(state, m),
+            recipeId: recipe.id,
+            substitutions: undefined,
+            cooked: false,
+          }
         : m,
     ),
   };
@@ -398,9 +549,13 @@ export const substitutions: Record<
   ],
 };
 export function substitutionOptions(state: State, i: ShoppingItem) {
+  if (i.prepared) return [];
   return (substitutions[i.name] ?? []).filter(
     (option) =>
-      ![...state.v2.allergies, ...state.settings.dislikes.split(",")]
+      ![
+        ...planningAllergies(state),
+        ...planningSettings(state).dislikes.split(","),
+      ]
         .filter((a) => a.trim())
         .some((a) =>
           option.name.toLowerCase().includes(a.trim().toLowerCase()),
@@ -457,12 +612,12 @@ export function sendToOtherShop(
 export function mealCost(
   state: State,
   r: Recipe,
-  people = state.settings.people,
-  appetite = state.settings.appetite,
+  people = planningSettings(state).people,
+  appetite = planningSettings(state).appetite,
 ) {
   let cost = 0,
     missing = 0;
-  for (const i of r.ingredients) {
+  for (const i of r.ingredients.filter((i) => !i.excludeFromShopping)) {
     const product = productFor(state, { ...i, key: itemKey(i) });
     if (!product || product.price === undefined) {
       missing++;
@@ -480,16 +635,19 @@ export function rankedRecipes(state: State, meal: Meal, cheap = false) {
   const options = state.recipes.filter(
     (r) =>
       r.category === meal.category &&
-      matches(r, state.settings) &&
-      !state.v2.allergies.some((a) =>
-        r.ingredients.some((i) =>
-          i.name.toLowerCase().includes(a.toLowerCase()),
+      discoverable(r) &&
+      r.origin !== "ai" &&
+      matches(r, planningSettings(state)) &&
+      !planningAllergies(state).some((a) =>
+        [...r.ingredients.map((i) => i.name), ...(r.allergens ?? [])].some(
+          (name) => name.toLowerCase().includes(a.toLowerCase()),
         ),
       ),
   );
+  const portions = generationPortions(state, meal);
   return options.sort((a, b) => {
-    const ac = mealCost(state, a, meal.people, meal.appetite),
-      bc = mealCost(state, b, meal.people, meal.appetite);
+    const ac = mealCost(state, a, portions.people, portions.appetite),
+      bc = mealCost(state, b, portions.people, portions.appetite);
     const ap = ac.missing * 1000 + ac.cost,
       bp = bc.missing * 1000 + bc.cost;
     const used = (r: Recipe) =>
@@ -502,6 +660,8 @@ export function rankedRecipes(state: State, meal: Meal, cheap = false) {
   });
 }
 export function smartGenerate(state: State): State {
+  if (state.v3) return generateStorePlan(state);
+
   let next = { ...state, plan: [...state.plan] };
   const used = new Set<string>();
   const recent = [...state.v2.recent];
@@ -511,13 +671,9 @@ export function smartGenerate(state: State): State {
         (m) => m.day === day && m.category === category,
       );
       if (old?.locked || old?.cooked) continue;
-      const meal = old ?? {
-        day,
-        category,
-        recipeId: null,
-        people: state.settings.people,
-        appetite: state.settings.appetite,
-        locked: false,
+      const meal = {
+        ...(old ?? { day, category, recipeId: null, locked: false }),
+        ...generationPortions(state, old),
       };
       const options = rankedRecipes(next, meal);
       const pool = options.filter((r) => !used.has(r.id) || r.favourite);
@@ -570,19 +726,31 @@ export function consumeMeal(state: State, meal: Meal): State {
     purchases = structuredClone(state.v2.purchases);
   for (const i of needs) {
     let remaining = i.quantity;
-    const base = stock[i.key];
+    const baseKey = i.key.endsWith("|prepared") ? i.key.slice(0, -9) : i.key;
+    const wantsPrepared = !!i.prepared;
+    const openingKey = stock[i.key] ? i.key : baseKey;
+    const base = stock[openingKey];
     if (
       base?.quantity !== null &&
       base &&
-      !base.prepared &&
-      !expired(base.expiry)
+      base.prepared === wantsPrepared &&
+      !expired(base.expiry) &&
+      (!wantsPrepared ||
+        preparedSafe(state, "stock/" + openingKey, base.expiry))
     ) {
       const take = Math.min(remaining, base.quantity - base.consumed);
       base.consumed += take;
       remaining -= take;
     }
     const lots = purchases
-      .filter((p) => p.key === i.key && purchaseIsCurrent(p))
+      .filter(
+        (p) =>
+          (p.key === i.key || p.key === baseKey) &&
+          p.prepared === wantsPrepared &&
+          (wantsPrepared
+            ? preparedSafe(state, p.id, p.expiry)
+            : purchaseIsCurrent(p)),
+      )
       .sort((a, b) => (a.expiry ?? "9999").localeCompare(b.expiry ?? "9999"));
     for (const p of lots) {
       const take = Math.min(remaining, p.quantity - p.consumed);
@@ -598,5 +766,74 @@ export function consumeMeal(state: State, meal: Meal): State {
         : m,
     ),
     v2: { ...state.v2, stock, purchases },
+  };
+}
+
+// Evaluate full-package basket deltas, not fractional ingredient costs. Locked
+// meals, purchased stock and existing assignments are part of every evaluation.
+export function generateStorePlan(state: State): State {
+  if (storeRequired(state))
+    throw Error(
+      "Choose a supermarket and specific store before generating meals.",
+    );
+  let next: State = { ...state, plan: [...state.plan] };
+  const used = new Set(
+    next.plan.filter((m) => m.locked || m.cooked).map((m) => m.recipeId),
+  );
+  const recent = [...state.v2.recent];
+  for (let day = 0; day < 7; day++)
+    for (const category of enabledCategories(state, day)) {
+      const old = next.plan.find(
+        (m) => m.day === day && m.category === category,
+      );
+      if (old?.locked || old?.cooked) continue;
+      const meal = {
+        ...(old ?? { day, category, recipeId: null, locked: false }),
+        ...generationPortions(state, old),
+      };
+      const candidates = rankedRecipes(state, meal, true)
+        .filter((r) => !used.has(r.id) || r.favourite)
+        .filter((r) =>
+          r.ingredients.every(
+            (i) =>
+              available(state, itemKey(i)) >=
+                scaleQuantity(
+                  i.quantity,
+                  r.servings,
+                  meal.people,
+                  meal.appetite,
+                ) || !productFor(state, { ...i, key: itemKey(i) })?.unavailable,
+          ),
+        );
+      const scored = candidates
+        .map((r) => {
+          const plan = next.plan
+            .filter((m) => m.day !== day || m.category !== category)
+            .concat({ ...meal, recipeId: r.id, substitutions: undefined });
+          const candidate = { ...next, plan };
+          const estimate = budget(candidate);
+          const repeat = state.v2.recent.includes(r.id) && !r.favourite ? 1 : 0;
+          return { r, candidate, estimate, score: estimate.total + repeat };
+        })
+        .filter(
+          (c) =>
+            c.estimate.limit == null ||
+            c.estimate.total <= c.estimate.limit ||
+            c.estimate.total < budget(next).total,
+        )
+        .sort(
+          (a, b) =>
+            a.estimate.missing - b.estimate.missing || a.score - b.score,
+        );
+      const pick = scored[0];
+      if (pick) {
+        next = pick.candidate;
+        used.add(pick.r.id);
+        recent.push(pick.r.id);
+      } else if (!old) next.plan.push(meal);
+    }
+  return {
+    ...next,
+    v2: { ...next.v2, recent: [...new Set(recent.slice(-250))] },
   };
 }
