@@ -9,11 +9,13 @@ const files = [
   "/icon-512.png",
   "/icon.svg",
   ...assets,
+  ...(await readdir("dist/recipe-photos")).map((f) => "/recipe-photos/" + f),
+  ...(await readdir("dist/recipe-sources")).map((f) => "/recipe-sources/" + f),
 ];
-const hash = createHash("sha256")
-  .update(await readFile("dist/index.html"))
-  .digest("hex")
-  .slice(0, 10);
+const hasher = createHash("sha256");
+for (const file of files.filter((f) => f !== "/"))
+  hasher.update(await readFile("dist" + file));
+const hash = hasher.digest("hex").slice(0, 10);
 await writeFile(
   "dist/sw.js",
   `const CACHE='mealmate-${hash}';const FILES=${JSON.stringify(files)};

@@ -1,0 +1,818 @@
+[
+  {
+    "id": "pdr-long-cooked-chuck-steak",
+    "name": "Long-cooked Chuck Steak With Vegetables",
+    "category": "Dinner",
+    "servings": 4,
+    "prep": 15,
+    "cook": 360,
+    "appliances": ["Slow cooker"],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "Chuck steak",
+        "quantity": 800,
+        "unit": "g",
+        "department": "Meat & seafood"
+      },
+      {
+        "name": "Tomato",
+        "quantity": 200,
+        "unit": "g",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Fennel",
+        "quantity": 1,
+        "unit": "each",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "each",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Cauliflower",
+        "quantity": 0.25,
+        "unit": "each",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Olive oil",
+        "quantity": 50,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Add a little of the olive oil to the long cooker, put in the meat, and set it to high.",
+      "Chop the onion and add it.",
+      "Cut the cauliflower to sizes you prefer and add.",
+      "Chop or slice 1/3 of the fennel and add.",
+      "Crush the tomatoes and add (or add the canned chopped tomatoes).",
+      "Add the rest of the olive oil and let it be for at least 6 hours.",
+      "Serve with the rest of the fennel (chop or sliced)."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Original fresh-tomato option and explicitly measured optional oil selected. Original yield: 4.",
+    "source": {
+      "name": "Public Domain Recipes · Emilio Müller",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/long-cooked-chuck-steak.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "long-cooked-chuck-steak"
+    },
+    "origin": "external",
+    "review": []
+  },
+  {
+    "id": "pdr-chocolate-chip-cookies",
+    "name": "Chocolate Chip Cookies ",
+    "category": "Snacks",
+    "servings": 4,
+    "prep": 10,
+    "cook": 10,
+    "appliances": ["Oven"],
+    "diet": ["Vegetarian"],
+    "ingredients": [
+      {
+        "name": "Butter",
+        "quantity": 230,
+        "unit": "g",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Bread flour",
+        "quantity": 330,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Salt",
+        "quantity": 5,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Baking soda",
+        "quantity": 5,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "White sugar",
+        "quantity": 100,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Brown sugar",
+        "quantity": 100,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Egg",
+        "quantity": 1,
+        "unit": "each",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Milk",
+        "quantity": 15,
+        "unit": "g",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Vanilla extract",
+        "quantity": 5,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Dark chocolate chips",
+        "quantity": 225,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Preheat oven to 190.6°C (original: 375°F)",
+      "Mix the flour, baking soda, and salt in a bowl",
+      "Using a mixer or whisk, beat the butter, sugar, eggs, vanilla and milk in a separate bowl for a few mins",
+      "Combine and stir in the dry ingredients, then the chocolate chips",
+      "Use an ice cream scooper or spoon to make uniform balls of cookie dough to the size you like and evenly space them out on a parchment paper lined baking sheet (you may need more than one sheet depending on the size of the cookies)",
+      "Bake in the oven one baking sheet at a time for around 8-10 minutes, taking them out when they start to brown",
+      "Cool for a few minutes then put them on a cooling rack"
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Uses 100 g of each sugar within the author’s explicit 100–200 g ranges. Original yield: 4 servings; original 375°F oven temperature converted to 190.6°C. Ingredient-derived vegetarian label; check chocolate ingredients.",
+    "source": {
+      "name": "Public Domain Recipes · mfed3",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/chocolate-chip-cookies.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "chocolate-chip-cookies"
+    },
+    "origin": "external",
+    "review": [],
+    "image": "/recipe-photos/chocolate-chip-cookies.webp",
+    "photo": {
+      "url": "/recipe-photos/chocolate-chip-cookies.webp",
+      "author": "mfed3",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/chocolate-chip-cookies.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-tarte-merengada",
+    "name": "Tarte Merengada de Limão",
+    "category": "Snacks",
+    "servings": 20,
+    "prep": 10,
+    "cook": 20,
+    "appliances": ["Oven", "Hand mixer"],
+    "diet": ["Vegetarian"],
+    "ingredients": [
+      {
+        "name": "Shortcake biscuits",
+        "quantity": 200,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Margarine",
+        "quantity": 80,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Condensed milk",
+        "quantity": 370,
+        "unit": "g",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Lemon juice",
+        "quantity": 100,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Lemon for zest",
+        "quantity": 1,
+        "unit": "each",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Egg",
+        "quantity": 5,
+        "unit": "each",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Sugar",
+        "quantity": 150,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Pre-heat the oven to 220ºC.",
+      "Separate the yolk from the egg whites and mix the yolks with the condensed milk into whipped cream.",
+      "Meanwhile mash the cookies into a powder and mix it with the margarine while covering the bottom and sides of a pie dish.",
+      "Take the outer scrapings of a lemon with a gratter and squeeze the juice of all the lemons.",
+      "Mix the scrappings and the juice with the yolk and add to the pie dish.",
+      "Take it to the oven.",
+      "Meanwhile mix the egg whites until they start to foam, add the sugar then and keep mixing them until the meringe starts to be firm.",
+      "After 10 to 15 minutes in the oven, cover the surface of the pie with small dumpings of meringe with a spoon.",
+      "Reduce the heat of the oven to 160ºC and put the pie back into the oven until the meringe on top becomes golden brown."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Original yield: 20 servings. Original 1 dl lemon juice converted to 100 ml; zest from one lemon as specified in step 4. No conversion from lemon count to juice volume is assumed.",
+    "source": {
+      "name": "Public Domain Recipes · magikarp-salesman",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/tarte-merengada.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "tarte-merengada"
+    },
+    "origin": "external",
+    "review": [],
+    "image": "/recipe-photos/tarte-merengada.webp",
+    "photo": {
+      "url": "/recipe-photos/tarte-merengada.webp",
+      "author": "magikarp-salesman",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/tarte-merengada.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-oatmeal-pancakes",
+    "name": "Oatmeal Pancakes",
+    "category": "Breakfast",
+    "servings": 8,
+    "prep": 10,
+    "cook": 15,
+    "appliances": ["Hob"],
+    "diet": ["Vegetarian"],
+    "ingredients": [
+      {
+        "name": "Egg",
+        "quantity": 2,
+        "unit": "each",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Sugar",
+        "quantity": 40,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Honey",
+        "quantity": 20,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Milk",
+        "quantity": 60,
+        "unit": "ml",
+        "department": "Dairy & eggs"
+      },
+      {
+        "name": "Oat flour",
+        "quantity": 120,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Baking powder",
+        "quantity": 5,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Mix eggs, sugar, honey and milk.",
+      "In another bowl mix oat flour and baking powder.",
+      "Combine two mixtures and let the batter rest for about 15 minutes.",
+      "Preheat the pan for 5 minutes over low (~33%) heat, cook for about 1 - 1.5 minutes then flip when you see bubbles come out and cook for another 45s - 1 minute.",
+      "Eat them with raspberry (or any other) jam."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Original yield: 8. Source’s measured milk option used; optional jam omitted. One teaspoon is represented as 5 ml, not converted to grams. Allow the source’s additional 15-minute batter rest.",
+    "source": {
+      "name": "Public Domain Recipes · wpnwbn",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/oatmeal-pancakes.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "oatmeal-pancakes"
+    },
+    "origin": "external",
+    "review": [],
+    "wait": 15,
+    "image": "/recipe-photos/oatmeal-pancakes.webp",
+    "photo": {
+      "url": "/recipe-photos/oatmeal-pancakes.webp",
+      "author": "wpnwbn",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/oatmeal-pancakes.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-shakshouka",
+    "name": "Shakshouka",
+    "category": "Breakfast",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "5 small tomatoes",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "5 eggs",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "1 peeled white onion",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "some chives",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "cumin",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "powdered sweet pepper",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Scald the tomatoes so they are easier to peel.",
+      "Peel the tomatoes and cut into cubes",
+      "Chop the onion and glaze it on the frying pan with oil",
+      "Add tomatoes",
+      "SEASON",
+      "Stir and wait for it to get denser",
+      "Knock the eggs in",
+      "Season the eggs",
+      "Cover the pan with a lid",
+      "Cook until eggs are laid",
+      "Add chives"
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · jakub-korsak",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/shakshouka.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "shakshouka"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/shakshouka.webp",
+    "photo": {
+      "url": "/recipe-photos/shakshouka.webp",
+      "author": "jakub-korsak",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/shakshouka.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-crab-salad",
+    "name": "Crab salad",
+    "category": "Lunch",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "Сrab meat (300 grams)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Egg (3)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Rice (50 grams)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Corn (1 can)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Cucumber (1)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Carrot (1)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Onion (1)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Mayonnaise (100 grams)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Boil rice, eggs and carrot",
+      "Chop crab meat and all other ingredients",
+      "Combine and mix all ingredients",
+      "Add mayonnaise",
+      "Chill before serving"
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · Public Domain Recipes contributors",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/crab-salad.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "crab-salad"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/crab-salad.webp",
+    "photo": {
+      "url": "/recipe-photos/crab-salad.webp",
+      "author": "Public Domain Recipes contributors",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/crab-salad.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-roesti",
+    "name": "Rösti",
+    "category": "Sides",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "~800g (~1.5lb) potatoes (firm/waxy)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "2 carrots",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "500g (~1lb) peas or spinach",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "4 eggs",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "2 onions (medium size)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "butter",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Shred raw or cooked (but cool) potatoes with a grater. The shreds should be",
+      "quite large so don't use your typical cheese shredder.",
+      "Dice the first onion and mix together with potatoes. You can also add diced",
+      "bacon if you want to. Add your seasonings here.",
+      "Heat up some butter in a large pan. Add your mix to the pan on high heat.",
+      "Let the mixture get warm for a few minutes under constant stirring.",
+      "Reduce heat to medium-high. Form the Rösti into a round cack. It should fill",
+      "out the whole pan. I recommend a thickness of around 1 - 1.5cm (~1/2\") for a",
+      "softer Rösti.",
+      "Add some more butter flakes around the inside of the pan to get it under the",
+      "Rösti.",
+      "It can take quite a while for a nice crust to form. Check after roughly 5-10",
+      "minutes for browning.",
+      "While the Rösti is cooking dice the other onion and the carrots. Steam",
+      "everything in a pan with a bit of water. Use a lid to get the temperature",
+      "up.",
+      "Alternatively you can use fresh or creamed spinach.",
+      "When you're satisfied with the browning, flip the Rösti and set the heat to",
+      "medium-low. A plate can be useful here, put it on top of the Rösti in the",
+      "pan and flip. Then gently put the whole cake back in the pan.",
+      "When the Rösti crispness is to your liking, remove from pan and fry two",
+      "eggs. A runny yolk adds quite a bit to the potatoes.",
+      "Top Rösti with eggs and serve with the peas or spinach."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · elias-pahls",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/roesti.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "roesti"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/roesti.webp",
+    "photo": {
+      "url": "/recipe-photos/roesti.webp",
+      "author": "elias-pahls",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/roesti.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-french-toast",
+    "name": "French Toast",
+    "category": "Breakfast",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "2 Eggs",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "1/2 Cup of milk (1/4 for a more solid consistency)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "5 Slices of bread",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Maple Syrup (Optional)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Butter",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Butter up a frying pan and set it on the burner with low-medium heat.(May need to add more butter in-between slices)",
+      "Take your two eggs and crack them into a bowl together.",
+      "Pour milk in the bowl with the eggs.",
+      "Break the yolks and stir the eggs and milk well with a beater until it's a smooth, yellow liquid.",
+      "Dip one side of bread into the bowl, making sure the liquid gets into all of the surface area of that side.",
+      "Immediately bring the side back up and scrape off any access liquid on the side with a butter knife.",
+      "Repeat steps 5-6, but for the other side of the bread.",
+      "Drop into the hot pan.",
+      "Cook both sides until golden brown, then plop onto a plate.",
+      "Repeat steps 5 to 9 until you have cooked all of your bread.",
+      "Drench french toast stack in Maple syrup (Optional)"
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · ryan-wilson",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/french-toast.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "french-toast"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/french-toast.webp",
+    "photo": {
+      "url": "/recipe-photos/french-toast.webp",
+      "author": "ryan-wilson",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/french-toast.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-carbonara",
+    "name": "Carbonara",
+    "category": "Dinner",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "Spaghetti: 320 g | 11 oz",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Eggs: 5",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Guanciale or Smoked Pancetta (cleaned and cubed): 150 g | 5 oz",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Pecorino Romano or Parmigiano-Reggiano (grated)(optional)",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Crack the eggs in a bowl but only add the yolks. Add a generous amount of your preferred grated cheese (Pecorino or Parmigiano) around 35g (you can optionally add a dash of black pepper).",
+      "Fill a pot with water and salt it less than typical pasta water. When it boils, cook the pasta one minute less than advised.",
+      "Fry the preferred pork (Guanciale or Smoked Pancetta) in an iron or nonstick pan (if using a different kind of pan add a dash of extra virgin olive oil) on low to medium heat until the sides are crisp but the insides are chewy.",
+      "While everything is being cooked and fried, beat the eggs manually using a fork until everything is entirely liquid. Remember to watch the time.",
+      "When your pasta is done (-1 minute), drain it and put it in the bowl with eggs. At this step you may consider the timing: if the pasta is too hot you will cook the eggs, and some people don't like it this way, so just wait for a minute. Keep moving and stirring to fully incorporate the eggs. Add guanciale and as many fats remaining in the pan as you want. Keep moving and stirring.",
+      "Plate and optionally garnish with the preferred grated cheese and black pepper. Voila."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · Peter Piontek, Ladislao Blanchi",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/carbonara.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "carbonara"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/carbonara.webp",
+    "photo": {
+      "url": "/recipe-photos/carbonara.webp",
+      "author": "Peter Piontek, Ladislao Blanchi",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/carbonara.md",
+      "cacheAllowed": true
+    }
+  },
+  {
+    "id": "pdr-arroz-chaufa",
+    "name": "Arroz Chaufa",
+    "category": "Lunch",
+    "servings": 0,
+    "prep": 0,
+    "cook": 0,
+    "appliances": [],
+    "diet": [],
+    "ingredients": [
+      {
+        "name": "Rice",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Salt",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Bell pepper",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Chicken",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Eggs",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Soy sauce",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Welsh onion",
+        "quantity": 0,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Cut the chicken into pieces and fry it. Don't forget the salt.",
+      "Cook scrambled eggs. Don't forget the salt.",
+      "Cook the rice. If it is yesterday's rice better, preferably without salt.",
+      "Cut the welsh onion and bell pepper into small squares.",
+      "Mix everything over low heat, adding soy sauce.",
+      "Optional: add bacon, sesame oil.",
+      "If everything is salty, you can reduce it with just a teaspoon of sugar, especially if you cook the rice with salt."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Authentic source recipe awaiting reliable quantity, serving, timing and appliance review.",
+    "source": {
+      "name": "Public Domain Recipes · andy-rufasto",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/arroz-chaufa.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "arroz-chaufa"
+    },
+    "origin": "external",
+    "review": [
+      "Source quantities/metadata need manual verification; no missing values have been invented."
+    ],
+    "image": "/recipe-photos/arroz-chaufa.webp",
+    "photo": {
+      "url": "/recipe-photos/arroz-chaufa.webp",
+      "author": "andy-rufasto",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/arroz-chaufa.md",
+      "cacheAllowed": true
+    }
+  }
+]

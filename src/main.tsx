@@ -20,6 +20,8 @@ import {
   Sparkles,
   Utensils,
   Download,
+  Store,
+  Recycle,
 } from "lucide-react";
 import {
   categories,
@@ -35,14 +37,23 @@ import { loadState, saveState, readRawState } from "./storage";
 import type { State } from "./storage";
 import "./style.css";
 import "./v2.css";
+import "./v3.css";
 import {
   emptyV2,
+  migrateState,
   enabledCategories,
   setDayCategories,
   switchWeek,
   dateForDay,
 } from "./v2-state";
-import { addCollection } from "./collection";
+import { upgradeCatalogue } from "./genuine-recipes";
+import { discoverable } from "./catalogue";
+import { Supermarkets, StoreSelector } from "./components/Supermarkets";
+import { selectedStore } from "./supermarkets";
+import { HouseholdServings } from "./components/HouseholdServings";
+import { Leftovers } from "./components/Leftovers";
+import { RecipePhoto, PhotoCredit } from "./components/RecipePhoto";
+import { NumericInput } from "./components/NumericInput";
 import {
   acknowledgeChanges,
   requirements,
@@ -65,6 +76,8 @@ const nav = [
   ["Recipes", BookOpen],
   ["Shopping List", ShoppingBasket],
   ["Pantry", Package],
+  ["Use Up Leftovers", Recycle],
+  ["Supermarkets", Store],
   ["Settings", SettingsIcon],
 ] as const;
 function monday() {
@@ -80,8 +93,8 @@ function dayDate(week: string, day: number) {
 function fresh(): State {
   return acknowledgeChanges({
     settings: defaults,
-    recipes: addCollection(starterRecipes),
-    plan: generatePlan([], starterRecipes, defaults),
+    recipes: upgradeCatalogue(starterRecipes),
+    plan: [],
     checked: [],
     pantry: [],
     week: monday(),
@@ -100,13 +113,21 @@ export function App() {
   const [selectMeal, setSelectMeal] = useState<Meal | null>(null);
   const [day, setDay] = useState(0);
   const [daySettings, setDaySettings] = useState(false);
+  const [detailPeople, setDetailPeople] = useState(2);
+  const [detailAppetite, setDetailAppetite] = useState(1);
+  useEffect(() => {
+    if (detail) {
+      setDetailPeople(detail.meal?.people ?? (detail.recipe.servings || 2));
+      setDetailAppetite(detail.meal?.appetite ?? 1);
+    }
+  }, [detail]);
   const [install, setInstall] = useState<any>(null);
   useEffect(() => {
     loadState()
       .then((s) => {
-        let next = s ? { ...s, recipes: addCollection(s.recipes) } : fresh();
+        let next = s ? { ...s, recipes: upgradeCatalogue(s.recipes) } : fresh();
         if (!next.v2.baseline[next.week]) next = acknowledgeChanges(next);
-        setState(next);
+        setState(migrateState(next));
         setLoaded(true);
       })
       .catch(() => {
@@ -175,16 +196,16 @@ export function App() {
       ),
     });
   const regenerate = () => {
-    const next = smartGenerate(state);
-    setState(next);
-    setStatus(
-      next.plan.some(
-        (m) =>
-          enabledCategories(next, m.day).includes(m.category) && !m.recipeId,
-      )
-        ? "Plan updated. Some slots have no matching recipes. Try adjusting your preferences."
-        : "Your week is refreshed. Locked meals and daily settings have been kept.",
-    );
+    try {
+      const next = smartGenerate(state);
+      setState(next);
+      setStatus(
+        "Plan updated where possible for your selected store. Existing meals without an approved replacement were kept. Check empty slots, partial prices and the weekly budget.",
+      );
+    } catch (error) {
+      setStatus((error as Error).message);
+      setPage("Supermarkets");
+    }
   };
   const swap = (meal: Meal) => {
     const r = rankedRecipes(state, meal).find(
@@ -223,12 +244,10 @@ export function App() {
         {r ? (
           <>
             <button
-              className="food-art"
-              style={{ background: r.colour }}
+              className="meal-photo-button"
               onClick={() => setDetail({ recipe: r, meal })}
             >
-              <span>{r.emoji}</span>
-              <small>MADE FOR YOUR TABLE</small>
+              <RecipePhoto recipe={r} />
             </button>
             <button
               className="recipe-title"
@@ -243,7 +262,7 @@ export function App() {
             )}
             <div className="meta">
               <Clock size={14} />
-              {r.prep + r.cook} min <span>·</span>
+              {r.prep + r.cook + (r.wait ?? 0)} min <span>·</span>
               <Users size={14} />
               {meal.people} people
             </div>
@@ -257,31 +276,28 @@ export function App() {
         <div className="portion-row">
           <label>
             People
-            <select
+            <NumericInput
               aria-label={`${meal.category} people`}
               value={meal.people}
-              onChange={(e) => changeMeal(meal, { people: +e.target.value })}
-            >
-              {Array.from({ length: 12 }, (_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
+              min={1}
+              max={12}
+              integer
+              onCommit={(n) =>
+                changeMeal(meal, { people: n, portionOverride: true })
+              }
+            />
           </label>
           <label>
             Appetite
-            <select
+            <NumericInput
               aria-label={`${meal.category} appetite`}
               value={meal.appetite}
-              onChange={(e) => changeMeal(meal, { appetite: +e.target.value })}
-            >
-              {[0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5].map((n) => (
-                <option key={n} value={n}>
-                  {n}×
-                </option>
-              ))}
-            </select>
+              min={0.75}
+              max={2.5}
+              onCommit={(n) =>
+                changeMeal(meal, { appetite: n, portionOverride: true })
+              }
+            />
           </label>
         </div>
         <div className="card-actions">
@@ -336,15 +352,13 @@ export function App() {
             : setDetail({ recipe: r })
         }
       >
-        <div className="food-art" style={{ background: r.colour }}>
-          <span>{r.emoji}</span>
-        </div>
+        <RecipePhoto recipe={r} />
         <div className="library-body">
           <span className="eyebrow">{r.category}</span>
           <h3>{r.name}</h3>
           <div className="meta">
             <Clock size={14} />
-            {r.prep + r.cook} min <span>·</span>
+            {r.prep + r.cook + (r.wait ?? 0)} min <span>·</span>
             {r.servings} serves
           </div>
           <div className="tags">
@@ -441,9 +455,13 @@ export function App() {
                       ? "Good food. On repeat."
                       : page === "Shopping List"
                         ? "A little list. All sorted."
-                        : page === "Pantry"
-                          ? "Know what’s in your kitchen."
-                          : "Make yourself at home."}
+                        : page === "Use Up Leftovers"
+                          ? "Good food deserves another meal."
+                          : page === "Supermarkets"
+                            ? "Your shop. Your plan."
+                            : page === "Pantry"
+                              ? "Know what’s in your kitchen."
+                              : "Make yourself at home."}
               </h1>
               <p>
                 {page === "Dashboard"
@@ -454,11 +472,16 @@ export function App() {
                       ? "Simple ingredients. Original recipes. Something for everyone."
                       : page === "Shopping List"
                         ? "Everything your meal plan needs, neatly brought together."
-                        : page === "Pantry"
-                          ? "Keep a simple checklist of ingredients you already have."
-                          : "Your people, your preferences, your kind of cooking."}
+                        : page === "Use Up Leftovers"
+                          ? "Good food deserves another meal."
+                          : page === "Supermarkets"
+                            ? "Your shop. Your plan."
+                            : page === "Pantry"
+                              ? "Keep a simple checklist of ingredients you already have."
+                              : "Your people, your preferences, your kind of cooking."}
               </p>
             </div>
+
             {(page === "Dashboard" || page === "Meal Planner") && (
               <button className="primary" onClick={regenerate}>
                 <Sparkles size={17} />
@@ -468,6 +491,17 @@ export function App() {
               </button>
             )}
           </div>
+          {(page === "Dashboard" || page === "Meal Planner") && (
+            <>
+              <StoreSelector state={state} onChange={setState} compact />
+              <button
+                className="text-button"
+                onClick={() => setPage("Supermarkets")}
+              >
+                Manage supermarkets, stores & products ↗
+              </button>
+            </>
+          )}
           {loadError && (
             <div className="notice-block">
               <strong>Saved data is protected from automatic writes.</strong>
@@ -587,7 +621,11 @@ export function App() {
                   <div>
                     <small>A little inspiration</small>
                     <strong>
-                      {state.recipes.length}
+                      {
+                        state.recipes.filter(
+                          (r) => discoverable(r) && usable(r),
+                        ).length
+                      }
                       <span> recipes to explore</span>
                     </strong>
                   </div>
@@ -795,6 +833,16 @@ export function App() {
             <ShoppingMode state={state} onChange={setState} />
           )}
           {page === "Pantry" && <Pantry state={state} onChange={setState} />}
+          {page === "Supermarkets" && (
+            <Supermarkets state={state} onChange={setState} />
+          )}
+          {page === "Use Up Leftovers" && (
+            <Leftovers
+              state={state}
+              onChange={setState}
+              onPantry={() => setPage("Pantry")}
+            />
+          )}
           {page === "Settings" && (
             <>
               <div className="settings-grid">
@@ -803,39 +851,11 @@ export function App() {
                     <Users size={20} />
                     Your household
                   </h2>
-                  <label className="field">
-                    Default number of people
-                    <input
-                      type="number"
-                      min="1"
-                      max="12"
-                      value={s.people}
-                      onChange={(e) =>
-                        settings({
-                          people: Math.max(
-                            1,
-                            Math.min(12, +e.target.value || 1),
-                          ),
-                        })
-                      }
-                    />
-                  </label>
-                  <label className="field">
-                    Default appetite · {s.appetite}×
-                    <input
-                      type="range"
-                      min="0.75"
-                      max="2.5"
-                      step="0.25"
-                      value={s.appetite}
-                      onChange={(e) => settings({ appetite: +e.target.value })}
-                    />
-                    <small>0.75× lighter portions → 2.5× extra hungry</small>
-                  </label>
-                  <p className="subtle">
-                    Defaults apply to new slots. Existing meal portions stay as
-                    you set them.
-                  </p>
+                  <HouseholdServings
+                    key={state.week}
+                    state={state}
+                    onChange={setState}
+                  />
                   <label className="field">
                     Week beginning
                     <input
@@ -930,7 +950,7 @@ export function App() {
                       value={s.maxTime}
                       onChange={(e) => settings({ maxTime: +e.target.value })}
                     >
-                      {[15, 20, 30, 45, 60, 90, 120].map((n) => (
+                      {[15, 20, 30, 45, 60, 90, 120, 240, 480].map((n) => (
                         <option key={n} value={n}>
                           {n} minutes
                         </option>
@@ -987,7 +1007,7 @@ export function App() {
                     </button>
                   )}
                   <p className="subtle">
-                    MealMate v2 · stored locally on this browser.
+                    MealMate v3 · stored locally on this browser.
                     <br />
                     Demonstration pricing. No configured AI provider.
                   </p>
@@ -1039,12 +1059,18 @@ export function App() {
             </button>
             {detail ? (
               <>
-                <div
-                  className="detail-art"
-                  style={{ background: detail.recipe.colour }}
-                >
-                  {detail.recipe.emoji}
-                </div>
+                <RecipePhoto recipe={detail.recipe} large />
+                <PhotoCredit recipe={detail.recipe} />
+                {detail.recipe.archived && (
+                  <p className="notice">
+                    Archived{" "}
+                    {detail.recipe.origin === "ai"
+                      ? "AI-authored starter"
+                      : "legacy variation"}
+                    . Saved meal references are kept; this recipe is excluded
+                    from new normal planning.
+                  </p>
+                )}
                 {!usable(detail.recipe) && (
                   <p className="notice">
                     Review required:{" "}
@@ -1077,6 +1103,52 @@ export function App() {
                     detail.recipe.appliances
                   ).join(", ") || "No appliances"}
                 </p>
+                {usable(detail.recipe) && (
+                  <>
+                    <p className="subtle">
+                      Original yield: {detail.recipe.servings} standard servings
+                      {detail.recipe.wait
+                        ? ` · plus ${detail.recipe.wait} min resting`
+                        : ""}
+                      .
+                    </p>
+                    <div className="form-grid">
+                      <label>
+                        People
+                        <NumericInput
+                          value={detailPeople}
+                          min={1}
+                          max={detail.meal ? 12 : 100}
+                          integer
+                          onCommit={(n) => {
+                            setDetailPeople(n);
+                            if (detail.meal)
+                              changeMeal(detail.meal, {
+                                people: n,
+                                portionOverride: true,
+                              });
+                          }}
+                        />
+                      </label>
+                      <label>
+                        Appetite multiplier
+                        <NumericInput
+                          value={detailAppetite}
+                          min={0.75}
+                          max={2.5}
+                          onCommit={(n) => {
+                            setDetailAppetite(n);
+                            if (detail.meal)
+                              changeMeal(detail.meal, {
+                                appetite: n,
+                                portionOverride: true,
+                              });
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </>
+                )}
                 <h3>Ingredients</h3>
                 {detail.recipe.ingredients.map((original) => {
                   const i =
@@ -1086,12 +1158,12 @@ export function App() {
                       <span>{i.name}</span>
                       <strong>
                         {quantity(
-                          detail.meal
+                          usable(detail.recipe)
                             ? scaleQuantity(
                                 i.quantity,
                                 detail.recipe.servings,
-                                detail.meal.people,
-                                detail.meal.appetite,
+                                detailPeople,
+                                detailAppetite,
                               )
                             : i.quantity,
                           i.unit,
@@ -1131,13 +1203,6 @@ export function App() {
                     )}{" "}
                     · {detail.recipe.source.license}
                   </p>
-                )}
-                {detail.recipe.image?.startsWith("https://") && (
-                  <img
-                    className="source-image"
-                    src={detail.recipe.image}
-                    alt={detail.recipe.name}
-                  />
                 )}
               </>
             ) : (

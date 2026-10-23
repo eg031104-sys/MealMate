@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { archiveVariations } from "./catalogue";
+import { emptyV3, v3Schema } from "./v3-state";
+import type { V3 } from "./v3-state";
 import type {
   Category,
   Ingredient,
@@ -23,6 +26,7 @@ export const ingredientSchema = z
     unit,
     department: z.string().min(1).max(100),
     rawMeasure: z.string().optional(),
+    prepared: z.boolean().optional(),
   })
   .passthrough();
 const method = z.object({
@@ -37,6 +41,7 @@ export const recipeSchema = z
     name: z.string().min(1),
     category: categorySchema,
     servings: nonnegative,
+    wait: nonnegative.optional(),
     prep: nonnegative,
     cook: nonnegative,
     appliances: z.array(z.string()),
@@ -47,6 +52,21 @@ export const recipeSchema = z
     colour: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    archived: z.boolean().optional(),
+    origin: z.enum(["household", "external", "mechanical", "ai"]).optional(),
+    photo: z
+      .object({
+        url: z.string(),
+        author: z.string(),
+        license: z.string(),
+        sourceUrl: z.string(),
+        cacheAllowed: z.boolean(),
+      })
+      .optional(),
+    preparedIngredients: z.array(z.string()).optional(),
+    allergens: z.array(z.string()).optional(),
+    cuisine: z.string().optional(),
+    difficulty: z.string().optional(),
     source: z
       .object({
         name: z.string(),
@@ -70,6 +90,7 @@ const mealSchema = z
     locked: z.boolean(),
     substitutions: z.record(z.string(), ingredientSchema).optional(),
     cooked: z.boolean().optional(),
+    portionOverride: z.boolean().optional(),
   })
   .passthrough();
 const settingsSchema = z
@@ -97,6 +118,13 @@ const productSchema = z.object({
   source: z.enum(["demo", "user"]),
   shop: z.string().optional(),
   name: z.string().optional(),
+  storeId: z.string().optional(),
+  productId: z.string().optional(),
+  priceLabel: z.string().optional(),
+  availabilityLabel: z.string().optional(),
+  unavailable: z.boolean().optional(),
+  observedAt: z.string().optional(),
+  special: z.boolean().optional(),
 });
 export type Product = z.infer<typeof productSchema>;
 const purchaseSchema = z
@@ -113,6 +141,8 @@ const purchaseSchema = z
     at: z.string(),
     expiry: date.optional(),
     prepared: z.boolean(),
+    storeId: z.string().optional(),
+    productId: z.string().optional(),
   })
   .refine(
     (p) => p.consumed <= p.quantity,
@@ -167,6 +197,7 @@ export type State = {
   pantry: string[];
   week: string;
   v2: V2;
+  v3?: V3;
 };
 export const legacySchema = z
   .object({
@@ -208,12 +239,14 @@ export function migrateState(raw: unknown): State {
         ? parts.slice(0, 2).join("|")
         : key;
     });
-  return { ...base, v2 } as State;
+  base.recipes = archiveVariations(base.recipes as Recipe[]);
+  const v3 = (raw as { v3?: unknown }).v3;
+  return { ...base, v2, v3: v3 ? v3Schema.parse(v3) : emptyV3() } as State;
 }
 export function parseBackup(text: string): State {
   if (text.length > 25_000_000) throw Error("Backup exceeds 25 MB");
   const file = JSON.parse(text);
-  if (file.format !== "mealmate-backup" || ![1, 2].includes(file.version))
+  if (file.format !== "mealmate-backup" || ![1, 2, 3].includes(file.version))
     throw Error("This is not a supported MealMate backup");
   const state = migrateState(file.state);
   const ids = new Set(state.recipes.map((r) => r.id));
@@ -241,7 +274,7 @@ export function exportBackup(state: State) {
   return JSON.stringify(
     {
       format: "mealmate-backup",
-      version: 2,
+      version: 3,
       exportedAt: new Date().toISOString(),
       state,
     },
@@ -300,7 +333,7 @@ export function switchWeek(state: State, week: string): State {
   };
 }
 export const itemKey = (i: Ingredient) =>
-  `${i.name.trim().toLowerCase()}|${i.unit}`;
+  `${i.name.trim().toLowerCase()}|${i.unit}${i.prepared ? "|prepared" : ""}`;
 export const decisionKey = (state: State, key: string) =>
   `${state.week}/${key}`;
 export function mealLabel(m: Meal, week?: string) {

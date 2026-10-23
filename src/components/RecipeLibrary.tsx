@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { discoverable } from "../catalogue";
+import { RecipePhoto, PhotoCredit } from "./RecipePhoto";
 import type { Recipe } from "../domain";
 import { matches, usable } from "../domain";
 import type { State } from "../storage";
@@ -18,6 +20,8 @@ export function RecipeLibrary({
   onChange: (s: State) => void;
   onOpen: (r: Recipe) => void;
 }) {
+  const [showArchived, setShowArchived] = useState(false);
+  const [limit, setLimit] = useState(36);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("name");
@@ -31,6 +35,8 @@ export function RecipeLibrary({
   const filtered = state.recipes
     .filter(
       (r) =>
+        (showArchived || discoverable(r)) &&
+        (category === "Review" || usable(r)) &&
         (category === "All" || category === "Review"
           ? category !== "Review" || !usable(r)
           : r.category === category) &&
@@ -45,7 +51,8 @@ export function RecipeLibrary({
         : sort === "favourites"
           ? Number(!!b.favourite) - Number(!!a.favourite) ||
             a.name.localeCompare(b.name)
-          : a.name.localeCompare(b.name),
+          : Number(b.origin === "external") - Number(a.origin === "external") ||
+            a.name.localeCompare(b.name),
     );
   function receive(values: unknown[]) {
     const result = importRecipes(state.recipes, values);
@@ -104,6 +111,14 @@ export function RecipeLibrary({
           Import / create recipes
         </button>
       </div>
+      <label className="check-row">
+        <input
+          type="checkbox"
+          checked={showArchived}
+          onChange={(e) => setShowArchived(e.target.checked)}
+        />
+        Show archived recipes (saved references are kept)
+      </label>
       <p className="subtle">
         {filtered.length} recipes ·{" "}
         {state.recipes.filter((r) => !usable(r)).length} awaiting review ·
@@ -192,17 +207,23 @@ export function RecipeLibrary({
         </p>
       )}
       <div className="library-grid">
-        {filtered.slice(0, 60).map((r) => (
+        {filtered.slice(0, limit).map((r) => (
           <article className="library-card" key={r.id}>
             <button className="library-open" onClick={() => onOpen(r)}>
-              <div className="food-art" style={{ background: r.colour }}>
-                <span>{r.emoji}</span>
-              </div>
+              <RecipePhoto recipe={r} />
               <div className="library-body">
                 <span className="eyebrow">{r.category}</span>
                 <h3>{r.name}</h3>
+                <small>
+                  {r.source?.name ??
+                    (r.origin === "ai"
+                      ? "Archived AI-authored MealMate starter"
+                      : "Household recipe")}
+                  {r.archived ? " · Archived" : ""}
+                </small>
                 <span className="meta">
-                  {r.prep + r.cook} min · {r.servings || "?"} serves
+                  {r.prep + r.cook + (r.wait ?? 0)} min · {r.servings || "?"}{" "}
+                  serves
                   {!usable(r) && " · Review required"}
                 </span>
               </div>
@@ -233,9 +254,12 @@ export function RecipeLibrary({
           </article>
         ))}
       </div>
-      {filtered.length > 60 && (
+      {filtered.length > limit && (
         <p className="subtle">
-          Showing the first 60 results. Refine your search to find more.
+          Showing {Math.min(limit, filtered.length)} of {filtered.length}.{" "}
+          <button className="secondary" onClick={() => setLimit(limit + 36)}>
+            Show more recipes
+          </button>
         </p>
       )}
       {editor && (

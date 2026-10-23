@@ -61,7 +61,16 @@ export function fromMealDB(raw: Record<string, unknown>): Recipe {
   return {
     id: `themealdb-${text("idMeal")}`,
     name: text("strMeal"),
-    category: "Dinner",
+    category:
+      text("strCategory") === "Breakfast"
+        ? "Breakfast"
+        : text("strCategory") === "Side"
+          ? "Sides"
+          : text("strCategory") === "Dessert"
+            ? "Snacks"
+            : "Dinner",
+    origin: "external",
+    cuisine: text("strArea"),
     description: `Imported from TheMealDB · ${text("strArea")} · ${text("strCategory")}`,
     servings: 0,
     prep: 0,
@@ -73,6 +82,15 @@ export function fromMealDB(raw: Record<string, unknown>): Recipe {
     emoji: "🍽️",
     colour: "#e7eedb",
     image: text("strMealThumb"),
+    photo: text("strMealThumb")
+      ? {
+          url: text("strMealThumb"),
+          author: "TheMealDB contributors",
+          license: "TheMealDB API artwork terms — personal/development use",
+          sourceUrl: "https://www.themealdb.com/terms_of_use.php",
+          cacheAllowed: false,
+        }
+      : undefined,
     source: {
       name: "TheMealDB",
       url: `https://www.themealdb.com/meal/${text("idMeal")}`,
@@ -108,7 +126,21 @@ export function normaliseRecipe(raw: unknown): Recipe {
     review.push("Every ingredient needs a positive measured quantity.");
   if (!recipe.ingredients.length || !recipe.instructions.length)
     review.push("Ingredients and instructions are required.");
-  return { ...recipe, review: [...new Set(review)] };
+  const aliases: Record<string, string> = {
+    courgette: "Zucchini",
+    aubergine: "Eggplant",
+    cilantro: "Coriander",
+    "bell pepper": "Capsicum",
+    scallion: "Spring onion",
+  };
+  return {
+    ...recipe,
+    ingredients: recipe.ingredients.map((i) => ({
+      ...i,
+      name: aliases[i.name.trim().toLowerCase()] ?? i.name.trim(),
+    })),
+    review: [...new Set(review)],
+  };
 }
 export function importRecipes(
   existing: Recipe[],
@@ -142,6 +174,7 @@ export function reviewReady(recipe: Recipe) {
 }
 export const recipeTemplate: Recipe = {
   id: "my-recipe-" + Date.now(),
+  origin: "household",
   name: "My household recipe",
   description: "",
   category: "Dinner",

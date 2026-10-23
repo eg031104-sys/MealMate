@@ -12,12 +12,14 @@ export type Ingredient = {
   unit: "g" | "ml" | "each";
   department: string;
   rawMeasure?: string;
+  prepared?: boolean;
 };
 export type Recipe = {
   id: string;
   name: string;
   category: Category;
   servings: number;
+  wait?: number;
   prep: number;
   cook: number;
   appliances: string[];
@@ -28,6 +30,19 @@ export type Recipe = {
   colour: string;
   description?: string;
   image?: string;
+  archived?: boolean;
+  origin?: "household" | "external" | "mechanical" | "ai";
+  photo?: {
+    url: string;
+    author: string;
+    license: string;
+    sourceUrl: string;
+    cacheAllowed: boolean;
+  };
+  preparedIngredients?: string[];
+  allergens?: string[];
+  cuisine?: string;
+  difficulty?: string;
   source?: { name: string; url: string; license: string; externalId?: string };
   review?: string[];
   favourite?: boolean;
@@ -47,6 +62,7 @@ export type Meal = {
   locked: boolean;
   substitutions?: Record<string, Ingredient>;
   cooked?: boolean;
+  portionOverride?: boolean;
 };
 export type Settings = {
   people: number;
@@ -117,7 +133,7 @@ export function matches(r: Recipe, s: Settings) {
     usable(r) &&
     !!method &&
     s.diet.every((d) => r.diet.includes(d)) &&
-    method.prep + method.cook <= s.maxTime &&
+    method.prep + method.cook + (r.wait ?? 0) <= s.maxTime &&
     !s.dislikes
       .split(",")
       .map((x) => x.trim().toLowerCase())
@@ -167,8 +183,11 @@ export function shoppingList(
     if (!r) continue;
     if (!usable(r)) continue;
     for (const original of r.ingredients) {
-      const i = meal.substitutions?.[original.name] ?? original;
-      const key = `${i.name.trim().toLowerCase()}|${i.unit}`;
+      const chosen = meal.substitutions?.[original.name] ?? original;
+      const i = r.preparedIngredients?.includes(original.name)
+        ? { ...chosen, prepared: true }
+        : chosen;
+      const key = `${i.name.trim().toLowerCase()}|${i.unit}${i.prepared ? "|prepared" : ""}`;
       const quantity = scaleQuantity(
         i.quantity,
         r.servings,

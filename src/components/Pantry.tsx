@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NumericInput } from "./NumericInput";
 import type { State, Stock } from "../v2-state";
 import {
   dateForDay,
@@ -155,30 +156,18 @@ export function Pantry({ state, onChange }: Props) {
               <div className="form-grid">
                 <label>
                   Current opening stock ({i.unit}, excludes purchases)
-                  <input
-                    type="number"
-                    min="0"
-                    step="any"
-                    placeholder="Unknown"
-                    defaultValue={
-                      stock?.quantity === null || !stock
-                        ? ""
+                  <NumericInput
+                    value={
+                      stock?.quantity == null
+                        ? null
                         : stock.quantity - stock.consumed
                     }
-                    onBlur={(e) => {
-                      if (
-                        e.target.value !== "" &&
-                        (!Number.isFinite(+e.target.value) ||
-                          +e.target.value < 0)
-                      )
-                        return;
+                    min={0}
+                    onCommit={(value) =>
                       setStock(key, i, {
-                        quantity:
-                          e.target.value === ""
-                            ? null
-                            : +e.target.value + (stock?.consumed ?? 0),
-                      });
-                    }}
+                        quantity: value + (stock?.consumed ?? 0),
+                      })
+                    }
                   />
                 </label>
                 <label>
@@ -243,25 +232,20 @@ export function Pantry({ state, onChange }: Props) {
                     <div className="form-grid">
                       <label>
                         Correct purchase quantity ({p.unit})
-                        <input
-                          type="number"
+                        <NumericInput
+                          value={p.quantity}
                           min={Math.max(0.001, p.consumed)}
-                          step="any"
-                          defaultValue={p.quantity}
-                          onBlur={(e) => {
-                            const q = +e.target.value;
-                            if (Number.isFinite(q) && q > 0 && q >= p.consumed)
-                              onChange({
-                                ...state,
-                                v2: {
-                                  ...state.v2,
-                                  purchases: state.v2.purchases.map((x) =>
-                                    x.id === p.id ? { ...x, quantity: q } : x,
-                                  ),
-                                },
-                              });
-                            else e.target.value = String(p.quantity);
-                          }}
+                          onCommit={(value) =>
+                            onChange({
+                              ...state,
+                              v2: {
+                                ...state.v2,
+                                purchases: state.v2.purchases.map((x) =>
+                                  x.id === p.id ? { ...x, quantity: value } : x,
+                                ),
+                              },
+                            })
+                          }
                         />
                       </label>
                       <label>
@@ -298,105 +282,6 @@ export function Pantry({ state, onChange }: Props) {
           reconfirmation after 30 days and stop counting as available. Set a
           checked use-by date or correct your current stock. Purchase history
           never proves food is still available.
-        </p>
-      </section>
-      <section className="settings-card surplus-section">
-        <span className="eyebrow">USE WHAT YOU HAVE</span>
-        <h2>Surplus ideas</h2>
-        <p>
-          {libraryProvider.label}. Ideas use unexpired, quantified surplus after
-          reservations. Prepared stock is kept separate and is not substituted
-          into raw-ingredient recipes.
-        </p>
-        <div className="form-grid">
-          <label>
-            People to feed
-            <input
-              type="number"
-              min="1"
-              max="12"
-              value={suggestPeople}
-              onChange={(e) =>
-                setSuggestPeople(
-                  Math.max(1, Math.min(12, +e.target.value || 1)),
-                )
-              }
-            />
-          </label>
-          <label>
-            Add to day
-            <select
-              value={suggestDay}
-              onChange={(e) => setSuggestDay(+e.target.value)}
-            >
-              {Array.from({ length: 7 }, (_, d) => (
-                <option key={d} value={d}>
-                  {dateForDay(state.week, d)}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        {suggestions.map((s) => (
-          <div className="suggestion-row" key={s.recipe.id}>
-            <div>
-              <strong>
-                {s.recipe.emoji} {s.recipe.name}
-              </strong>
-              <p>
-                {s.urgent ? "Use-by soon · " : ""}Uses surplus{" "}
-                {s.uses.join(", ")} · {s.additional} ingredient quantities need
-                topping up
-              </p>
-            </div>
-            <button
-              className="secondary"
-              onClick={() => {
-                try {
-                  const existing = state.plan.find(
-                    (m) =>
-                      m.day === suggestDay && m.category === s.recipe.category,
-                  );
-                  if (
-                    existing?.recipeId &&
-                    !window.confirm(
-                      `Replace the existing ${s.recipe.category.toLowerCase()} on ${dateForDay(state.week, suggestDay)}?`,
-                    )
-                  )
-                    return;
-                  let next = addSuggestion(state, s, suggestDay);
-                  const enabled = enabledCategories(next, suggestDay);
-                  if (!enabled.includes(s.recipe.category))
-                    next = setDayCategories(next, suggestDay, [
-                      ...enabled,
-                      s.recipe.category,
-                    ]);
-                  onChange(next);
-                  setMessage(
-                    "Added to the plan. Reservations and shopping list updated.",
-                  );
-                } catch (error) {
-                  setMessage((error as Error).message);
-                }
-              }}
-            >
-              Add to plan
-            </button>
-          </div>
-        ))}
-        {!suggestions.length && (
-          <p className="empty">
-            No matching surplus ideas yet. Record actual stock or purchases
-            first.
-          </p>
-        )}
-        <p role="status">{message}</p>
-        <p className="subtle">
-          Raw surplus is still raw: use the recipe’s full cooking instructions.
-          Keep perishables at 5°C or colder, follow use-by dates, keep raw meat
-          separate and cook chicken to 75°C. Refrigerate cooked leftovers
-          promptly; do not use food whose storage history is uncertain. Expiry
-          dates are user-entered, not safety guarantees.
         </p>
       </section>
     </>
