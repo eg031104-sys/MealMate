@@ -217,3 +217,120 @@
     min-height: 52px;
   }
 }
+/* Portalled sheet: never inherits a narrow recipe card/arrow width. */
+.schedule-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #14201388;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.schedule-backdrop .repeat-panel {
+  box-sizing: border-box;
+  width: min(100%, 520px);
+  max-width: 520px;
+  min-width: 0;
+  padding: 20px;
+  max-height: 85dvh;
+  overflow-y: auto;
+}
+.schedule-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+.schedule-heading strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.schedule-heading button {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.repeat-panel select {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (max-width: 600px) {
+  .schedule-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .schedule-backdrop .repeat-panel {
+    width: 100%;
+    max-width: none;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 16px max(20px, env(safe-area-inset-bottom));
+  }
+}
+.product-suggestion {
+  min-width: 0;
+  padding: 10px 0;
+  overflow-wrap: anywhere;
+}
+.product-suggestion h4 {
+  margin: 8px 0;
+}
+.product-overview,
+.product-alternative {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.product-overview > div,
+.product-alternative > div {
+  min-width: 0;
+  flex: 1;
+}
+.product-photo {
+  width: 64px;
+  height: 76px;
+  flex: 0 0 64px;
+  object-fit: contain;
+  background: #f3f5ef;
+  border-radius: 8px;
+}
+.product-placeholder {
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  text-align: center;
+  color: #65705d;
+}
+.product-suggestion small,
+.product-suggestion a {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.product-suggestion button {
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  margin: 4px 4px 4px 0;
+}
+.product-suggestion input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.product-alternatives {
+  padding: 10px;
+  border: 1px solid #dce5d0;
+  border-radius: 10px;
+}
+.product-alternative {
+  padding: 12px 0;
+  border-top: 1px solid #dce5d0;
+}
+.compact-summary,
+.expand-item,
+.expanded-item {
+  min-width: 0;
+}

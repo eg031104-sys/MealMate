@@ -1,3 +1,4 @@
+import { ShoppingPreference } from "./components/ProductSuggestion";
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -918,6 +919,10 @@ export function App() {
           {page === "Settings" && (
             <>
               <div className="settings-grid">
+                <section className="settings-card">
+                  <h2>Shopping recommendations</h2>
+                  <ShoppingPreference state={state} onChange={setState} />
+                </section>
                 <section className="settings-card">
                   <h2>
                     <Users size={20} />

@@ -127,8 +127,13 @@ describe("store-first configuration and catalogue", () => {
     s = saveStoreProduct(s, product(s, "a"));
     expect(recommendation(s, chicken(s)).cost).toBe(12);
     s.v3!.weekStores[s.week] = "b";
-    expect(recommendation(s, chicken(s)).product).toBeUndefined();
-    expect(budget(s).partial).toBe(true);
+    const fallback = recommendation(s, chicken(s)).product;
+    expect(fallback?.source).toBe("estimate");
+    expect(fallback?.priceLabel).toBe("Estimated price");
+    expect(fallback?.productId).toBeUndefined();
+    expect(fallback?.storeId).toBeUndefined();
+    expect(fallback?.size).not.toBe(1000);
+    expect(fallback?.price).not.toBe(12);
   });
   it("calculates whole packages at the selected branch", () => {
     let s = fixture();
@@ -169,6 +174,14 @@ describe("store-first configuration and catalogue", () => {
   });
   it("keeps unknown prices partial and never presents stock as verified", () => {
     const s = fixture();
+    // An ingredient with insufficient information must still make the basket partial.
+    s.recipes = s.recipes.map((r) => ({
+      ...r,
+      ingredients: r.ingredients.map((i) => ({
+        ...i,
+        name: "Unidentified specialty ingredient",
+      })),
+    }));
     expect(budget(s).partial).toBe(true);
     expect(budget(s).total).toBe(0);
     expect(availabilityLabel()).toBe("Availability unknown");

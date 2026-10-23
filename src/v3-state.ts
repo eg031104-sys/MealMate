@@ -75,7 +75,7 @@ export const storeProductSchema = z.object({
   unit: z.enum(["g", "ml", "each"]),
   size: z.number().finite().positive(),
   price: nonnegative.optional(),
-  source: z.enum(["user", "estimate", "demo", "authorised"]),
+  source: z.enum(["user", "estimate", "demo", "authorised", "community"]),
   observedAt: z.string().datetime().optional(),
   verifiedUntil: z.string().datetime().optional(),
   provider: z.string().optional(),
@@ -85,6 +85,17 @@ export const storeProductSchema = z.object({
   availabilityAt: z.string().datetime().optional(),
   specialUntil: z.string().datetime().optional(),
   regularPrice: nonnegative.optional(),
+  brand: z.string().optional(),
+  barcode: z
+    .string()
+    .regex(/^\d{8,14}$/)
+    .optional(),
+  image: z.string().url().optional(),
+  imageLicense: z.string().optional(),
+  packageLabel: z.string().optional(),
+  retrievedAt: z.string().datetime().optional(),
+  scope: z.enum(["store", "chain-community"]).optional(),
+  suitability: z.number().min(0).max(1).optional(),
 });
 export type StoreProduct = z.infer<typeof storeProductSchema>;
 export const v3Schema = z
@@ -107,6 +118,15 @@ export const v3Schema = z
     ),
     storageDates: z.record(z.string(), z.string()),
     safeStorage: z.record(z.string(), z.boolean()).default({}),
+    shopping: z
+      .object({
+        preference: z
+          .enum(["Budget", "Balanced", "Premium"])
+          .default("Balanced"),
+        selections: z.record(z.string(), z.string().nullable()).default({}),
+        priceOverrides: z.record(z.string(), nonnegative).default({}),
+      })
+      .optional(),
     photoOffline: z.boolean(),
     storeFinder: storeFinderSchema.default(emptyStoreFinder),
   })

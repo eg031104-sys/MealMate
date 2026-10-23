@@ -1,3 +1,4 @@
+import { estimateIngredient } from "./product-estimates";
 import { planningSettings, planningAllergies } from "./planning-model";
 import { discoverable } from "./catalogue";
 import {
@@ -9,6 +10,8 @@ import {
   unavailable,
   genuineSpecial,
   storeRequired,
+  shoppingPreferences,
+  productSelectionKey,
 } from "./supermarkets";
 import { shoppingList, scaleQuantity, matches, usable } from "./domain";
 import type { Ingredient, Meal, Recipe, ShoppingItem } from "./domain";
@@ -235,23 +238,52 @@ export function productFor(state: State, i: ShoppingItem): Product | undefined {
       i,
       Math.max(0, i.quantity - available(state, i.key)),
     );
-    if (!product) return;
+    const fallback = estimateIngredient(i);
+    const overrideKey = `${productSelectionKey(state, i.key)}/${product?.id ?? "generic"}`;
+    const override = shoppingPreferences(state).priceOverrides[overrideKey];
+    if (!product)
+      return override !== undefined
+        ? {
+            ...(fallback ?? {
+              size: i.unit === "each" ? 1 : i.quantity || 1,
+              source: "user" as const,
+            }),
+            price: override,
+            source: "user" as const,
+            priceLabel: "User price",
+          }
+        : fallback;
+    const status = priceStatus(product);
+    const known =
+      !["Unknown price", "Unverified imported price"].includes(status) &&
+      product.price !== undefined;
+    const estimated = estimateIngredient(i, product.size);
+    const unitPrice = override ?? (known ? product.price : estimated?.price);
+    const label =
+      override !== undefined
+        ? "User price"
+        : known
+          ? status === "User-entered price"
+            ? "User price"
+            : status === "Confirmed current price"
+              ? "Catalogue price"
+              : status.includes("retrieved")
+                ? "Previous price"
+                : status === "Demonstration price"
+                  ? "Estimated price"
+                  : status
+          : estimated
+            ? "Estimated price"
+            : "Price unknown";
     return {
       size: product.size,
-      price: ["Unknown price", "Unverified imported price"].includes(
-        priceStatus(product),
-      )
-        ? undefined
-        : product.price,
-      source:
-        product.source === "demo" || product.source === "estimate"
-          ? "demo"
-          : "user",
+      price: unitPrice,
+      source: label === "Estimated price" ? "estimate" : "user",
       shop: assignedStore(state, i.key)?.name,
       name: product.name,
       storeId: product.storeId,
       productId: product.id,
-      priceLabel: priceStatus(product),
+      priceLabel: label,
       availabilityLabel: availabilityLabel(product),
       unavailable: unavailable(product),
       observedAt: product.observedAt,
@@ -299,7 +331,8 @@ export function budget(state: State, items = requirements(state)) {
         !state.recipes.some((r) => r.id === m.recipeId && usable(r)),
     ).length,
     uncertain = 0,
-    demoUsed = false;
+    demoUsed = false,
+    estimated = 0;
   for (const p of state.v2.purchases.filter((p) => p.week === state.week)) {
     if (p.price !== undefined) {
       total += p.price;
@@ -310,11 +343,14 @@ export function budget(state: State, items = requirements(state)) {
     if (product?.price !== undefined) {
       total += Math.ceil(p.quantity / product.size) * product.price;
       demoUsed ||= product.source === "demo";
+      if (product.source === "estimate") estimated++;
     } else missing++;
   }
   for (const i of items) {
     const status = pantryStatus(state, i);
-    if (status.check && !status.confirmed) {
+    const opening = state.v2.stock[i.key];
+    const quantified = opening?.quantity != null || available(state, i.key) > 0;
+    if (status.check && !status.confirmed && !quantified) {
       uncertain++;
       continue;
     }
@@ -324,6 +360,7 @@ export function budget(state: State, items = requirements(state)) {
       else {
         total += rec.cost;
         demoUsed ||= rec.product?.source === "demo";
+        if (rec.product?.source === "estimate") estimated++;
       }
     }
   }
@@ -335,6 +372,7 @@ export function budget(state: State, items = requirements(state)) {
     partial:
       missing > 0 || uncertain > 0 || unquantifiedIngredients(state).length > 0,
     demoUsed,
+    estimated,
     limit,
     remaining: limit === undefined || limit === null ? null : limit - total,
   };

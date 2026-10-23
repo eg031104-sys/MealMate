@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Heart, ChevronDown } from "lucide-react";
 import type { Recipe } from "../domain";
 import type { State } from "../v2-state";
@@ -22,6 +23,38 @@ export function RecipeControls({
   onChange: (s: State) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    panel.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const keydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Tab") {
+        const controls = [
+          ...(panel.current?.querySelectorAll<HTMLElement>("button, select") ??
+            []),
+        ];
+        const first = controls[0],
+          last = controls.at(-1);
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", keydown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", keydown);
+      trigger.current?.focus();
+    };
+  }, [open]);
   const current = state.recipes.find((r) => r.id === recipe.id) ?? recipe;
   const change = (patch: Partial<Recipe>) =>
     onChange({
@@ -46,6 +79,7 @@ export function RecipeControls({
         </button>
         <button
           type="button"
+          ref={trigger}
           className="schedule-arrow"
           aria-label={`Scheduling preferences for ${current.name}`}
           aria-expanded={open}
@@ -54,56 +88,81 @@ export function RecipeControls({
           <ChevronDown size={19} />
         </button>
       </div>
-      {open && (
-        <div className="repeat-panel">
-          <label>
-            Recipe rotation · {current.category}
-            <select
-              aria-label={`Repeat ${current.name}`}
-              value={repeat.mode}
-              onChange={(e) =>
-                change({
-                  repeat:
-                    e.target.value === "weekly-fixed"
-                      ? { mode: "weekly-fixed", day: 0 }
-                      : { mode: e.target.value as "normal" | "weekly-random" },
-                })
-              }
+      {open &&
+        createPortal(
+          <div className="schedule-backdrop" onClick={() => setOpen(false)}>
+            <div
+              ref={panel}
+              className="repeat-panel"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Schedule ${current.name}`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <option value="normal">Normal rotation</option>
-              <option value="weekly-random">Every week, random day</option>
-              <option value="weekly-fixed">Every week, same day</option>
-            </select>
-          </label>
-          {repeat.mode === "weekly-fixed" && (
-            <label>
-              Weekday
-              <select
-                aria-label={`Weekday for ${current.name}`}
-                value={repeat.day}
-                onChange={(e) =>
-                  change({
-                    repeat: {
-                      mode: "weekly-fixed",
-                      day: Number(e.target.value),
-                    } as RepeatPreference,
-                  })
-                }
-              >
-                {weekdays.map((day, i) => (
-                  <option key={day} value={i}>
-                    {day}
+              <div className="schedule-heading">
+                <strong>{current.name}</strong>
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close scheduling preferences"
+                >
+                  Close
+                </button>
+              </div>
+              <label>
+                Recipe rotation · {current.category}
+                <select
+                  aria-label={`Repeat ${current.name}`}
+                  value={repeat.mode}
+                  onChange={(e) =>
+                    change({
+                      repeat:
+                        e.target.value === "weekly-fixed"
+                          ? { mode: "weekly-fixed", day: 0 }
+                          : {
+                              mode: e.target.value as
+                                "normal" | "weekly-random",
+                            },
+                    })
+                  }
+                >
+                  <option value="normal">Normal rotation</option>
+                  <option value="weekly-random">
+                    Every week on a random day
                   </option>
-                ))}
-              </select>
-            </label>
-          )}
-          <small>
-            Favourites get a modest boost. Weekly repeats are independent and
-            still respect dietary restrictions and locked meals.
-          </small>
-        </div>
-      )}
+                  <option value="weekly-fixed">
+                    Every week on a fixed day
+                  </option>
+                </select>
+              </label>
+              {repeat.mode === "weekly-fixed" && (
+                <label>
+                  Weekday
+                  <select
+                    aria-label={`Weekday for ${current.name}`}
+                    value={repeat.day}
+                    onChange={(e) =>
+                      change({
+                        repeat: {
+                          mode: "weekly-fixed",
+                          day: Number(e.target.value),
+                        } as RepeatPreference,
+                      })
+                    }
+                  >
+                    {weekdays.map((day, i) => (
+                      <option key={day} value={i}>
+                        {day}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

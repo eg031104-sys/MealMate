@@ -133,7 +133,7 @@ const date = z
 const productSchema = z.object({
   size: z.number().finite().positive(),
   price: nonnegative.optional(),
-  source: z.enum(["demo", "user"]),
+  source: z.enum(["demo", "user", "estimate"]),
   shop: z.string().optional(),
   name: z.string().optional(),
   storeId: z.string().optional(),

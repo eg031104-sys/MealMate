@@ -1,3 +1,4 @@
+import { ProductSuggestion } from "./ProductSuggestion";
 import { useState } from "react";
 import { NumericInput } from "./NumericInput";
 import { StoreSelector, StoreComparisons } from "./Supermarkets";
@@ -5,6 +6,7 @@ import {
   selectedStore,
   assignedStore,
   saveStoreProduct,
+  selectProduct,
   supermarketData,
 } from "../supermarkets";
 import { Check, ChevronDown, ChevronUp, AlertTriangle } from "lucide-react";
@@ -61,6 +63,7 @@ export function BudgetCard({ state, onChange }: Props) {
         </span>
         <p>Week beginning {state.week}</p>
         <h2>
+          {b.estimated > 0 ? "~" : ""}
           {aud(b.total)}
           <small>
             {b.limit != null ? ` / ${aud(b.limit)}` : " · no budget set"}
@@ -113,11 +116,13 @@ export function BudgetCard({ state, onChange }: Props) {
         </p>
       )}
       <p className="budget-note">
-        Includes recorded purchases for this week plus outstanding package
-        purchases.{" "}
+        A planning target, not a guaranteed checkout price. Includes recorded
+        purchases for this week plus outstanding package purchases.{" "}
         {b.demoUsed
           ? "Demonstration prices and example pack sizes — not current supermarket prices. "
-          : "User-entered or unpriced products. "}
+          : b.estimated > 0
+            ? `${b.estimated} entries use approximate Australian retail allowances, not observed supermarket prices. `
+            : "User-entered or unpriced products. "}
         {b.missing > 0 &&
           `${b.missing} prices or planned recipe details are missing. `}
         {b.uncertain > 0 &&
@@ -133,7 +138,9 @@ function ProductEditor({
 }: { item: ShoppingItem } & Props) {
   const existing = productFor(state, item);
   const [size, setSize] = useState(String(existing?.size ?? ""));
-  const [price, setPrice] = useState(existing?.price?.toString() ?? "");
+  const [price, setPrice] = useState(
+    existing?.source === "estimate" ? "" : (existing?.price?.toString() ?? ""),
+  );
   const [shop, setShop] = useState(
     existing?.source === "user" ? (existing.shop ?? "") : "",
   );
@@ -143,9 +150,11 @@ function ProductEditor({
     <details className="product-editor">
       <summary>Package size & price</summary>
       <p className="subtle">
-        {existing?.source === "demo"
-          ? "Current values are demonstration data. Save to use your own package and price."
-          : "User-entered package information. Not live supermarket data."}
+        {existing?.source === "estimate"
+          ? "Generic estimate, not catalogue data. Enter the package you intend to buy."
+          : existing?.source === "demo"
+            ? "Current values are demonstration data. Save to use your own package and price."
+            : "User-entered package information. Not live supermarket data."}
       </p>
       <div className="form-grid">
         <label>
@@ -190,7 +199,7 @@ function ProductEditor({
           }
           const product: Product = {
             size: +size,
-            price: price.trim() === "" ? existing?.price : +price,
+            price: price.trim() === "" ? undefined : +price,
             shop,
             name,
             source: "user",
@@ -201,19 +210,24 @@ function ProductEditor({
               setError("Choose a specific store before saving its product.");
               return;
             }
+            const id = existing?.productId ?? crypto.randomUUID();
             onChange(
-              saveStoreProduct(state, {
-                id: existing?.productId ?? crypto.randomUUID(),
-                storeId: store.id,
-                ingredientKey: item.key,
-                name: name || item.name,
-                unit: item.unit,
-                size: +size,
-                price: price.trim() === "" ? existing?.price : +price,
-                source: "user",
-                observedAt: new Date().toISOString(),
-                availability: "unknown",
-              }),
+              selectProduct(
+                saveStoreProduct(state, {
+                  id,
+                  storeId: store.id,
+                  ingredientKey: item.key,
+                  name: name || item.name,
+                  unit: item.unit,
+                  size: +size,
+                  price: price.trim() === "" ? undefined : +price,
+                  source: "user",
+                  observedAt: new Date().toISOString(),
+                  availability: "unknown",
+                }),
+                item.key,
+                id,
+              ),
             );
           } else
             onChange({
@@ -892,6 +906,10 @@ export function ShoppingMode({ state, onChange }: Props) {
                           </span>
                         ) : (
                           <>
+                            <small>
+                              {i.approximate ? "≈ " : ""}
+                              {amount(i.quantity, i.unit)} required
+                            </small>
                             <span>
                               Buy {amount(rec.buy, i.unit)}
                               {rec.product
@@ -899,8 +917,17 @@ export function ShoppingMode({ state, onChange }: Props) {
                                 : " · package size unknown"}
                             </span>
                             <small>
-                              {i.approximate ? "≈ " : ""}
-                              {amount(i.quantity, i.unit)} needed
+                              {rec.product?.source === "estimate" ? "~" : ""}
+                              {rec.cost === undefined
+                                ? "Price unknown"
+                                : aud(rec.cost)}{" "}
+                              ·{" "}
+                              {rec.product?.priceLabel ??
+                                (rec.product?.source === "demo"
+                                  ? "Demonstration price"
+                                  : rec.product
+                                    ? "User price"
+                                    : "Price unknown")}
                               {inv.shortage > 0 && recorded.length > 0
                                 ? ` · Short ${amount(inv.shortage, i.unit)}`
                                 : ""}
@@ -944,27 +971,13 @@ export function ShoppingMode({ state, onChange }: Props) {
                         </strong>{" "}
                         · Recommended purchase {amount(rec.buy, i.unit)}
                       </p>
-                      <p className="subtle">
-                        {rec.product
-                          ? `${rec.product.source === "demo" ? "Example pack (demonstration only)" : "Your package"}: ${amount(rec.product.size, i.unit)} · ${rec.product.price === undefined ? "No price" : aud(rec.product.price)} · ${rec.product.shop ?? "Shop not specified"} ${rec.product.name ?? ""}`
-                          : "No product information. Set your own package size and price."}
-                      </p>
-                      {rec.product && (
-                        <p className="source-label">
-                          {rec.product.priceLabel ??
-                            (rec.product.source === "demo"
-                              ? "Demonstration price"
-                              : "User-entered price")}{" "}
-                          ·{" "}
-                          {rec.product.availabilityLabel ??
-                            "Availability unknown"}
-                          {rec.product.observedAt
-                            ? " · " +
-                              new Date(
-                                rec.product.observedAt,
-                              ).toLocaleDateString("en-AU")
-                            : ""}
-                        </p>
+                      {state.v3 && (
+                        <ProductSuggestion
+                          key={`${i.key}/${assignedStore(state, i.key)?.id}`}
+                          state={state}
+                          item={i}
+                          onChange={onChange}
+                        />
                       )}
                       {state.v3 && (
                         <label className="field">
@@ -1025,7 +1038,7 @@ export function ShoppingMode({ state, onChange }: Props) {
                         </p>
                       )}
                       <ProductEditor
-                        key={`product-${i.key}`}
+                        key={`product-${i.key}/${rec.product?.productId ?? "generic"}/${assignedStore(state, i.key)?.id}`}
                         state={state}
                         onChange={onChange}
                         item={i}

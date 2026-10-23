@@ -1,3 +1,4 @@
+import { rankProducts } from "./product-ranking";
 import type { State } from "./v2-state";
 import type { ShoppingItem, Meal, Recipe } from "./domain";
 import { emptyV3, storeProductSchema } from "./v3-state";
@@ -21,6 +22,7 @@ export function priceStatus(
   now = Date.now(),
   trusted: ReadonlySet<string> = connectedAuthorisedProviders,
 ): string {
+  if (p.source === "community") return "Unknown price";
   if (p.price === undefined) return "Unknown price";
   if (p.source === "user") return "User-entered price";
   if (p.source === "estimate") return "Estimated price";
@@ -87,17 +89,23 @@ export function chooseStoreProduct(
   required = i.quantity,
   storeId = assignedStore(state, i.key)?.id,
 ) {
+  const data = supermarketData(state);
+  const choice = data.shopping?.selections[`${storeId}/${i.key}`];
+  if (choice === null) return undefined;
   const candidates = productsFor(state, i, storeId);
-  const value = (p: StoreProduct) =>
-    ["Unknown price", "Unverified imported price"].includes(priceStatus(p))
-      ? undefined
-      : p.price;
-  return candidates.sort(
-    (a, b) =>
-      Number(unavailable(a)) - Number(unavailable(b)) ||
-      Number(value(a) === undefined) - Number(value(b) === undefined) ||
-      Math.ceil(required / a.size) * (value(a) ?? 0) -
-        Math.ceil(required / b.size) * (value(b) ?? 0),
+  const chosen = candidates.find((p) => p.id === choice && !unavailable(p));
+  if (chosen) return chosen;
+  return rankProducts(
+    candidates,
+    i,
+    required,
+    data.shopping?.preference ?? "Balanced",
+    choice,
+    (p) =>
+      ["Unknown price", "Unverified imported price"].includes(priceStatus(p))
+        ? undefined
+        : p.price,
+    unavailable,
   )[0];
 }
 export function saveStoreProduct(state: State, raw: unknown): State {
@@ -146,4 +154,48 @@ export const manualProvider: SupermarketProvider = {
 };
 export function storeRequired(state: State) {
   return !!state.v3 && !selectedStore(state);
+}
+
+export function shoppingPreferences(state: State) {
+  return (
+    supermarketData(state).shopping ?? {
+      preference: "Balanced" as const,
+      selections: {},
+      priceOverrides: {},
+    }
+  );
+}
+export function productSelectionKey(state: State, key: string) {
+  return `${assignedStore(state, key)?.id}/${key}`;
+}
+export function selectProduct(
+  state: State,
+  key: string,
+  id: string | null,
+): State {
+  const data = supermarketData(state),
+    shopping = shoppingPreferences(state);
+  if (
+    id &&
+    !data.products.some(
+      (p) =>
+        p.id === id &&
+        p.ingredientKey === key &&
+        p.storeId === assignedStore(state, key)?.id,
+    )
+  )
+    throw Error("Product does not match this ingredient and store.");
+  return {
+    ...state,
+    v3: {
+      ...data,
+      shopping: {
+        ...shopping,
+        selections: {
+          ...shopping.selections,
+          [productSelectionKey(state, key)]: id,
+        },
+      },
+    },
+  };
 }
