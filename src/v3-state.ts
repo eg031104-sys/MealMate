@@ -1,16 +1,69 @@
 import { z } from "zod";
 export const chains = ["Coles", "Woolworths", "ALDI", "IGA"] as const;
 const nonnegative = z.number().finite().nonnegative();
-export const storeSchema = z.object({
-  id: z.string().min(1),
-  chain: z.enum(chains),
-  name: z.string().trim().min(1),
-  suburb: z.string().trim().min(1),
-  postcode: z.string().regex(/^\d{4}$/),
-  address: z.string(),
-  origin: z.enum(["user", "authorised-directory"]),
-});
+export const storeSchema = z
+  .object({
+    id: z.string().min(1),
+    chain: z.enum(chains),
+    name: z.string().trim().min(1),
+    suburb: z.string().trim(),
+    postcode: z.string().regex(/^(\d{4})?$/),
+    address: z.string(),
+    origin: z.enum(["user", "authorised-directory", "openstreetmap"]),
+    latitude: z.number().finite().min(-90).max(90).optional(),
+    longitude: z.number().finite().min(-180).max(180).optional(),
+    sourceUrl: z.string().url().optional(),
+    retrievedAt: z.string().datetime().optional(),
+    addressComplete: z.boolean().optional(),
+  })
+  .superRefine((store, ctx) => {
+    if (
+      store.origin !== "openstreetmap" &&
+      (!store.suburb || !/^\d{4}$/.test(store.postcode))
+    )
+      ctx.addIssue({
+        code: "custom",
+        message: "Enter a suburb and four-digit postcode.",
+      });
+    if (
+      store.origin === "openstreetmap" &&
+      (store.latitude === undefined ||
+        store.longitude === undefined ||
+        !/^https:\/\/www\.openstreetmap\.org\/(node|way|relation)\/\d+$/.test(
+          store.sourceUrl ?? "",
+        ))
+    )
+      ctx.addIssue({
+        code: "custom",
+        message: "Mapped stores require coordinates and their original source.",
+      });
+  });
 export type Store = z.infer<typeof storeSchema>;
+export const searchPlaceSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  postcode: z.string(),
+  latitude: z.number().finite().min(-44).max(-9),
+  longitude: z.number().finite().min(112).max(155),
+});
+export type SearchPlace = z.infer<typeof searchPlaceSchema>;
+export const storeFinderSchema = z.object({
+  query: z.string().max(120),
+  resultsQuery: z.string().max(120).default(""),
+  location: searchPlaceSchema.nullable(),
+  results: z.array(storeSchema).max(1000),
+  fetchedAt: z.string().datetime().nullable(),
+  radiusKm: z.union([z.literal(30), z.literal(50), z.literal(100)]),
+});
+export const emptyStoreFinder = () =>
+  ({
+    query: "",
+    resultsQuery: "",
+    location: null,
+    results: [],
+    fetchedAt: null,
+    radiusKm: 30,
+  }) as z.infer<typeof storeFinderSchema>;
 export const storeProductSchema = z.object({
   id: z.string().min(1),
   storeId: z.string().min(1),
@@ -52,6 +105,7 @@ export const v3Schema = z
     storageDates: z.record(z.string(), z.string()),
     safeStorage: z.record(z.string(), z.boolean()).default({}),
     photoOffline: z.boolean(),
+    storeFinder: storeFinderSchema.default(emptyStoreFinder),
   })
   .superRefine((data, ctx) => {
     const ids = new Set(data.stores.map((s) => s.id));
@@ -94,5 +148,6 @@ export function emptyV3(): V3 {
     storageDates: {},
     safeStorage: {},
     photoOffline: true,
+    storeFinder: emptyStoreFinder(),
   };
 }

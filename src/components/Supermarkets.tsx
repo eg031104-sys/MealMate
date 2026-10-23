@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { StoreFinder } from "./StoreFinder";
 import type { State } from "../v2-state";
 import type { Store } from "../v3-state";
 import { chains, storeSchema } from "../v3-state";
@@ -27,6 +28,7 @@ export function StoreSelector({
 }: Props & { compact?: boolean }) {
   const data = supermarketData(state);
   const current = selectedStore(state);
+  const [finderOpen, setFinderOpen] = useState(!current);
   return (
     <section className="store-selector">
       <div>
@@ -39,7 +41,7 @@ export function StoreSelector({
         <p>
           {current
             ? `${current.suburb} ${current.postcode} · manual local catalogue. Live prices and stock are not connected.`
-            : "Save a specific store before generating a meal plan. Existing meals and purchases are preserved."}
+            : "Find and save a nearby supermarket before generating a meal plan. Existing meals and purchases are preserved."}
         </p>
       </div>
       <label>
@@ -64,6 +66,10 @@ export function StoreSelector({
           ))}
         </select>
       </label>
+      <button className="secondary" onClick={() => setFinderOpen(!finderOpen)}>
+        {finderOpen ? "Hide store finder" : "Find nearby supermarkets"}
+      </button>
+      {finderOpen && <StoreFinder state={state} onChange={onChange} />}
       {!compact && (
         <p className="subtle">
           Store selection changes estimates and generation preferences, not
@@ -106,7 +112,13 @@ export function Supermarkets({ state, onChange }: Props) {
             <p>
               {s.address} · {s.suburb} {s.postcode}
               <br />
-              User-entered store details · directory not connected
+              {s.origin === "openstreetmap" ? (
+                <a href={s.sourceUrl} target="_blank" rel="noreferrer">
+                  OpenStreetMap contributors · ODbL · community directory
+                </a>
+              ) : (
+                "User-entered store details"
+              )}
             </p>
             <div className="button-row">
               <button
@@ -140,14 +152,14 @@ export function Supermarkets({ state, onChange }: Props) {
         ))}
         {!findSavedStores(data.stores, query).length && (
           <p>
-            No matching saved stores. Use the official locator and add the exact
-            location below.
+            No matching saved stores. Search nearby supermarkets above, or add a
+            location manually below.
           </p>
         )}
         <h3>Add a specific store</h3>
         <p>
-          No live store directory is configured. These are your own saved
-          locations; we do not invent store records or availability.
+          Manual fallback: use the official locator if the community directory
+          has missing or outdated details, then save the exact branch here.
         </p>
         <div className="form-grid">
           <label>

@@ -2,7 +2,7 @@
 
 ## Actual integration status
 
-**No live retailer product, price, specials, availability or store-directory feed is connected.** V3 runs in explicit manual-store-catalogue mode for Coles, Woolworths, ALDI and IGA. The source selection is deliberately not described as live integration. No retailer accounts, private credentials, reverse-engineered checkout endpoints, anti-bot workarounds or scraper services were used.
+**No live retailer product, price, specials, availability or retailer store-directory feed is connected.** A subsequent store-finder patch adds community OpenStreetMap location lookup via Photon and Private.coffee Overpass; see [source terms, behaviour and limitations](store-finder.md). V3 runs in explicit manual-store-catalogue mode for Coles, Woolworths, ALDI and IGA. The source selection is deliberately not described as live integration. No retailer accounts, private credentials, reverse-engineered checkout endpoints, anti-bot workarounds or scraper services were used.
 
 Research found consumer-facing information and potential partner/open-data routes, but did not establish a documented, authorised, tested feed with reliable Australian store coverage for this application. This is not a claim that no commercial partner API exists.
 

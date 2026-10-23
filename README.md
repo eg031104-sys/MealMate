@@ -18,7 +18,7 @@ Use HTTPS for Android installation/service workers. A LAN HTTP development URL i
 
 ## V3 behaviour
 
-- **Supermarket first:** save a specific Coles, Woolworths, ALDI or IGA branch; choose a primary store and optional per-week override/comparison stores. Search saved stores by suburb/postcode, with official locator links and explicit manual-store entry when no directory is connected.
+- **Supermarket first:** save a specific Coles, Woolworths, ALDI or IGA branch; choose a primary store and optional per-week override/comparison stores. Find real mapped nearby stores by Australian suburb/postcode directly from the Dashboard, filter chains, view approximate distances, and tap to save/select. Photon and Private.coffee Overpass provide OpenStreetMap locations; cached searches and saved stores persist offline. Official locator links and manual entry remain as fallbacks. See [store finder sources and limitations](docs/store-finder.md).
 - **Per-store products:** enter names/identifiers, compatible metric package sizes, optional prices and dated user availability reports. More than one product can supply an ingredient. V2 unscoped manual price records remain stored and can be explicitly copied to a chosen branch.
 - **Store-aware planning:** requires a saved store before generation; evaluates full-basket package costs, existing stock/purchases, variation, exclusions and budget. Shared ingredients can avoid extra packs. Unknown prices produce a partial estimate. Existing meals with no suitable replacement are retained. It is a best-effort heuristic, not a guarantee of a complete, optimal or within-budget plan when source data is missing or fixed meals already exceed the limit.
 - **Multi-store shopping:** optional basket comparisons and per-item saved-store assignments. Another-store choices can be used in the unavailable-item workflow. Recorded spending stays in the budget. Travel/convenience costs are not guessed.
@@ -31,7 +31,7 @@ Use HTTPS for Android installation/service workers. A LAN HTTP development URL i
 
 ## What is genuinely connected?
 
-**No Coles, Woolworths, ALDI or IGA live product/price/stock/directory feed is connected.** The working fallback is a local, per-branch manual catalogue. Production can label user-entered/estimated/unknown data and retains evidence fields for future authorised providers. It does not claim current verified prices or live stock. Manual availability reports expire after 24 hours. Price and availability provenance are separate.
+**No Coles, Woolworths, ALDI or IGA live product/price/stock feed is connected.** Store-location discovery uses OpenStreetMap through Photon / Private.coffee Overpass, not a retailer feed. The working fallback is a local, per-branch manual catalogue. Production can label user-entered/estimated/unknown data and retains evidence fields for future authorised providers. It does not claim current verified prices or live stock. Manual availability reports expire after 24 hours. Price and availability provenance are separate.
 
 Read [supermarket data investigation](docs/supermarket-data.md) for primary sources, access/licensing findings, auth/rate-limit unknowns, Open Prices/GS1 evaluation and what an authorised future integration needs. No fragile scraper, account bypass or client API secret was added.
 
@@ -50,7 +50,7 @@ Reservations are for the selected week, as in V2, rather than a simultaneous glo
 ## Android acceptance checklist
 
 1. Open the existing HTTPS MealMate address in Chrome while online. Close old MealMate windows if the database upgrade asks. Export a JSON backup in Settings; do not clear browser data.
-2. Open **Supermarkets**. Add your exact branch using the official locator if needed, then select it as primary. Save another branch and test postcode search, a per-week override and optional comparison.
+2. On the Dashboard, open **Find nearby supermarkets**. Search `4272` or `Tamborine Mountain QLD`, choose a matching locality if prompted, then filter by chain and tap a store to save/select it. Check the actual source record and approximate straight-line distance. Verify the Dashboard selector now contains it, refresh/reopen and check the postcode/selection persists. Save another branch, choose a different planning week and select its override. Test a wider radius, empty/error results, cached offline results and the manual fallback in **Supermarkets**.
 3. Enter a chicken product at 1,000 g/$12 for one branch and 500 g/$5 for another. For a saved recipe requiring 750 g, verify purchases round to 1,000 g and estimates differ by store. Labels must say user-entered; stock must remain unknown unless you record an observation.
 4. Generate meals. Confirm a store is required, locked/custom daily settings remain and unmatched existing meals are kept. Review partial estimates and empty slots. The genuine starter collection is small; review/import additional suitable recipes before expecting a varied full week.
 5. Browse Recipes: normal discovery excludes old AI/mechanical entries; **Show archived recipes** still finds old saved records/favourites. Check the real source photos, Review category and source credits. A broken/no-photo record must show a neutral placeholder.
