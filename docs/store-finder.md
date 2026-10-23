@@ -35,3 +35,11 @@ The IndexedDB name, version (3), object store and household key are unchanged. N
 Automated tests cover AU postcode/suburb validation, chain matching, radius/distance sorting, node/building handling, duplicates, missing address data, malformed/partial/busy responses, Dashboard selection, current-week overrides, ambiguous locations, cancellation, cached/offline results and persistence of existing purchases/pantry through the additive upgrade.
 
 Live network verification must be recorded separately from mocked/fixture tests. The development workspace initially blocked `photon.komoot.io` and `overpass.private.coffee`; a successful production build alone does not prove network access or data coverage.
+
+## Authorised test deployment and phone diagnostics
+
+The owner authorised a private test deployment even though development-network restrictions prevent live API verification. No suitable browser-testing tool is available in this workspace. This does not establish real API availability or browser CORS compatibility.
+
+Request errors identify **Photon postcode/suburb lookup** or **Overpass store lookup** and the host. HTTP failures include the status; busy services include the retry interval. A browser fetch failure is labelled a **network or browser-access error**, with CORS/security, connectivity and provider outage listed as possible causes, never as a confirmed diagnosis. Unreadable JSON and timeouts have separate messages. These errors appear in the finder alert; saved stores and household data are retained.
+
+On Android, open the existing private HTTPS address in the same Chrome profile, search `4272` or `Tamborine Mountain QLD`, select a matching locality if prompted and tap a store. Check the Dashboard selector, reopen the app to check persistence, then try a different shopping week's store. If a search fails, report the exact on-screen error, entered query and whether it failed before or after locality selection. Do not clear site data to diagnose an API failure. No backend credentials or cloud-environment changes are required on the phone to try the public-service requests.

@@ -258,3 +258,37 @@ describe("network requests", () => {
     );
   });
 });
+it("identifies the failing provider and explains that CORS cannot be distinguished from other connection failures", async () => {
+  vi.spyOn(Date, "now").mockReturnValue(new Date("2030-01-01").getTime());
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockRejectedValue(new TypeError("Failed to fetch")),
+  );
+  await expect(osmStoreProvider.locations("4272")).rejects.toThrow(
+    /Photon.*network or browser-access error.*CORS.*does not reveal which/,
+  );
+  vi.spyOn(Date, "now").mockReturnValue(new Date("2030-01-02").getTime());
+  await expect(osmStoreProvider.stores(centre, 30)).rejects.toThrow(
+    /Overpass store lookup.*network or browser-access error/,
+  );
+});
+it("identifies provider HTTP and invalid-JSON errors without displaying an empty store list", async () => {
+  vi.spyOn(Date, "now").mockReturnValue(new Date("2031-01-01").getTime());
+  vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 403 }));
+  await expect(osmStoreProvider.locations("4272")).rejects.toThrow(
+    /Photon.*HTTP 403/,
+  );
+  vi.spyOn(Date, "now").mockReturnValue(new Date("2031-01-02").getTime());
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => {
+        throw new SyntaxError("Unexpected token");
+      },
+    }),
+  );
+  await expect(osmStoreProvider.locations("4272")).rejects.toThrow(
+    /Photon.*unreadable data/,
+  );
+});

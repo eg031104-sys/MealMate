@@ -227,6 +227,9 @@ async function request(
   init: RequestInit = {},
   signal?: AbortSignal,
 ): Promise<unknown> {
+  const service = url.startsWith(locationEndpoints.photon)
+    ? "Photon postcode/suburb lookup (photon.komoot.io)"
+    : "Overpass store lookup (overpass.private.coffee)";
   if (Date.now() < nextRequestAt)
     throw Error("Please wait a few seconds before searching again.");
   nextRequestAt = Date.now() + 1200;
@@ -245,22 +248,26 @@ async function request(
     if (response.status === 429 || response.status === 503) {
       nextRequestAt = Date.now() + 30000;
       throw Error(
-        "The public store-location service is busy. Please wait 30 seconds and try again. Your saved stores are unchanged.",
+        `${service}: service busy (HTTP ${response.status}). Please wait 30 seconds and try again. Your saved stores are unchanged.`,
       );
     }
     if (!response.ok)
       throw Error(
-        `Store-location service returned ${response.status}. Please try again later or use the manual fallback.`,
+        `${service}: HTTP ${response.status}. Please try again later or use the manual fallback.`,
       );
     return await response.json();
   } catch (error) {
     if (controller.signal.aborted && !signal?.aborted)
       throw Error(
-        "Store search timed out. Please try again later or use the manual fallback.",
+        `${service}: request timed out. Please try again later or use the manual fallback.`,
       );
     if (error instanceof TypeError)
       throw Error(
-        "Could not reach the store-location service. Check your internet connection and try again. Saved stores still work offline.",
+        `${service}: network or browser-access error. Check your internet connection. A provider outage or browser security/CORS block can also cause this; the browser does not reveal which. Retry later or use the manual fallback. Saved stores still work offline.`,
+      );
+    if (error instanceof SyntaxError)
+      throw Error(
+        `${service}: the service returned unreadable data. Please retry later or use the manual fallback.`,
       );
     throw error;
   } finally {
