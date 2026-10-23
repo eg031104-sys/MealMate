@@ -304,3 +304,18 @@ it("validates invalid postcodes locally and reports an unmatched locality clearl
   await screen.findByText(/No matching Australian suburb or postcode/);
   expect(source.stores).not.toHaveBeenCalled();
 });
+it("labels capped Photon results instead of claiming a complete supermarket directory", () => {
+  const s = base();
+  s.v3!.storeFinder = {
+    query: "4272",
+    resultsQuery: "4272",
+    location: place,
+    results: [{ ...store(1, "Coles"), directoryProvider: "photon" }],
+    fetchedAt: new Date().toISOString(),
+    radiusKm: 30,
+  };
+  render(<StoreFinder state={s} onChange={vi.fn()} provider={provider()} />);
+  expect(
+    screen.getByText(/results may be capped; not a complete store directory/),
+  ).toBeTruthy();
+});

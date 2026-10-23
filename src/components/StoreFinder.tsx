@@ -255,6 +255,25 @@ export function StoreFinder({
             Community map details may be incomplete or out of date. Not a
             retailer-verified directory.
           </p>
+          {!!saved.results.length && (
+            <p className="subtle">
+              Directory source:{" "}
+              {[
+                ...new Set(
+                  saved.results.map((store) =>
+                    store.directoryProvider === "photon"
+                      ? "Photon nearby places (results may be capped; not a complete store directory)"
+                      : store.directoryProvider === "vk-overpass"
+                        ? "VK Maps Overpass"
+                        : store.directoryProvider === "private-coffee"
+                          ? "Private.coffee Overpass"
+                          : "OpenStreetMap saved search",
+                  ),
+                ),
+              ].join(" · ")}
+              . Availability of products is unknown.
+            </p>
+          )}
           {results.map((store) => (
             <div key={store.id} className="finder-store">
               <button
@@ -350,9 +369,10 @@ export function StoreFinder({
         >
           Private.coffee Overpass
         </a>
-        . Your search text / approximate search centre is sent to these
-        services. Store locations do not provide live prices, stock or
-        opening-hour verification.
+        . Fallback may also use VK Maps Overpass (maps.mail.ru). Your search
+        text / approximate search centre is sent to these services. Store
+        locations do not provide live prices, stock or opening-hour
+        verification.
       </p>
     </section>
   );

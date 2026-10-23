@@ -13,6 +13,7 @@ import {
   chainFromTags,
   parseLocations,
   parseStores,
+  parsePhotonStores,
   saveFoundStore,
   osmStoreProvider,
 } from "./store-finder";
@@ -224,7 +225,17 @@ describe("network requests", () => {
       })
       .mockResolvedValueOnce({
         ok: true,
-        json: async () => response(element(1)),
+        json: async () => ({
+          features: [
+            rawPlace({
+              osm_key: "shop",
+              osm_value: "supermarket",
+              name: "Coles fixture",
+              street: "Fixture Street",
+              housenumber: "1",
+            }),
+          ],
+        }),
       });
     vi.stubGlobal("fetch", fetcher);
     const places = await osmStoreProvider.locations("4272");
@@ -232,11 +243,10 @@ describe("network requests", () => {
     const result = osmStoreProvider.stores(places[0], 30);
     await vi.advanceTimersByTimeAsync(1500);
     expect(await result).toHaveLength(1);
-    expect(fetcher.mock.calls[1][0]).toBe(
-      "https://overpass.private.coffee/api/interpreter",
+    expect(String(fetcher.mock.calls[1][0])).toContain(
+      "https://photon.komoot.io/reverse?",
     );
-    expect(fetcher.mock.calls[1][1].method).toBe("POST");
-    expect(String(fetcher.mock.calls[1][1].body)).toContain("around");
+    expect(String(fetcher.mock.calls[1][0])).toContain("radius=30");
     expect(fetcher.mock.calls[1][1].credentials).toBe("omit");
   });
   it("reports rate limiting and network failure clearly rather than returning invented records", async () => {
@@ -269,7 +279,7 @@ it("identifies the failing provider and explains that CORS cannot be distinguish
   );
   vi.spyOn(Date, "now").mockReturnValue(new Date("2030-01-02").getTime());
   await expect(osmStoreProvider.stores(centre, 30)).rejects.toThrow(
-    /Overpass store lookup.*network or browser-access error/,
+    /Store directories unavailable.*Photon.*CORS.*VK Maps Overpass/,
   );
 });
 it("identifies provider HTTP and invalid-JSON errors without displaying an empty store list", async () => {
@@ -291,4 +301,41 @@ it("identifies provider HTTP and invalid-JSON errors without displaying an empty
   await expect(osmStoreProvider.locations("4272")).rejects.toThrow(
     /Photon.*unreadable data/,
   );
+});
+
+it("normalises genuine Photon POI fields without invented names or addresses", () => {
+  const stores = parsePhotonStores(
+    {
+      features: [
+        rawPlace({
+          osm_key: "shop",
+          osm_value: "supermarket",
+          osm_id: 21,
+          name: "ALDI fixture",
+          street: "Fixture Road",
+          housenumber: "7",
+          city: "Test locality",
+        }),
+        rawPlace({
+          osm_key: "shop",
+          osm_value: "supermarket",
+          osm_id: 22,
+          name: "IGA fixture",
+          postcode: undefined,
+        }),
+        rawPlace({
+          countrycode: "NZ",
+          osm_key: "shop",
+          osm_value: "supermarket",
+          name: "Coles foreign fixture",
+        }),
+      ],
+    },
+    centre,
+    30,
+  );
+  expect(stores).toHaveLength(2);
+  expect(stores[0].address).toContain("7 Fixture Road");
+  expect(stores[1].postcode).toBe("");
+  expect(stores[0].sourceUrl).toBe("https://www.openstreetmap.org/node/21");
 });

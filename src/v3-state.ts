@@ -15,6 +15,9 @@ export const storeSchema = z
     sourceUrl: z.string().url().optional(),
     retrievedAt: z.string().datetime().optional(),
     addressComplete: z.boolean().optional(),
+    directoryProvider: z
+      .enum(["photon", "vk-overpass", "private-coffee"])
+      .optional(),
   })
   .superRefine((store, ctx) => {
     if (

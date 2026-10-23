@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  createDirectoryClient,
+  type DirectorySource,
+} from "./directory-network";
 import type { State } from "./v2-state";
 import { storeSchema, type SearchPlace, type Store } from "./v3-state";
 import { supermarketData } from "./supermarkets";
@@ -8,6 +12,8 @@ import { supermarketData } from "./supermarkets";
 export const locationEndpoints = {
   photon: "https://photon.komoot.io/api/",
   overpass: "https://overpass.private.coffee/api/interpreter",
+  vkOverpass: "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  photonNearby: "https://photon.komoot.io/reverse",
 };
 export const LOCATION_CACHE_MS = 7 * 86400000;
 export interface StoreLocationProvider {
@@ -221,6 +227,85 @@ export function parseStores(
         ),
   );
 }
+export function parsePhotonStores(
+  raw: unknown,
+  origin: SearchPlace,
+  radiusKm: number,
+): Store[] {
+  const features = photonResponse.parse(raw).features;
+  const elements = features.flatMap((feature) => {
+    const p = feature.properties;
+    const type = (
+      { N: "node", W: "way", R: "relation" } as Record<string, string>
+    )[text(p.osm_type).toUpperCase()];
+    if (
+      text(p.countrycode).toUpperCase() !== "AU" ||
+      p.osm_key !== "shop" ||
+      !["supermarket", "convenience"].includes(text(p.osm_value)) ||
+      !type ||
+      typeof p.osm_id !== "number" ||
+      !Number.isInteger(p.osm_id) ||
+      p.osm_id <= 0
+    )
+      return [];
+    const [lon, lat] = feature.geometry.coordinates;
+    return [
+      {
+        type,
+        id: p.osm_id,
+        lat,
+        lon,
+        tags: {
+          shop: text(p.osm_value),
+          name: text(p.name),
+          "addr:housenumber": text(p.housenumber),
+          "addr:street": text(p.street),
+          "addr:suburb": text(p.district) || text(p.city),
+          "addr:postcode": text(p.postcode),
+          "addr:state": text(p.state),
+        },
+      },
+    ];
+  });
+  return parseStores({ elements }, origin, radiusKm);
+}
+export function directoryAttempts(place: SearchPlace, radiusKm: number) {
+  const params = new URLSearchParams({
+    lat: String(place.latitude),
+    lon: String(place.longitude),
+    radius: String(radiusKm),
+    limit: "100",
+    lang: "en",
+  });
+  params.append("osm_tag", "shop:supermarket");
+  params.append("osm_tag", "shop:convenience");
+  const query = `[out:json][timeout:10];nwr(around:${radiusKm * 1000},${place.latitude},${place.longitude})[shop~"^(supermarket|convenience)$"][~"^(name|brand|operator)$"~"Coles|Woolworths|ALDI|IGA",i];out center tags;`;
+  const post = {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ data: query }),
+  };
+  return [
+    {
+      id: "photon" as DirectorySource,
+      label: "Photon nearby supermarkets (photon.komoot.io)",
+      url: `${locationEndpoints.photonNearby}?${params}`,
+    },
+    {
+      id: "vk-overpass" as DirectorySource,
+      label: "VK Maps Overpass (maps.mail.ru)",
+      url: locationEndpoints.vkOverpass,
+      init: post,
+    },
+    {
+      id: "private-coffee" as DirectorySource,
+      label: "Private.coffee Overpass",
+      url: locationEndpoints.overpass,
+      init: post,
+    },
+  ];
+}
+const nearbyDirectories = createDirectoryClient();
 let nextRequestAt = 0;
 async function request(
   url: string,
@@ -302,24 +387,19 @@ export const osmStoreProvider: StoreLocationProvider = {
       ![30, 50, 100].includes(radiusKm)
     )
       throw Error("Choose an Australian search location and supported radius.");
-    // An explicit small-area query; never download a national store list.
-    const q = `[out:json][timeout:30];nwr(around:${radiusKm * 1000},${place.latitude},${place.longitude})[shop~"^(supermarket|convenience)$"][~"^(name|brand|operator)$"~"Coles|Woolworths|ALDI|IGA",i];out center tags;`;
-    // A geocode and store lookup are sequential, separated to respect fair use.
-    const delay = Math.max(0, nextRequestAt - Date.now());
-    if (delay) await new Promise<void>((resolve) => setTimeout(resolve, delay));
+    const gap = Math.max(0, nextRequestAt - Date.now());
+    if (gap) await new Promise<void>((resolve) => setTimeout(resolve, gap));
     if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
-    return parseStores(
-      await request(
-        locationEndpoints.overpass,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ data: q }),
-        },
-        signal,
-      ),
-      place,
-      radiusKm,
+    return nearbyDirectories.lookup(
+      directoryAttempts(place, radiusKm),
+      (raw, id) => {
+        const stores =
+          id === "photon"
+            ? parsePhotonStores(raw, place, radiusKm)
+            : parseStores(raw, place, radiusKm);
+        return stores.map((store) => ({ ...store, directoryProvider: id }));
+      },
+      signal,
     );
   },
 };
