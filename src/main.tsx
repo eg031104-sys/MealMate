@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
+  Heart,
   LayoutDashboard,
   CalendarDays,
   BookOpen,
@@ -26,7 +27,6 @@ import {
 import {
   categories,
   defaults,
-  generatePlan,
   matches,
   scaleQuantity,
   quantity,
@@ -48,6 +48,14 @@ import {
 } from "./v2-state";
 import { upgradeCatalogue } from "./genuine-recipes";
 import { discoverable } from "./catalogue";
+import { PlanningPreferences } from "./components/PlanningPreferences";
+import { MyMeals } from "./components/MyMeals";
+import { RecipeControls } from "./components/RecipeControls";
+import { confirmCooked } from "./meal-history";
+import { planningWeekStart } from "./weekly-planner";
+import { planningSettings } from "./planning-model";
+import { today } from "./shopping";
+import "./planning.css";
 import { MeasurementSettings } from "./components/MeasurementSettings";
 import { Supermarkets, StoreSelector } from "./components/Supermarkets";
 import { selectedStore } from "./supermarkets";
@@ -58,9 +66,7 @@ import { NumericInput } from "./components/NumericInput";
 import {
   acknowledgeChanges,
   requirements,
-  smartGenerate,
   rankedRecipes,
-  consumeMeal,
   replaceMeal,
   pantryStatus,
   recommendation,
@@ -75,6 +81,7 @@ const nav = [
   ["Dashboard", LayoutDashboard],
   ["Meal Planner", CalendarDays],
   ["Recipes", BookOpen],
+  ["My Meals", Heart],
   ["Shopping List", ShoppingBasket],
   ["Pantry", Package],
   ["Use Up Leftovers", Recycle],
@@ -105,6 +112,7 @@ function fresh(): State {
 export function App() {
   const [state, setState] = useState<State | null>(null);
   const [page, setPage] = useState("Dashboard");
+  const [planningOpen, setPlanningOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState(false);
@@ -205,28 +213,29 @@ export function App() {
       ),
     });
   const regenerate = () => {
-    try {
-      const next = smartGenerate(state);
-      setState(next);
-      setStatus(
-        "Plan updated where possible for your selected store. Existing meals without an approved replacement were kept. Check empty slots, partial prices and the weekly budget.",
-      );
-    } catch (error) {
-      setStatus((error as Error).message);
-      setPage("Supermarkets");
-    }
+    setPlanningOpen(true);
+    setPage("Meal Planner");
   };
   const swap = (meal: Meal) => {
-    const r = rankedRecipes(state, meal).find(
-      (r) =>
-        r.id !== meal.recipeId && !state.plan.some((m) => m.recipeId === r.id),
+    const options = rankedRecipes(state, meal).filter(
+      (r) => r.id !== meal.recipeId,
     );
+    const fresh = options.find(
+      (r) => !state.plan.some((m) => m.recipeId === r.id),
+    );
+    const r = fresh ?? options[0];
     if (!r) {
-      setStatus("No other matching recipe. Try adjusting your preferences.");
+      setStatus(
+        "No other matching recipe. Try adjusting this week's planning preferences.",
+      );
       return;
     }
     try {
       setState(replaceMeal(state, meal, r));
+      if (!fresh)
+        setStatus(
+          "This recipe already appears this week; no unused eligible alternative was available.",
+        );
     } catch (e) {
       setStatus((e as Error).message);
     }
@@ -269,6 +278,7 @@ export function App() {
                 Review required — excluded from shopping
               </small>
             )}
+            <RecipeControls recipe={r} state={state} onChange={setState} />
             <div className="meta">
               <Clock size={14} />
               {r.prep + r.cook + (r.wait ?? 0)} min <span>·</span>
@@ -327,12 +337,17 @@ export function App() {
         </div>
         {meal.recipeId && (
           <div className="meal-cooked">
+            <button className="text-button" onClick={() => setPage("My Meals")}>
+              History / confirm cooking
+            </button>
             <button
               className="text-button"
               disabled={meal.cooked}
               onClick={() => {
                 try {
-                  setState(consumeMeal(state, meal));
+                  setState(
+                    confirmCooked(state, state.week, meal, today(), true),
+                  );
                   setStatus(
                     "Meal marked cooked. Recorded stock was consumed and reservations released.",
                   );
@@ -342,7 +357,7 @@ export function App() {
               }}
             >
               {meal.cooked
-                ? "✓ Cooked — stock consumed"
+                ? "✓ Confirmed cooked"
                 : "Mark cooked & consume stock"}
             </button>
           </div>
@@ -352,31 +367,34 @@ export function App() {
   };
   const recipeCards = (recipes: Recipe[]) =>
     recipes.map((r) => (
-      <button
-        key={r.id}
-        className="library-card"
-        onClick={() =>
-          selectMeal
-            ? (setState(replaceMeal(state, selectMeal, r)), setSelectMeal(null))
-            : setDetail({ recipe: r })
-        }
-      >
-        <RecipePhoto recipe={r} />
-        <div className="library-body">
-          <span className="eyebrow">{r.category}</span>
-          <h3>{r.name}</h3>
-          <div className="meta">
-            <Clock size={14} />
-            {r.prep + r.cook + (r.wait ?? 0)} min <span>·</span>
-            {r.servings} serves
+      <article key={r.id} className="library-card">
+        <button
+          className="library-open"
+          onClick={() =>
+            selectMeal
+              ? (setState(replaceMeal(state, selectMeal, r)),
+                setSelectMeal(null))
+              : setDetail({ recipe: r })
+          }
+        >
+          <RecipePhoto recipe={r} />
+          <div className="library-body">
+            <span className="eyebrow">{r.category}</span>
+            <h3>{r.name}</h3>
+            <div className="meta">
+              <Clock size={14} />
+              {r.prep + r.cook + (r.wait ?? 0)} min <span>·</span>
+              {r.servings} serves
+            </div>
+            <div className="tags">
+              {r.diet.slice(0, 2).map((d) => (
+                <span key={d}>{d}</span>
+              ))}
+            </div>
           </div>
-          <div className="tags">
-            {r.diet.slice(0, 2).map((d) => (
-              <span key={d}>{d}</span>
-            ))}
-          </div>
-        </div>
-      </button>
+        </button>
+        <RecipeControls recipe={r} state={state} onChange={setState} />
+      </article>
     ));
   return (
     <div className="app">
@@ -460,47 +478,50 @@ export function App() {
                   ? "Your week, well fed."
                   : page === "Meal Planner"
                     ? "A good week starts here."
-                    : page === "Recipes"
-                      ? "Good food. On repeat."
-                      : page === "Shopping List"
-                        ? "A little list. All sorted."
-                        : page === "Use Up Leftovers"
-                          ? "Good food deserves another meal."
-                          : page === "Supermarkets"
-                            ? "Your shop. Your plan."
-                            : page === "Pantry"
-                              ? "Know what’s in your kitchen."
-                              : "Make yourself at home."}
+                    : page === "My Meals"
+                      ? "Your meals, remembered."
+                      : page === "Recipes"
+                        ? "Good food. On repeat."
+                        : page === "Shopping List"
+                          ? "A little list. All sorted."
+                          : page === "Use Up Leftovers"
+                            ? "Good food deserves another meal."
+                            : page === "Supermarkets"
+                              ? "Your shop. Your plan."
+                              : page === "Pantry"
+                                ? "Know what’s in your kitchen."
+                                : "Make yourself at home."}
               </h1>
               <p>
                 {page === "Dashboard"
                   ? "Less “what’s for dinner?”, more time around the table."
                   : page === "Meal Planner"
                     ? "Seven days of meals, made to fit your household."
-                    : page === "Recipes"
-                      ? "Simple ingredients. Original recipes. Something for everyone."
-                      : page === "Shopping List"
-                        ? "Everything your meal plan needs, neatly brought together."
-                        : page === "Use Up Leftovers"
-                          ? "Good food deserves another meal."
-                          : page === "Supermarkets"
-                            ? "Your shop. Your plan."
-                            : page === "Pantry"
-                              ? "Keep a simple checklist of ingredients you already have."
-                              : "Your people, your preferences, your kind of cooking."}
+                    : page === "My Meals"
+                      ? "Confirmed cooking history and your favourite recipes."
+                      : page === "Recipes"
+                        ? "Simple ingredients. Original recipes. Something for everyone."
+                        : page === "Shopping List"
+                          ? "Everything your meal plan needs, neatly brought together."
+                          : page === "Use Up Leftovers"
+                            ? "Good food deserves another meal."
+                            : page === "Supermarkets"
+                              ? "Your shop. Your plan."
+                              : page === "Pantry"
+                                ? "Keep a simple checklist of ingredients you already have."
+                                : "Your people, your preferences, your kind of cooking."}
               </p>
             </div>
 
             {(page === "Dashboard" || page === "Meal Planner") && (
               <button className="primary" onClick={regenerate}>
                 <Sparkles size={17} />
-                {page === "Dashboard"
-                  ? "Generate meal plan"
-                  : "Refresh unlocked meals"}
+                Plan My Meals
               </button>
             )}
           </div>
-          {(page === "Dashboard" || page === "Meal Planner") && (
+          {(page === "Dashboard" ||
+            (page === "Meal Planner" && !planningOpen)) && (
             <>
               <StoreSelector state={state} onChange={setState} compact />
               <button
@@ -566,11 +587,8 @@ export function App() {
                     <br className="desktop" /> makes sense, and one less thing
                     to think about.
                   </p>
-                  <button
-                    className="light-button"
-                    onClick={() => setPage("Meal Planner")}
-                  >
-                    Let’s plan your week
+                  <button className="light-button" onClick={regenerate}>
+                    Plan My Meals
                     <ArrowUpRight size={18} />
                   </button>
                   <span className="hero-foot">
@@ -643,7 +661,21 @@ export function App() {
               </div>
             </>
           )}
-          {(page === "Dashboard" || page === "Meal Planner") && (
+          {page === "Meal Planner" && planningOpen && (
+            <PlanningPreferences
+              key={state.week}
+              state={state}
+              onChange={setState}
+              onDone={(message) => {
+                setPlanningOpen(false);
+                setStatus(message);
+              }}
+              onCancel={() => setPlanningOpen(false)}
+              onStores={() => setPage("Supermarkets")}
+            />
+          )}
+          {(page === "Dashboard" ||
+            (page === "Meal Planner" && !planningOpen)) && (
             <>
               <div className="section-heading">
                 <div>
@@ -664,15 +696,38 @@ export function App() {
                     <ArrowUpRight size={16} />
                   </button>
                 ) : (
-                  <button
-                    className="text-button"
-                    onClick={() => setPage("Settings")}
-                  >
-                    Meal categories
+                  <button className="text-button" onClick={regenerate}>
+                    Planning preferences
                     <SettingsIcon size={16} />
                   </button>
                 )}
               </div>
+              {state.planning?.weeks[state.week] && (
+                <p className="subtle">
+                  This week: {planningSettings(state).people} people ·{" "}
+                  {planningSettings(state).appetite}× appetite. Individual
+                  portions and day switches take precedence.
+                </p>
+              )}
+              {state.planning?.reports[state.week]?.map((message) => (
+                <p className="notice" key={message}>
+                  {message}
+                </p>
+              ))}
+              <label className="planner-week">
+                Planning week
+                <input
+                  aria-label="Planner week"
+                  type="date"
+                  value={state.week}
+                  onChange={(e) => {
+                    if (e.target.value)
+                      setState(
+                        switchWeek(state, planningWeekStart(e.target.value)),
+                      );
+                  }}
+                />
+              </label>
               <div className="week-tabs">
                 {Array.from({ length: 7 }, (_, i) => (
                   <button
@@ -773,7 +828,8 @@ export function App() {
                   })}
                 </h3>
                 <span>
-                  {dailyCategories.length} meals · made for {s.people}
+                  {dailyCategories.length} meals · made for{" "}
+                  {planningSettings(state).people}
                 </span>
               </div>
               <div className="meal-grid">
@@ -784,8 +840,8 @@ export function App() {
                     day,
                     category,
                     recipeId: null,
-                    people: s.people,
-                    appetite: s.appetite,
+                    people: planningSettings(state).people,
+                    appetite: planningSettings(state).appetite,
                     locked: false,
                   };
                   if (
@@ -831,6 +887,13 @@ export function App() {
               </div>
             </>
           )}
+          {page === "My Meals" && (
+            <MyMeals
+              state={state}
+              onChange={setState}
+              onOpen={(r) => setDetail({ recipe: r })}
+            />
+          )}
           {page === "Recipes" && (
             <RecipeLibrary
               state={state}
@@ -872,7 +935,10 @@ export function App() {
                       value={state.week}
                       onChange={(e) => {
                         if (e.target.value) {
-                          let next = switchWeek(state, e.target.value);
+                          let next = switchWeek(
+                            state,
+                            planningWeekStart(e.target.value),
+                          );
                           if (!next.v2.baseline[next.week])
                             next = acknowledgeChanges(next);
                           setState(next);
@@ -990,7 +1056,9 @@ export function App() {
                     </label>
                   ))}
                   <p className="subtle">
-                    Daily overrides are preserved. Disabled meals are kept but
+                    Weeks with saved planning preferences keep their own
+                    categories. Use Plan My Meals to change this week. Daily
+                    overrides are preserved. Disabled meals are kept but
                     excluded from shopping. Changing defaults does not replace
                     recipes. Refresh applies only to enabled, unlocked meals.
                   </p>
@@ -1071,6 +1139,11 @@ export function App() {
               <>
                 <RecipePhoto recipe={detail.recipe} large />
                 <PhotoCredit recipe={detail.recipe} />
+                <RecipeControls
+                  recipe={detail.recipe}
+                  state={state}
+                  onChange={setState}
+                />
                 {detail.recipe.archived && (
                   <p className="notice">
                     Archived{" "}
@@ -1109,8 +1182,8 @@ export function App() {
                 <p className="subtle">
                   Cooking method:{" "}
                   {(
-                    cookingMethod(detail.recipe, s)?.appliances ??
-                    detail.recipe.appliances
+                    cookingMethod(detail.recipe, planningSettings(state))
+                      ?.appliances ?? detail.recipe.appliances
                   ).join(", ") || "No appliances"}
                 </p>
                 {usable(detail.recipe) && (
@@ -1204,8 +1277,8 @@ export function App() {
                 <h3>Let’s get cooking</h3>
                 <ol>
                   {(
-                    cookingMethod(detail.recipe, s)?.instructions ??
-                    detail.recipe.instructions
+                    cookingMethod(detail.recipe, planningSettings(state))
+                      ?.instructions ?? detail.recipe.instructions
                   ).map((step) => (
                     <li key={step}>{step}</li>
                   ))}
@@ -1245,7 +1318,9 @@ export function App() {
                   )}
                 </div>
                 {!state.recipes.some(
-                  (r) => r.category === selectMeal?.category && matches(r, s),
+                  (r) =>
+                    r.category === selectMeal?.category &&
+                    matches(r, planningSettings(state)),
                 ) && (
                   <p className="empty">
                     No matching recipes. Adjust your dietary, appliance or time

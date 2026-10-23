@@ -1,3 +1,4 @@
+import { RecipeControls } from "./RecipeControls";
 import { useState } from "react";
 import { discoverable } from "../catalogue";
 import { RecipePhoto, PhotoCredit } from "./RecipePhoto";
@@ -229,19 +230,7 @@ export function RecipeLibrary({
               </div>
             </button>
             <div className="library-controls">
-              <button
-                aria-pressed={!!r.favourite}
-                onClick={() =>
-                  onChange({
-                    ...state,
-                    recipes: state.recipes.map((x) =>
-                      x.id === r.id ? { ...x, favourite: !x.favourite } : x,
-                    ),
-                  })
-                }
-              >
-                {r.favourite ? "★ Favourite" : "☆ Favourite"}
-              </button>
+              <RecipeControls recipe={r} state={state} onChange={onChange} />
               <button
                 onClick={() => {
                   setEditingId(r.id);

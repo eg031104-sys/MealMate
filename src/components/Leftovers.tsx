@@ -1,3 +1,4 @@
+import { RecipeControls } from "./RecipeControls";
 import { useState } from "react";
 import type { State } from "../v2-state";
 import { dateForDay, enabledCategories, setDayCategories } from "../v2-state";
@@ -208,6 +209,11 @@ export function Leftovers({
                   <p>None — enough unreserved stock is recorded.</p>
                 )}
                 <PhotoCredit recipe={s.recipe} />
+                <RecipeControls
+                  recipe={s.recipe}
+                  state={state}
+                  onChange={onChange}
+                />
                 <div className="button-row">
                   <button
                     className="primary"

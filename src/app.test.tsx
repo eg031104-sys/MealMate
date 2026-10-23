@@ -105,6 +105,6 @@ it("renders appliance search, recipe filters and backup restore validation", asy
   expect(
     screen.getByRole("heading", { name: "Chickpea spinach curry" }),
   ).toBeTruthy();
-  expect(screen.getByText("☆ Favourite")).toBeTruthy();
+  expect(screen.getByRole("button", { name: /^Favourite / })).toBeTruthy();
   cleanup();
 }, 20000);

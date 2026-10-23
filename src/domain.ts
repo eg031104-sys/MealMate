@@ -51,6 +51,7 @@ export type Recipe = {
   source?: { name: string; url: string; license: string; externalId?: string };
   review?: string[];
   favourite?: boolean;
+  repeat?: import("./planning-model").RepeatPreference;
   methods?: {
     appliances: string[];
     instructions: string[];

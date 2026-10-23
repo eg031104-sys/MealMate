@@ -1,3 +1,4 @@
+import { planningSettings, planningAllergies } from "./planning-model";
 import { discoverable } from "./catalogue";
 import {
   selectedStore,
@@ -448,11 +449,12 @@ export function replaceMeal(
   if (recipe.category !== meal.category)
     throw Error("Replacement must use the same meal category.");
   if (
-    !matches(recipe, state.settings) ||
-    state.v2.allergies.some((a) =>
-      recipe.ingredients.some((i) =>
-        i.name.toLowerCase().includes(a.toLowerCase()),
-      ),
+    !matches(recipe, planningSettings(state)) ||
+    planningAllergies(state).some((a) =>
+      [
+        ...recipe.ingredients.map((i) => i.name),
+        ...(recipe.allergens ?? []),
+      ].some((name) => name.toLowerCase().includes(a.toLowerCase())),
     )
   )
     throw Error("Recipe does not match household preferences.");
@@ -502,7 +504,10 @@ export function substitutionOptions(state: State, i: ShoppingItem) {
   if (i.prepared) return [];
   return (substitutions[i.name] ?? []).filter(
     (option) =>
-      ![...state.v2.allergies, ...state.settings.dislikes.split(",")]
+      ![
+        ...planningAllergies(state),
+        ...planningSettings(state).dislikes.split(","),
+      ]
         .filter((a) => a.trim())
         .some((a) =>
           option.name.toLowerCase().includes(a.trim().toLowerCase()),
@@ -584,10 +589,10 @@ export function rankedRecipes(state: State, meal: Meal, cheap = false) {
       r.category === meal.category &&
       discoverable(r) &&
       r.origin !== "ai" &&
-      matches(r, state.settings) &&
-      !state.v2.allergies.some((a) =>
-        r.ingredients.some((i) =>
-          i.name.toLowerCase().includes(a.toLowerCase()),
+      matches(r, planningSettings(state)) &&
+      !planningAllergies(state).some((a) =>
+        [...r.ingredients.map((i) => i.name), ...(r.allergens ?? [])].some(
+          (name) => name.toLowerCase().includes(a.toLowerCase()),
         ),
       ),
   );

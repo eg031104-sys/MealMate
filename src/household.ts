@@ -1,10 +1,11 @@
+import { planningSettings } from "./planning-model";
 import type { State } from "./v2-state";
 import type { Meal } from "./domain";
 export function customised(state: State, m: Meal) {
   return (
     m.portionOverride ??
-    (m.people !== state.settings.people ||
-      m.appetite !== state.settings.appetite)
+    (m.people !== planningSettings(state).people ||
+      m.appetite !== planningSettings(state).appetite)
   );
 }
 export function servingCounts(state: State) {
@@ -35,6 +36,22 @@ export function updateHousehold(
   return {
     ...state,
     settings: { ...state.settings, people, appetite },
+    ...(state.planning?.weeks[state.week]
+      ? {
+          planning: {
+            ...state.planning,
+            last: { ...state.planning.weeks[state.week], people, appetite },
+            weeks: {
+              ...state.planning.weeks,
+              [state.week]: {
+                ...state.planning.weeks[state.week],
+                people,
+                appetite,
+              },
+            },
+          },
+        }
+      : {}),
     plan: state.plan.map((m) =>
       m.cooked || (scope === "defaults" && customised(state, m))
         ? customised(state, m) && !m.cooked

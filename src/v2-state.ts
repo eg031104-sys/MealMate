@@ -1,4 +1,10 @@
 import { z } from "zod";
+import {
+  planningSchema,
+  repeatSchema,
+  planningSettings,
+} from "./planning-model";
+import type { PlanningData } from "./planning-model";
 import { archiveVariations } from "./catalogue";
 import { emptyV3, v3Schema } from "./v3-state";
 import type { V3 } from "./v3-state";
@@ -82,6 +88,7 @@ export const recipeSchema = z
       .optional(),
     review: z.array(z.string()).optional(),
     favourite: z.boolean().optional(),
+    repeat: repeatSchema.optional(),
     methods: z.array(method).optional(),
   })
   .passthrough();
@@ -209,6 +216,7 @@ export type State = {
   week: string;
   v2: V2;
   v3?: V3;
+  planning?: PlanningData;
 };
 export const legacySchema = z
   .object({
@@ -252,7 +260,13 @@ export function migrateState(raw: unknown): State {
     });
   base.recipes = archiveVariations(base.recipes as Recipe[]);
   const v3 = (raw as { v3?: unknown }).v3;
-  return { ...base, v2, v3: v3 ? v3Schema.parse(v3) : emptyV3() } as State;
+  const planning = (raw as { planning?: unknown }).planning;
+  return {
+    ...base,
+    v2,
+    v3: v3 ? v3Schema.parse(v3) : emptyV3(),
+    ...(planning ? { planning: planningSchema.parse(planning) } : {}),
+  } as State;
 }
 export function parseBackup(text: string): State {
   if (text.length > 25_000_000) throw Error("Backup exceeds 25 MB");
@@ -273,6 +287,9 @@ export function parseBackup(text: string): State {
     state.v2.purchases.length
   )
     throw Error("Duplicate purchase IDs");
+  for (const h of state.planning?.history ?? [])
+    if (!ids.has(h.recipeId))
+      throw Error("A cooking history recipe is missing from the backup");
   const keys = new Set<string>();
   for (const m of state.plan) {
     const key = `${m.day}/${m.category}`;
@@ -300,7 +317,8 @@ export function dateForDay(week: string, day: number) {
 }
 export function enabledCategories(state: State, day: number): Category[] {
   return (
-    state.v2.daily[dateForDay(state.week, day)] ?? state.settings.categories
+    state.v2.daily[dateForDay(state.week, day)] ??
+    planningSettings(state).categories
   );
 }
 export function activeMeals(state: State) {
@@ -318,14 +336,14 @@ export function setDayCategories(
   if (enabled === null) delete daily[key];
   else daily[key] = enabled;
   const plan = [...state.plan];
-  for (const category of enabled ?? state.settings.categories)
+  for (const category of enabled ?? planningSettings(state).categories)
     if (!plan.some((m) => m.day === day && m.category === category))
       plan.push({
         day,
         category,
         recipeId: null,
-        people: state.settings.people,
-        appetite: state.settings.appetite,
+        people: planningSettings(state).people,
+        appetite: planningSettings(state).appetite,
         locked: false,
       });
   return { ...state, plan, v2: { ...state.v2, daily } };
