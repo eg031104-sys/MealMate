@@ -77,7 +77,19 @@ export function approximateMeasure(
             : undefined;
   if (!kind) return;
   const key = `${lower}|${kind}`;
-  const n = Number(text.match(/^(\d+(?:\.\d+)?)\s/)?.[1] ?? 1);
+  const numeric = text
+    .replace(/(\d)([¼½¾])/g, "$1 $2")
+    .replace(/¼/g, "1/4")
+    .replace(/½/g, "1/2")
+    .replace(/¾/g, "3/4");
+  const count = numeric.match(/^(\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:\.\d+)?)\s/);
+  const n = count
+    ? count[1].split(/\s+/).reduce((sum, v) => {
+        const [a, b] = v.split("/").map(Number);
+        return sum + a / (b ?? 1);
+      }, 0)
+    : 1;
+  if (!Number.isFinite(n) || n <= 0) return;
   const rule = overrides[key] ?? defaultEstimates[key];
   if (rule)
     return {

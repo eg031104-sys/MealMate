@@ -687,7 +687,7 @@ export function ShoppingMode({ state, onChange }: Props) {
       <BudgetCard state={state} onChange={onChange} />
       {!!unquantifiedIngredients(state).length && (
         <section className="notice-block">
-          <strong>Seasonings outside exact totals</strong>
+          <strong>Outside exact quantity totals</strong>
           <p>
             Check your pantry:{" "}
             {unquantifiedIngredients(state)

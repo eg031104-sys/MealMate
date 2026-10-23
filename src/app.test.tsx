@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { curatedRecipes } from "./curated-recipes";
 import "fake-indexeddb/auto";
 import { it, expect, afterEach } from "vitest";
 import {
@@ -73,7 +74,7 @@ it("supports independent daily switches, purchase recording and refresh persiste
   await user.click(screen.getByRole("button", { name: /Shopping List/ }));
   await user.click(screen.getByRole("button", { name: /Chicken breast/ }));
   expect(screen.getByText("✓ Recorded 500 g · $8.00")).toBeTruthy();
-  expect((await loadState())?.recipes.length).toBe(42);
+  expect((await loadState())?.recipes.length).toBe(40 + curatedRecipes.length);
   cleanup();
 }, 20000);
 it("renders appliance search, recipe filters and backup restore validation", async () => {

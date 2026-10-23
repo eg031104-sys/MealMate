@@ -17,7 +17,10 @@ export function upgradeCatalogue(
       !recipes.some(
         (r) =>
           r.id === recipe.id ||
-          r.name.trim().toLowerCase() === recipe.name.trim().toLowerCase(),
+          r.name.trim().toLowerCase() === recipe.name.trim().toLowerCase() ||
+          (!!recipe.source?.externalId &&
+            r.source?.externalId === recipe.source.externalId &&
+            r.source?.name === recipe.source.name),
       )
     )
       recipes.push(applyRecipeEstimates(recipe, overrides));

@@ -1,4 +1,5 @@
 import type { Recipe, Ingredient } from "./domain";
+import { approximateMeasure, ingredientName } from "./measurements";
 import { usable } from "./domain";
 import { recipeSchema } from "./v2-state";
 export interface RecipeSource {
@@ -47,11 +48,12 @@ export function fromMealDB(raw: Record<string, unknown>): Recipe {
     const name = text(`strIngredient${n}`);
     if (!name) continue;
     const measure = text(`strMeasure${n}`);
-    const metric = metricMeasure(measure);
+    const metric = metricMeasure(measure) ?? approximateMeasure(name, measure);
     if (!metric)
       review.push(`Check quantity: ${name} — ${measure || "not supplied"}`);
     ingredients.push({
-      name,
+      ...metric,
+      name: ingredientName(name),
       quantity: metric?.quantity ?? 0,
       unit: metric?.unit ?? "g",
       department: "Imported — review department",

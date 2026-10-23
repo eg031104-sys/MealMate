@@ -1180,7 +1180,7 @@ export function App() {
                       </span>
                       <strong>
                         {i.excludeFromShopping ? (
-                          "To taste · not in exact totals"
+                          "Unquantified / optional · not in exact totals"
                         ) : (
                           <>
                             {i.approximate ? "≈ " : ""}
