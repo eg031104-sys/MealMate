@@ -1,7 +1,116 @@
-import {describe,it,expect} from 'vitest';
-import {scaleQuantity,shoppingList,generatePlan,defaults,matches} from './domain';
-import type {Meal} from './domain';
-import {starterRecipes} from './recipes';
-describe('serving calculations',()=>{it('scales household size and appetite independently',()=>{expect(scaleQuantity(200,2,4,1.5)).toBe(600);expect(scaleQuantity(200,2,1,.75)).toBe(75);expect(scaleQuantity(200,2,3,2.5)).toBe(750);});it('rejects invalid servings',()=>{expect(()=>scaleQuantity(100,0,2,1)).toThrow();});});
-describe('shopping list',()=>{const meal:Meal={day:0,category:'Breakfast',recipeId:'recipe-1',people:2,appetite:1,locked:false};it('merges duplicate ingredients with scaled quantities',()=>{const items=shoppingList([meal,{...meal,day:1,people:4,appetite:1.5}],starterRecipes,['Breakfast']);expect(items.find(i=>i.name==='Rolled oats')?.quantity).toBe(400);expect(items.filter(i=>i.name==='Banana')).toHaveLength(1);expect(items.find(i=>i.name==='Banana')?.department).toBe('Fruit & veg');});it('excludes disabled categories and empty meals',()=>{expect(shoppingList([meal,{...meal,recipeId:null}],starterRecipes,['Dinner'])).toEqual([]);});it('does not merge incompatible units',()=>{const r={...starterRecipes[0],ingredients:[{name:'Milk',quantity:100,unit:'ml' as const,department:'Dairy & eggs'},{name:'Milk',quantity:20,unit:'g' as const,department:'Dairy & eggs'}]};expect(shoppingList([meal],[r],['Breakfast'])).toHaveLength(2);});});
-describe('planner',()=>{it('retains locked portions and recipes',()=>{const locked:Meal={day:0,category:'Dinner',recipeId:'recipe-17',people:4,appetite:2,locked:true};expect(generatePlan([locked],starterRecipes,defaults).find(m=>m.day===0&&m.category==='Dinner')).toEqual(locked);});it('leaves slots empty when nothing matches',()=>{expect(generatePlan([],starterRecipes,{...defaults,maxTime:0}).every(m=>m.recipeId===null)).toBe(true);});it('enforces dietary restrictions and dislikes',()=>{expect(matches(starterRecipes[0],{...defaults,diet:['Vegan'],dislikes:'banana'})).toBe(false);expect(matches(starterRecipes[16],{...defaults,diet:['Vegetarian']})).toBe(false);});it('contains 30 complete original recipes',()=>{expect(starterRecipes).toHaveLength(30);expect(starterRecipes.every(r=>r.instructions.length>0&&r.ingredients.length>0&&r.servings===2)).toBe(true);});});
+import { describe, it, expect } from "vitest";
+import {
+  scaleQuantity,
+  shoppingList,
+  generatePlan,
+  defaults,
+  matches,
+} from "./domain";
+import type { Meal } from "./domain";
+import { starterRecipes } from "./recipes";
+describe("serving calculations", () => {
+  it("scales household size and appetite independently", () => {
+    expect(scaleQuantity(200, 2, 4, 1.5)).toBe(600);
+    expect(scaleQuantity(200, 2, 1, 0.75)).toBe(75);
+    expect(scaleQuantity(200, 2, 3, 2.5)).toBe(750);
+  });
+  it("rejects invalid servings", () => {
+    expect(() => scaleQuantity(100, 0, 2, 1)).toThrow();
+  });
+});
+describe("shopping list", () => {
+  const meal: Meal = {
+    day: 0,
+    category: "Breakfast",
+    recipeId: "recipe-1",
+    people: 2,
+    appetite: 1,
+    locked: false,
+  };
+  it("merges duplicate ingredients with scaled quantities", () => {
+    const items = shoppingList(
+      [meal, { ...meal, day: 1, people: 4, appetite: 1.5 }],
+      starterRecipes,
+      ["Breakfast"],
+    );
+    expect(items.find((i) => i.name === "Rolled oats")?.quantity).toBe(400);
+    expect(items.filter((i) => i.name === "Banana")).toHaveLength(1);
+    expect(items.find((i) => i.name === "Banana")?.department).toBe(
+      "Fruit & veg",
+    );
+  });
+  it("excludes disabled categories and empty meals", () => {
+    expect(
+      shoppingList([meal, { ...meal, recipeId: null }], starterRecipes, [
+        "Dinner",
+      ]),
+    ).toEqual([]);
+  });
+  it("does not merge incompatible units", () => {
+    const r = {
+      ...starterRecipes[0],
+      ingredients: [
+        {
+          name: "Milk",
+          quantity: 100,
+          unit: "ml" as const,
+          department: "Dairy & eggs",
+        },
+        {
+          name: "Milk",
+          quantity: 20,
+          unit: "g" as const,
+          department: "Dairy & eggs",
+        },
+      ],
+    };
+    expect(shoppingList([meal], [r], ["Breakfast"])).toHaveLength(2);
+  });
+});
+describe("planner", () => {
+  it("retains locked portions and recipes", () => {
+    const locked: Meal = {
+      day: 0,
+      category: "Dinner",
+      recipeId: "recipe-17",
+      people: 4,
+      appetite: 2,
+      locked: true,
+    };
+    expect(
+      generatePlan([locked], starterRecipes, defaults).find(
+        (m) => m.day === 0 && m.category === "Dinner",
+      ),
+    ).toEqual(locked);
+  });
+  it("leaves slots empty when nothing matches", () => {
+    expect(
+      generatePlan([], starterRecipes, { ...defaults, maxTime: 0 }).every(
+        (m) => m.recipeId === null,
+      ),
+    ).toBe(true);
+  });
+  it("enforces dietary restrictions and dislikes", () => {
+    expect(
+      matches(starterRecipes[0], {
+        ...defaults,
+        diet: ["Vegan"],
+        dislikes: "banana",
+      }),
+    ).toBe(false);
+    expect(
+      matches(starterRecipes[16], { ...defaults, diet: ["Vegetarian"] }),
+    ).toBe(false);
+  });
+  it("contains 30 complete original recipes", () => {
+    expect(starterRecipes).toHaveLength(30);
+    expect(
+      starterRecipes.every(
+        (r) =>
+          r.instructions.length > 0 &&
+          r.ingredients.length > 0 &&
+          r.servings === 2,
+      ),
+    ).toBe(true);
+  });
+});

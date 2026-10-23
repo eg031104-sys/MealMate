@@ -1,0 +1,794 @@
+/* V2 extends the original design; shopping actions use Android-friendly targets. */
+button,
+input,
+select,
+summary {
+  touch-action: manipulation;
+}
+.secondary {
+  background: #eef2e7;
+  border: 1px solid #dce4d1;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  min-height: 44px;
+}
+.button-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.button-row > button,
+.button-row .check-row {
+  min-height: 44px;
+}
+.inline-form {
+  display: flex;
+  gap: 9px;
+  margin: 15px 0;
+}
+.inline-form input {
+  min-width: 0;
+  flex: 1;
+}
+.inline-form button {
+  min-height: 44px;
+  padding: 0 15px;
+  border: 1px solid #dbe4ce;
+  background: #edf2e5;
+  border-radius: 8px;
+}
+.grow {
+  flex: 1;
+  min-width: 150px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 15px 0;
+}
+.form-grid label,
+.receipt label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 11px;
+  color: #73816a;
+}
+.form-grid input,
+.form-grid select,
+.receipt input {
+  min-height: 44px;
+  width: 100%;
+  min-width: 0;
+}
+.notice-block {
+  background: #edf2e5;
+  padding: 18px;
+  border-radius: 10px;
+  margin: 14px 0;
+}
+.notice-block p {
+  font-size: 12px;
+}
+.appliance-scroll {
+  max-height: 330px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #e4e8dc;
+  border-radius: 8px;
+  padding: 10px;
+}
+.appliance-scroll fieldset {
+  border: 0;
+  padding: 5px 4px;
+  margin: 0 0 15px;
+}
+.appliance-scroll legend {
+  font-size: 10px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: #8a987b;
+}
+.appliance-scroll .check-row {
+  min-height: 40px;
+  margin: 0;
+}
+.settings-card .check-row input {
+  flex-shrink: 0;
+}
+.day-settings {
+  margin-top: 14px;
+  padding: 18px;
+}
+.day-settings h3 {
+  margin: 0 0 5px;
+}
+.day-settings small {
+  font-size: 10px;
+  color: #8a987b;
+}
+.day-settings .subtle {
+  margin: 12px 0 0;
+}
+.daily-switches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+}
+.switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 12px;
+  background: #f4f6ef;
+  border-radius: 8px;
+  font-size: 12px;
+  gap: 8px;
+}
+.switch-row input {
+  appearance: none;
+  width: 36px;
+  height: 22px;
+  padding: 0;
+  border-radius: 20px;
+  border: 1px solid #c9d0c0;
+  background: #d8ddcf;
+  position: relative;
+  flex-shrink: 0;
+}
+.switch-row input:after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+.switch-row input:checked {
+  background: #3b6546;
+  border-color: #3b6546;
+}
+.switch-row input:checked:after {
+  transform: translateX(14px);
+}
+.meal-cooked {
+  border-top: 1px solid #eef0e8;
+  padding: 4px 0;
+  grid-column: 1/-1;
+}
+.meal-cooked button {
+  min-height: 44px;
+}
+.recipe-tools {
+  margin: 20px 0;
+}
+.recipe-tools p {
+  font-size: 12px;
+}
+.library-open {
+  padding: 0;
+  width: 100%;
+  text-align: left;
+}
+.library-controls {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eef1e7;
+  padding: 3px 8px;
+  gap: 4px;
+}
+.library-controls button {
+  font-size: 10px;
+  min-height: 44px;
+  padding: 5px;
+}
+.library-controls button[aria-pressed="true"] {
+  color: #a77d20;
+}
+.json-editor {
+  width: 100%;
+  height: 45dvh;
+  font: 12px/1.6 monospace;
+  background: white;
+  color: #354a30;
+  padding: 15px;
+  border: 1px solid #dae2d1;
+  border-radius: 8px;
+  resize: vertical;
+}
+.source-image {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+.budget-card {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 8px 20px;
+  background: #edf2e5;
+  border: 1px solid #d8e2cb;
+  border-radius: 12px;
+  padding: 22px;
+  margin: 20px 0;
+}
+.budget-card .eyebrow {
+  font-size: 8px;
+}
+.budget-card h2 {
+  font-size: 30px;
+  margin: 12px 0 5px;
+}
+.budget-card h2 small {
+  font:
+    12px "DM Sans",
+    sans-serif;
+  color: #89977a;
+  letter-spacing: 0;
+  margin-left: 5px;
+}
+.budget-card p {
+  font-size: 11px;
+  margin: 5px 0 0;
+}
+.budget-card > label {
+  font-size: 10px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.budget-card input {
+  width: 100%;
+  min-height: 44px;
+}
+.budget-card .budget-note {
+  grid-column: 1/-1;
+  border-top: 1px solid #dce4cf;
+  padding-top: 10px;
+  font-size: 10px;
+}
+.over-budget {
+  background: #fcf0e9;
+  border-color: #e8c9b5;
+}
+.over-budget h2,
+.over-budget > div > p {
+  color: #a5582b;
+}
+.shopping-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0 10px;
+}
+.shopping-tools .check-row {
+  margin-right: auto;
+  min-height: 44px;
+}
+.shopping-tools .secondary {
+  font-size: 10px;
+  padding: 8px 10px;
+}
+.pantry-check {
+  background: #f0f3e8;
+  border: 1px solid #e0e7d4;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+.pantry-check h2 {
+  font-size: 18px;
+}
+.pantry-check h2 span {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #e1e9d5;
+  margin-left: 8px;
+}
+.pantry-check-row {
+  border-top: 1px solid #dfe6d3;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pantry-check-row > strong {
+  font-size: 13px;
+}
+.pantry-check-row > span {
+  font-size: 12px;
+}
+.pantry-check-row > small {
+  font-size: 10px;
+  color: #8b967d;
+}
+.stock-inline {
+  font-size: 10px;
+  color: #819074;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+.stock-inline input {
+  width: 100px;
+  min-height: 44px;
+}
+.compact-department {
+  border: 1px solid #e0e6d7;
+  border-radius: 11px;
+  background: #fff;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.compact-department > h2 {
+  background: #f1f4ec;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 13px 17px;
+  margin: 0;
+}
+.compact-item {
+  border-top: 1px solid #edf0e7;
+}
+.compact-summary {
+  display: flex;
+  align-items: stretch;
+}
+.purchase-check {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  flex-shrink: 0;
+  min-height: 76px;
+  cursor: pointer;
+}
+.purchase-check input {
+  width: 23px;
+  height: 23px;
+  border: 1px solid #bdc9af;
+}
+.expand-item {
+  padding: 12px 14px 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  flex: 1;
+  gap: 12px;
+  min-width: 0;
+  min-height: 80px;
+}
+.expand-item > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.expand-item strong {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.expand-item span span {
+  font-size: 12px;
+}
+.expand-item small {
+  font-size: 10px;
+  color: #8b9780;
+  line-height: 1.5;
+}
+.expand-item svg {
+  flex-shrink: 0;
+  color: #8b9b7b;
+}
+.change-new,
+.change-increased {
+  background: #eef5ff;
+  box-shadow: inset 3px 0 #4b83bf;
+}
+.change-new .change-label,
+.change-increased .change-label {
+  color: #346ba3;
+  font-weight: 600;
+}
+.change-removed {
+  background: #f3f3f1;
+  color: #94978f;
+}
+.change-removed .expand-item strong {
+  text-decoration: line-through;
+}
+.change-removed .change-label {
+  font-size: 10px;
+}
+.confirmed {
+  color: #497b42 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.expanded-item {
+  padding: 10px 20px 22px 52px;
+  border-top: 1px solid #e4e9db;
+}
+.expanded-item > p {
+  font-size: 12px;
+}
+.expanded-item h4 {
+  font-size: 13px;
+  margin: 20px 0 8px;
+}
+.inventory-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #dfe6d6;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px 0;
+  background: #f7f9f3;
+}
+.inventory-strip span {
+  padding: 12px;
+  font-size: 10px;
+  color: #839173;
+}
+.inventory-strip strong {
+  font-size: 13px;
+  color: #526b41;
+  display: block;
+  margin-top: 3px;
+}
+.shortage {
+  background: #fff2e5;
+  padding: 12px;
+  color: #a36b2e;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  border-radius: 7px;
+  line-height: 1.6;
+}
+.shortage svg {
+  flex-shrink: 0;
+}
+.product-editor {
+  border-block: 1px solid #e0e7d5;
+  padding: 14px 0;
+  margin: 15px 0;
+}
+.product-editor summary {
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 30px;
+}
+.product-editor > p {
+  font-size: 11px;
+}
+.purchase-form {
+  padding-bottom: 15px;
+}
+.purchase-form > p {
+  font-size: 11px;
+}
+.receipt {
+  background: #f3f6ed;
+  border: 1px solid #dfe7d3;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 15px;
+}
+.receipt > strong {
+  font-size: 11px;
+  color: #66874e;
+}
+.receipt > label {
+  margin: 12px 0;
+}
+.expanded-item > ul {
+  padding-left: 18px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #7b8b6b;
+}
+.resolution-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.resolution-menu button {
+  background: #eff3e7;
+  border: 1px solid #dbe4cf;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  font-size: 14px;
+}
+.resolution-menu small {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #849674;
+}
+.replacement-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  border: 1px solid #e1e7d8;
+  border-radius: 9px;
+  background: white;
+  padding: 16px;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 12px;
+  gap: 15px;
+  min-height: 60px;
+}
+.replacement-option small {
+  display: block;
+  color: #889c75;
+  margin-top: 7px;
+  font-size: 10px;
+}
+.pantry-stock {
+  border-bottom: 1px solid #e4eadb;
+  padding: 14px 0;
+}
+.pantry-stock > summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+.pantry-stock summary > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.pantry-stock summary strong {
+  font-size: 12px;
+}
+.pantry-stock summary small {
+  font-size: 10px;
+  color: #8a9b78;
+  line-height: 1.7;
+}
+.tag {
+  padding: 5px 8px;
+  background: #ecf2e2;
+  color: #7c935f;
+  font-size: 9px;
+  border-radius: 5px;
+}
+.surplus-section {
+  margin-top: 24px;
+}
+.suggestion-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  border-top: 1px solid #e4eadb;
+  padding: 18px 0;
+}
+.suggestion-row strong {
+  font-size: 12px;
+}
+.suggestion-row p {
+  font-size: 10px;
+  margin: 6px 0 0;
+}
+.suggestion-row .secondary {
+  white-space: nowrap;
+  font-size: 10px;
+}
+.source-image {
+  max-width: 100%;
+}
+.toolbar > input {
+  min-height: 44px;
+}
+.shopping-mode > .settings-card > summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+.modal .secondary,
+.modal .primary {
+  min-height: 44px;
+}
+.modal li {
+  overflow-wrap: anywhere;
+}
+a {
+  color: #547b46;
+}
+@media (max-width: 800px) {
+  .daily-switches {
+    grid-template-columns: 1fr 1fr;
+  }
+  .shopping-tools {
+    gap: 7px;
+  }
+  .expanded-item {
+    padding-left: 18px;
+  }
+}
+@media (max-width: 560px) {
+  .primary {
+    min-height: 44px;
+  }
+  .text-button {
+    min-height: 44px;
+  }
+  .meal-card .card-actions button {
+    min-height: 36px;
+  }
+  .meal-card .portion-row select {
+    min-height: 36px;
+  }
+  .icon-button {
+    min-width: 36px;
+    min-height: 36px;
+  }
+  .daily-switches {
+    gap: 8px;
+  }
+  .day-settings {
+    padding: 15px;
+  }
+  .day-settings .secondary {
+    font-size: 10px;
+    padding: 8px 12px;
+  }
+  .day-settings .text-button {
+    font-size: 11px;
+  }
+  .form-grid {
+    gap: 10px;
+  }
+  .budget-card {
+    grid-template-columns: 1fr 110px;
+    padding: 18px 15px;
+    gap: 10px;
+  }
+  .budget-card h2 {
+    font-size: 27px;
+  }
+  .budget-card h2 small {
+    font-size: 10px;
+    display: block;
+    margin: 7px 0 0;
+  }
+  .budget-card > label {
+    font-size: 9px;
+  }
+  .budget-card .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+  }
+  .budget-card .budget-note {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .shopping-tools .check-row {
+    width: 100%;
+    margin: 0;
+  }
+  .shopping-tools .secondary {
+    flex: 1;
+    min-height: 44px;
+  }
+  .compact-summary .purchase-check {
+    width: 49px;
+  }
+  .expanded-item {
+    padding: 12px 15px 20px;
+  }
+  .pantry-check {
+    padding: 17px 15px;
+  }
+  .stock-inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stock-inline input {
+    width: 100%;
+  }
+  .pantry-check-row .button-row > button {
+    flex: 1;
+    font-size: 11px;
+  }
+  .inventory-strip span {
+    padding: 12px 8px;
+  }
+  .inventory-strip strong {
+    font-size: 12px;
+  }
+  .resolution-menu button {
+    font-size: 13px;
+    padding: 17px;
+  }
+  .modal .section-heading {
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .modal .section-heading h2 {
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  .modal .section-heading .secondary {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .recipe-tools {
+    padding: 18px 14px;
+  }
+  .recipe-tools .inline-form {
+    flex-wrap: wrap;
+  }
+  .recipe-tools .inline-form input {
+    flex-basis: 100%;
+  }
+  .recipe-tools .inline-form button {
+    flex: 1;
+  }
+  .library-controls {
+    padding: 0 4px;
+  }
+  .library-controls button {
+    font-size: 9px;
+    padding: 4px;
+  }
+  .toolbar select {
+    width: auto;
+  }
+  .toolbar > input {
+    width: 100%;
+    flex-basis: 100%;
+  }
+  .json-editor {
+    font-size: 11px;
+    height: 43dvh;
+  }
+  .pantry-stock > summary {
+    align-items: flex-start;
+  }
+  .suggestion-row {
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .suggestion-row .secondary {
+    padding: 8px;
+    font-size: 9px;
+  }
+  .surplus-section > h2 {
+    font-size: 20px;
+  }
+  .form-grid label {
+    font-size: 10px;
+  }
+  .expanded-item .secondary {
+    min-height: 44px;
+  }
+  .purchase-form .primary {
+    width: 100%;
+    font-size: 12px;
+  }
+  .source-image {
+    max-height: 200px;
+  }
+}
