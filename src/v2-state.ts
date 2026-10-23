@@ -27,6 +27,11 @@ export const ingredientSchema = z
     department: z.string().min(1).max(100),
     rawMeasure: z.string().optional(),
     prepared: z.boolean().optional(),
+    approximate: z.boolean().optional(),
+    estimateKey: z.string().optional(),
+    estimateMultiplier: nonnegative.optional(),
+    excludeFromShopping: z.boolean().optional(),
+    measurementNote: z.string().optional(),
   })
   .passthrough();
 const method = z.object({
@@ -101,6 +106,12 @@ const settingsSchema = z
     dislikes: z.string(),
     appliances: z.array(z.string()),
     maxTime: nonnegative,
+    measurementOverrides: z
+      .record(
+        z.string(),
+        z.object({ quantity: z.number().finite().positive(), unit }),
+      )
+      .optional(),
     categories: z.array(categorySchema),
   })
   .passthrough();

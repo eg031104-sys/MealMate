@@ -13,6 +13,11 @@ export type Ingredient = {
   department: string;
   rawMeasure?: string;
   prepared?: boolean;
+  approximate?: boolean;
+  estimateKey?: string;
+  estimateMultiplier?: number;
+  excludeFromShopping?: boolean;
+  measurementNote?: string;
 };
 export type Recipe = {
   id: string;
@@ -71,6 +76,7 @@ export type Settings = {
   dislikes: string;
   appliances: string[];
   maxTime: number;
+  measurementOverrides?: import("./measurements").MeasurementOverrides;
   categories: Category[];
 };
 export type ShoppingItem = Ingredient & { key: string };
@@ -117,11 +123,12 @@ export function usable(r: Recipe) {
     !r.review?.length &&
     Number.isFinite(r.servings) &&
     r.servings > 0 &&
-    r.ingredients.length > 0 &&
+    r.ingredients.some((i) => !i.excludeFromShopping && i.quantity > 0) &&
     r.ingredients.every(
       (i) =>
         Number.isFinite(i.quantity) &&
-        i.quantity > 0 &&
+        (i.quantity > 0 ||
+          (i.quantity === 0 && i.excludeFromShopping === true)) &&
         ["g", "ml", "each"].includes(i.unit),
     ) &&
     r.instructions.length > 0
@@ -187,6 +194,7 @@ export function shoppingList(
       const i = r.preparedIngredients?.includes(original.name)
         ? { ...chosen, prepared: true }
         : chosen;
+      if (i.excludeFromShopping) continue;
       const key = `${i.name.trim().toLowerCase()}|${i.unit}${i.prepared ? "|prepared" : ""}`;
       const quantity = scaleQuantity(
         i.quantity,
@@ -195,7 +203,12 @@ export function shoppingList(
         meal.appetite,
       );
       const old = items.get(key);
-      items.set(key, { ...i, key, quantity: quantity + (old?.quantity ?? 0) });
+      items.set(key, {
+        ...i,
+        key,
+        approximate: i.approximate || old?.approximate,
+        quantity: quantity + (old?.quantity ?? 0),
+      });
     }
   }
   return [...items.values()].sort(

@@ -95,7 +95,9 @@ export function librarySuggestions(
       const usedQuantities: Ingredient[] = [],
         additionalIngredients: Ingredient[] = [];
       let urgent = false;
-      for (const original of recipe.ingredients) {
+      for (const original of recipe.ingredients.filter(
+        (i) => !i.excludeFromShopping,
+      )) {
         const i = {
           ...original,
           prepared:

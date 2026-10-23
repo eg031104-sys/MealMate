@@ -13,6 +13,7 @@ import { quantity } from "../domain";
 import type { State, Product } from "../v2-state";
 import { decisionKey, mealLabel } from "../v2-state";
 import {
+  unquantifiedIngredients,
   acknowledgeChanges,
   affectedMeals,
   aud,
@@ -684,6 +685,19 @@ export function ShoppingMode({ state, onChange }: Props) {
     <div className="shopping-mode">
       {state.v3 && <StoreSelector state={state} onChange={onChange} compact />}
       <BudgetCard state={state} onChange={onChange} />
+      {!!unquantifiedIngredients(state).length && (
+        <section className="notice-block">
+          <strong>Seasonings outside exact totals</strong>
+          <p>
+            Check your pantry:{" "}
+            {unquantifiedIngredients(state)
+              .map((i) => i.name)
+              .join(", ")}
+            . Source quantities are unmeasured or to taste. Shopping quantities
+            and budget exclude these amounts unless you configure an estimate.
+          </p>
+        </section>
+      )}
       {state.v3 && <StoreComparisons state={state} />}
       {b.remaining !== null && b.remaining < 0 && (
         <details className="settings-card">
@@ -753,7 +767,10 @@ export function ShoppingMode({ state, onChange }: Props) {
               return (
                 <div className="pantry-check-row" key={i.key}>
                   <strong>{i.name}</strong>
-                  <span>{amount(i.quantity, i.unit)} needed in total</span>
+                  <span>
+                    {i.approximate ? "≈ " : ""}
+                    {amount(i.quantity, i.unit)} needed in total
+                  </span>
                   <small>
                     {stock?.quantity === null ||
                     (!stock && available(state, i.key) === 0)
@@ -882,6 +899,7 @@ export function ShoppingMode({ state, onChange }: Props) {
                                 : " · package size unknown"}
                             </span>
                             <small>
+                              {i.approximate ? "≈ " : ""}
                               {amount(i.quantity, i.unit)} needed
                               {inv.shortage > 0 && recorded.length > 0
                                 ? ` · Short ${amount(inv.shortage, i.unit)}`
@@ -920,8 +938,11 @@ export function ShoppingMode({ state, onChange }: Props) {
                   {expanded === i.key && (
                     <div className="expanded-item">
                       <p>
-                        <strong>{amount(i.quantity, i.unit)} required</strong> ·
-                        Recommended purchase {amount(rec.buy, i.unit)}
+                        <strong>
+                          {i.approximate ? "≈ " : ""}
+                          {amount(i.quantity, i.unit)} required
+                        </strong>{" "}
+                        · Recommended purchase {amount(rec.buy, i.unit)}
                       </p>
                       <p className="subtle">
                         {rec.product

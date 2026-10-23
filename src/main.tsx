@@ -48,6 +48,7 @@ import {
 } from "./v2-state";
 import { upgradeCatalogue } from "./genuine-recipes";
 import { discoverable } from "./catalogue";
+import { MeasurementSettings } from "./components/MeasurementSettings";
 import { Supermarkets, StoreSelector } from "./components/Supermarkets";
 import { selectedStore } from "./supermarkets";
 import { HouseholdServings } from "./components/HouseholdServings";
@@ -125,7 +126,15 @@ export function App() {
   useEffect(() => {
     loadState()
       .then((s) => {
-        let next = s ? { ...s, recipes: upgradeCatalogue(s.recipes) } : fresh();
+        let next = s
+          ? {
+              ...s,
+              recipes: upgradeCatalogue(
+                s.recipes,
+                s.settings.measurementOverrides,
+              ),
+            }
+          : fresh();
         if (!next.v2.baseline[next.week]) next = acknowledgeChanges(next);
         setState(migrateState(next));
         setLoaded(true);
@@ -935,6 +944,7 @@ export function App() {
                     unlisted traces are not detectable.
                   </p>
                 </section>
+                <MeasurementSettings state={state} onChange={setState} />
                 <section className="settings-card">
                   <h2>
                     <Utensils size={20} />
@@ -1155,18 +1165,37 @@ export function App() {
                     detail.meal?.substitutions?.[original.name] ?? original;
                   return (
                     <div className="ingredient" key={i.name}>
-                      <span>{i.name}</span>
+                      <span>
+                        {i.name}
+                        {i.rawMeasure && (
+                          <small style={{ display: "block" }}>
+                            Source: {i.rawMeasure}
+                          </small>
+                        )}
+                        {i.measurementNote && (
+                          <small style={{ display: "block" }}>
+                            {i.measurementNote}
+                          </small>
+                        )}
+                      </span>
                       <strong>
-                        {quantity(
-                          usable(detail.recipe)
-                            ? scaleQuantity(
-                                i.quantity,
-                                detail.recipe.servings,
-                                detailPeople,
-                                detailAppetite,
-                              )
-                            : i.quantity,
-                          i.unit,
+                        {i.excludeFromShopping ? (
+                          "To taste · not in exact totals"
+                        ) : (
+                          <>
+                            {i.approximate ? "≈ " : ""}
+                            {quantity(
+                              usable(detail.recipe)
+                                ? scaleQuantity(
+                                    i.quantity,
+                                    detail.recipe.servings,
+                                    detailPeople,
+                                    detailAppetite,
+                                  )
+                                : i.quantity,
+                              i.unit,
+                            )}
+                          </>
                         )}
                       </strong>
                     </div>

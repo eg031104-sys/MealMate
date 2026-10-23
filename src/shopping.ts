@@ -31,6 +31,18 @@ export function requirements(state: State) {
     "Sides",
   ]);
 }
+export function unquantifiedIngredients(state: State) {
+  const names = new Map<string, Ingredient>();
+  for (const meal of activeMeals(state)) {
+    const recipe = state.recipes.find((r) => r.id === meal.recipeId);
+    if (!recipe || !usable(recipe)) continue;
+    for (const original of recipe.ingredients) {
+      const i = meal.substitutions?.[original.name] ?? original;
+      if (i.excludeFromShopping) names.set(i.name.toLowerCase(), i);
+    }
+  }
+  return [...names.values()];
+}
 export function today() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -319,7 +331,8 @@ export function budget(state: State, items = requirements(state)) {
     total,
     missing,
     uncertain,
-    partial: missing > 0 || uncertain > 0,
+    partial:
+      missing > 0 || uncertain > 0 || unquantifiedIngredients(state).length > 0,
     demoUsed,
     limit,
     remaining: limit === undefined || limit === null ? null : limit - total,
@@ -551,7 +564,7 @@ export function mealCost(
 ) {
   let cost = 0,
     missing = 0;
-  for (const i of r.ingredients) {
+  for (const i of r.ingredients.filter((i) => !i.excludeFromShopping)) {
     const product = productFor(state, { ...i, key: itemKey(i) });
     if (!product || product.price === undefined) {
       missing++;

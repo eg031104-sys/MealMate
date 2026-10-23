@@ -122,7 +122,7 @@ export function normaliseRecipe(raw: unknown): Recipe {
   const recipe = recipeSchema.parse(raw) as Recipe;
   const review = [...(recipe.review ?? [])];
   if (!recipe.servings) review.push("Serving size must be supplied.");
-  if (recipe.ingredients.some((i) => i.quantity <= 0))
+  if (recipe.ingredients.some((i) => i.quantity <= 0 && !i.excludeFromShopping))
     review.push("Every ingredient needs a positive measured quantity.");
   if (!recipe.ingredients.length || !recipe.instructions.length)
     review.push("Ingredients and instructions are required.");

@@ -363,7 +363,7 @@ describe("genuine catalogue and import reliability", () => {
     expect(next.filter((r) => r.origin === "mechanical")).toHaveLength(198);
     expect(next.find((r) => r.id === existing[30].id)?.favourite).toBe(true);
     expect(next.find((r) => r.id === existing[30].id)?.archived).toBe(true);
-    expect(next.filter(discoverable)).toHaveLength(10);
+    expect(next.filter(discoverable)).toHaveLength(12);
     expect(upgradeCatalogue(next)).toHaveLength(next.length);
   });
   it("contains four curated planning-ready external recipes and six review records", () => {

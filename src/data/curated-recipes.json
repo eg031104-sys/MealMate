@@ -1,0 +1,144 @@
+[
+  {
+    "id": "themealdb-53110",
+    "name": "Sticky Chicken",
+    "origin": "external",
+    "category": "Dinner",
+    "servings": 4,
+    "prep": 5,
+    "cook": 35,
+    "wait": 30,
+    "appliances": ["Oven"],
+    "diet": ["Dairy-free"],
+    "allergens": ["Soy", "Gluten", "Mustard"],
+    "ingredients": [
+      {
+        "name": "Chicken drumsticks",
+        "quantity": 8,
+        "unit": "each",
+        "department": "Meat & seafood"
+      },
+      {
+        "name": "Soy sauce",
+        "quantity": 30,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Honey",
+        "quantity": 15,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Olive oil",
+        "quantity": 15,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Tomato paste",
+        "quantity": 5,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      },
+      {
+        "name": "Dijon mustard",
+        "quantity": 15,
+        "unit": "ml",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Cut three shallow slits in each drumstick. Combine the soy sauce, honey, olive oil, tomato paste and mustard, then coat the chicken with this mixture.",
+      "Allow 30 minutes for the short marinating option. If preparing ahead, cover and refrigerate overnight as described by the source.",
+      "Heat a conventional oven to 200°C (or a fan-forced oven to 180°C). Arrange the chicken in a shallow roasting tray.",
+      "Roast for 35 minutes, turning occasionally, until the drumsticks are thoroughly cooked and coated with the sticky glaze."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "TheMealDB 53110; original Good Food team recipe. Original yield 4, prep 5 min and cooking 35 min verified with the linked publisher. Allow 30 min marinating. Original UK metric tablespoons are 15 ml, not Australian 20 ml; teaspoon is 5 ml. UK tomato purée is listed as tomato paste. Core chicken dish; optional serving sides are not silently added.",
+    "cuisine": "Family cooking",
+    "difficulty": "Easy",
+    "image": "https://www.themealdb.com/images/media/meals/cj56fs1762340001.jpg",
+    "photo": {
+      "url": "https://www.themealdb.com/images/media/meals/cj56fs1762340001.jpg",
+      "author": "TheMealDB contributors; original recipe by Good Food team",
+      "license": "TheMealDB API artwork terms — personal/development use; not represented as CC licensed",
+      "sourceUrl": "https://www.themealdb.com/terms_of_use.php",
+      "cacheAllowed": false
+    },
+    "source": {
+      "name": "TheMealDB · original recipe: Good Food team",
+      "url": "https://www.themealdb.com/meal/53110",
+      "license": "TheMealDB official API personal/development terms; retain attribution; method facts restated in original wording",
+      "externalId": "53110"
+    },
+    "review": [],
+    "methods": [
+      {
+        "appliances": ["Fan-forced oven"],
+        "instructions": [
+          "Cut three shallow slits in each drumstick. Combine the soy sauce, honey, olive oil, tomato paste and mustard, then coat the chicken with this mixture.",
+          "Allow 30 minutes for the short marinating option. If preparing ahead, cover and refrigerate overnight as described by the source.",
+          "Heat a conventional oven to 200°C (or a fan-forced oven to 180°C). Arrange the chicken in a shallow roasting tray.",
+          "Roast for 35 minutes, turning occasionally, until the drumsticks are thoroughly cooked and coated with the sticky glaze."
+        ],
+        "prep": 5,
+        "cook": 35
+      }
+    ]
+  },
+  {
+    "id": "pdr-banana-oatmeal-cookies",
+    "name": "Banana and oatmeal cookies",
+    "origin": "external",
+    "category": "Snacks",
+    "servings": 3,
+    "prep": 3,
+    "cook": 20,
+    "appliances": ["Fan-forced oven"],
+    "diet": ["Vegan", "Vegetarian", "Dairy-free"],
+    "allergens": ["Oats — check gluten and cross-contact labelling"],
+    "ingredients": [
+      {
+        "name": "Banana",
+        "quantity": 2,
+        "unit": "each",
+        "department": "Fruit & veg"
+      },
+      {
+        "name": "Oats",
+        "quantity": 100,
+        "unit": "g",
+        "department": "Pantry & grains"
+      }
+    ],
+    "instructions": [
+      "Preheat a fan-forced oven to 180°C.",
+      "Peel the bananas and mash them, leaving a little texture.",
+      "Mix in the oats.",
+      "Line an oven tray with baking paper. Shape the mixture into discs approximately 8 cm across.",
+      "Bake with fan heat for about 20 minutes, until the outside is golden and slightly crisp.",
+      "Serve warm or cold. The source allows a couple of days in a sealed container."
+    ],
+    "emoji": "🍽️",
+    "colour": "#e7eedb",
+    "description": "Éric G.’s original public-domain recipe, yielding 3 servings (not 3 cookies). The source’s 2 bananas and 100 g oats are retained. Its explicitly optional cinnamon and honey are omitted from this base recipe; no duplicate variation is created. Oats are not classified gluten-free.",
+    "image": "/recipe-photos/banana-oatmeal-cookies.webp",
+    "photo": {
+      "url": "/recipe-photos/banana-oatmeal-cookies.webp",
+      "author": "Éric G. · Public Domain Recipes",
+      "license": "Public domain — Unlicense",
+      "sourceUrl": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/banana-oatmeal-cookies.md",
+      "cacheAllowed": true
+    },
+    "source": {
+      "name": "Public Domain Recipes · Éric G.",
+      "url": "https://github.com/ronaldl29/public-domain-recipes/blob/134e22f11e4d14e66ee587b1dd3a266e5646d387/content/banana-oatmeal-cookies.md",
+      "license": "Public domain — Unlicense",
+      "externalId": "banana-oatmeal-cookies"
+    },
+    "review": []
+  }
+]
